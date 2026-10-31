@@ -102,38 +102,38 @@ gives 4.7kΩ (0%) first. E12 5k gives an exact 2-resistor result before any exac
 
 ### Tests for User Story 1 (write first, must fail)
 
-- [ ] T011 [P] [US1] Write `CORE_TEST/ParserTest.kt` as a table of research R5 cases:
+- [X] T011 [P] [US1] Write `CORE_TEST/ParserTest.kt` as a table of research R5 cases:
   - valid: "4700", "4.7k", "4,7k", "4k7", "4K7", "R47", "1M5", "47R", " 4.7 kΩ ", "100ohm", "0.1", "1G";
   - invalid: "", "abc", "4.7.1", "4,7,1", "-1", "0", "2G", "0.05", "4k7k", "k";
   - exact `Rational` results.
-- [ ] T012 [P] [US1] Write `CORE_TEST/ReferenceSearch.kt`, a slow exhaustive search over all combinations in canonical order with exact rationals and the FR-007 ranking, and `CORE_TEST/SearchReferenceTest.kt`. Both cases run with all kinds allowed:
+- [X] T012 [P] [US1] Write `CORE_TEST/ReferenceSearch.kt`, a slow exhaustive search over all combinations in canonical order with exact rationals and the FR-007 ranking, and `CORE_TEST/SearchReferenceTest.kt`. Both cases run with all kinds allowed:
   - a grid of targets (0.1Ω, 0.33Ω, 1Ω, 4.7Ω, 10Ω, 123Ω, 1k, 1.234k, 5k, 47k, 1M, 9.9M, 25M, 1G) on E3, E6 and E12;
   - 10 seeded random targets on E24.
 
   `search(...)` must equal the reference exactly: the same combinations in the same order.
-- [ ] T013 [P] [US1] Write `CORE_TEST/SearchExamplesTest.kt`:
+- [X] T013 [P] [US1] Write `CORE_TEST/SearchExamplesTest.kt`:
   - E12 4.7k: the first result is Single 4.7kΩ;
   - E12 5k: the first result is 10k ∥ 10k, before any exact 3-resistor result;
   - each kind appears at most 5 times;
   - the list is sorted by FR-007;
   - no duplicate permutations.
-- [ ] T014 [P] [US1] Write `CORE_TEST/FormatTest.kt`:
+- [X] T014 [P] [US1] Write `CORE_TEST/FormatTest.kt`:
   - `connectionText` for each kind ("1kΩ + 2.2kΩ", "10kΩ ∥ 10kΩ", "4.7kΩ ∥ 10kΩ + 220Ω");
   - `formatOhms` with 4 significant digits ("3.197kΩ", "0.3333Ω", "10MΩ");
   - `formatDeviation` ("0%", "+0.0213%", "−1.23%", 3 significant digits, the minus sign U+2212);
   - `uk` decimal commas.
-- [ ] T015 [P] [US1] Write `CORE_TEST/SearchBenchmarkTest.kt`: E192, all kinds, 20 fixed targets after a warm-up, median under 150 ms (research R4).
+- [X] T015 [P] [US1] Write `CORE_TEST/SearchBenchmarkTest.kt`: E192, all kinds, 20 fixed targets after a warm-up, median under 150 ms (research R4).
 
 ### Implementation for User Story 1
 
-- [ ] T016 [US1] Create `CORE/TargetParser.kt` (`parseTarget`) so that T011 passes.
-- [ ] T017 [US1] Create `CORE/Connection.kt` (`Kind`, `Combination`, `resistance`, `deviation`, the ranking comparator) and `CORE/Search.kt`:
+- [X] T016 [US1] Create `CORE/TargetParser.kt` (`parseTarget`) so that T011 passes.
+- [X] T017 [US1] Create `CORE/Connection.kt` (`Kind`, `Combination`, `resistance`, `deviation`, the ranking comparator) and `CORE/Search.kt`:
   - the per-kind search from research R4: canonical a ≤ b ≤ c, binary search of the ideal last value, an outward walk bounded by the kind's current 5th best, prefix cut-offs;
   - `Double` keys with a 1e-9 relative margin, then an exact re-rank;
   - merge and sort.
 
   T012, T013 and T015 must pass.
-- [ ] T018 [US1] Create `CORE/Format.kt` (`connectionText`, `formatOhms`, `formatDeviation`) using `formatSi`/`formatDecimal`, so that T014 passes.
+- [X] T018 [US1] Create `CORE/Format.kt` (`connectionText`, `formatOhms`, `formatDeviation`) using `formatSi`/`formatDecimal`, so that T014 passes.
 - [ ] T019 [US1] Add the input and list strings to `RES/values*/strings.xml`: `target_label`, `target_hint`, `target_error`, `series_label` and `empty` (contracts/ui-contract.md), in all six locales.
 - [ ] T020 [US1] Implement `UI/CombinationsScreen.kt` per contracts/ui-contract.md:
   - an `OutlinedTextField` (text keyboard) with the hint or error as supporting text;

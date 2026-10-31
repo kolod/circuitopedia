@@ -70,8 +70,17 @@ duplicates (FR-006), every enumeration uses the canonical order a ≤ b ≤ c.
   bound), larger b only get worse. In parallel kinds, once 1/a + 1/b ≥ 1/T, larger b only get
   worse. The `(a∥b) + c` kind with c free is the costliest; it is the reason for a measured
   budget, not a guess.
+- **Two lessons from implementation**, both measured:
+  1. Prefixes far from the target (a tiny `a` in the parallel kinds) walked every `c` while the bound
+     was still loose, which made the search O(n³). A first pass now tries only the two values next
+     to each ideal. Those are real combinations, so the pass yields a safe initial bound, and the full
+     walk starts from it.
+  2. For targets near the ends of the range, almost every prefix improves the top 5. Re-sorting on
+     every acceptance cost seconds (E192, 30MΩ, `Parallel3`: 4.3 s). The collector now keeps the
+     best 5 keys in a small sorted array and compacts its candidate list only when the list has
+     doubled. After both fixes: median 47 ms, maximum 85 ms over the 20 benchmark targets.
 - **Budget**: a JVM benchmark test runs E192 with every kind allowed over 20 targets and fails if
-  the median exceeds 150 ms. Mid-range phones are about 3–5 times slower than a desktop JVM, which
+  the median exceeds 150 ms or any target exceeds 400 ms. Mid-range phones are about 3–5 times slower than a desktop JVM, which
   leaves SC-002 at 1 s with margin.
 - **Correctness (SC-003)**: a JVM test runs a slow reference search that enumerates every
   combination with exact rationals. It compares the reference with the fast search for all

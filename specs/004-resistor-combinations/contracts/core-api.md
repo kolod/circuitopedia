@@ -14,9 +14,10 @@ fun formatDecimal(value: BigDecimal, locale: Locale): String
 ## `:modules:resistor-combinations:core` — package `io.github.kolod.circuitopedia.modules.resistorcombinations.core`
 
 ```kotlin
-class Rational : Comparable<Rational> {          // exact, > 0, reduced
+class Rational : Comparable<Rational> {          // exact, reduced, any sign (deviations)
     operator fun plus(other: Rational): Rational
-    fun reciprocal(): Rational
+    operator fun minus(other: Rational): Rational; operator fun times(…); operator fun div(…)
+    fun reciprocal(): Rational; fun abs(): Rational
     fun toDouble(): Double
     fun round(significantDigits: Int): BigDecimal   // HALF_UP
     companion object { fun of(value: BigDecimal): Rational }
@@ -31,8 +32,11 @@ enum class Kind(val resistorCount: Int) { Single(1), Series2(2), Series3(3), Par
 
 data class Combination(val kind: Kind, val values: List<Rational>) {
     val resistance: Rational
-    fun deviation(target: Rational): BigDecimal  // signed, exact enough for display and tests
+    fun deviation(target: Rational): Rational    // signed, exact
 }
+
+fun rankingFor(target: Rational): Comparator<Combination>   // FR-007
+const val PER_KIND = 5
 
 /** The 5 best of Single and of each allowed kind, merged and sorted (FR-006–FR-008). */
 fun search(target: Rational, series: ESeries, allowed: Set<Kind>): List<Combination>
@@ -43,7 +47,7 @@ fun parseTarget(text: String): Rational?
 // Format.kt (FR-009)
 fun Combination.connectionText(locale: Locale): String   // "4.7kΩ ∥ 10kΩ + 220Ω"
 fun Rational.formatOhms(locale: Locale): String            // 4 significant digits: "3.197kΩ"
-fun formatDeviation(deviation: BigDecimal, locale: Locale): String   // "+0.0812%", "−1.23%", "0%"
+fun formatDeviation(deviation: Rational, locale: Locale): String   // "+0.0812%", "−1.23%", "0%"
 ```
 
 Test-only (in `src/test`): `referenceSearch(...)`, the exhaustive exact search used by
