@@ -178,7 +178,7 @@ clear the results.
 
 ### Tests for User Story 2 (write first, must fail)
 
-- [ ] T018 [P] [US2] Write `CORE_TEST/ReferenceBuildSearch.kt`, an exhaustive exact search over every arm build pair (Single, Series2 or Parallel2 for each computed arm; the entered value for an entered arm), with:
+- [X] T018 [P] [US2] Write `CORE_TEST/ReferenceBuildSearch.kt`, an exhaustive exact search over every arm build pair (Single, Series2 or Parallel2 for each computed arm; the entered value for an entered arm), with:
   - the total in [0.9·Rt, 1.1·Rt];
   - the FR-010 ranking;
   - the best 5 per chosenCount, merged.
@@ -189,7 +189,7 @@ clear the results.
   - a target near the end of the value range.
 
   `builds(...)` must equal the reference exactly.
-- [ ] T019 [P] [US2] Write `CORE_TEST/BuildSearchExamplesTest.kt`. Cases:
+- [X] T019 [P] [US2] Write `CORE_TEST/BuildSearchExamplesTest.kt`. Cases:
   - **R1 entered:** 5V / 3.3V / R1 = 10k on E24; every build keeps R1 = 10k, and chosenCount ∈ {1, 2}.
   - **Both arms chosen:** 9V / 3V / 30k on E24; the first build is 20k / 10k with u2Error 0 and chosenCount 2.
   - **Window:** every total within ±10%.
@@ -197,11 +197,11 @@ clear the results.
   - **Order:** sorted by FR-010.
   - **Nothing to choose:** R1 and R2 both entered give an empty list.
   - **Cancellation:** the cancellation callback stops the search.
-- [ ] T020 [P] [US2] Write `CORE_TEST/BuildSearchBudgetTest.kt`: E192, both arms chosen, 10 fixed targets. `buildEvaluations` stays under a budget, set to about 3× the measured maximum. The timing is printed only.
+- [X] T020 [P] [US2] Write `CORE_TEST/BuildSearchBudgetTest.kt`: E192, both arms chosen, 10 fixed targets. `buildEvaluations` stays under a budget, set to about 3× the measured maximum. The timing is printed only.
 
 ### Implementation for User Story 2
 
-- [ ] T021 [US2] Create `CORE/BuildSearch.kt` per research R4, so that T018–T020 pass:
+- [X] T021 [US2] Create `CORE/BuildSearch.kt` per research R4, so that T018–T020 pass:
   - `DividerBuild`;
   - `builds`;
   - `buildEvaluations`;

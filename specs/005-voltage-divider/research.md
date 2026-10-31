@@ -99,6 +99,17 @@ each B1 the best B2 is the one nearest to `q·B1` with `q = k/(1−k)`, clamped 
 - **Cost estimate**: E192 (2,2) is about 4·10⁴ B1 values × log(4·10⁴) per binary search, plus short
   walks. That is a few million steps.
 
+**As implemented**, measured on 2026-10-31:
+- **Widening bound.** The fixed two passes became a widening bound per tier: e = 0, 0.1%, 1%, 10%,
+  100%, then ∞. Each pass is complete for its e, because its B1 band contains every build with
+  error ≤ e, so the search stops at the first pass that finds 5 builds within e. Before this, a
+  tier with fewer than 5 candidates in the first pass fell back to every arm build up to 1.1·R.
+  The median went from 83 to 27 ms, and the most evaluations for a target from 1.24 M to 181 k.
+- **Negative band edge.** An entered arm can push the other arm's band edge below zero. The
+  parallel-pair bound then has to accept every b. A bug here dropped all parallel pairs, and the
+  reference test caught it.
+- **Arm-list sort.** Arm lists are sorted in place, without boxing.
+
 **Ranking (FR-010)**: |error| (exact), then the resistor count, then |T − Rt| (exact), then the
 values in order. The best 5 per tier are merged and sorted.
 
