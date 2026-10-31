@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Molded axial inductor (RF choke) for the inductor color code calculator, editable in Inkscape.
+
+  Contract with the shared BandDrawing (checked by InductorSvgTest, spec 002 research R10):
+  - band-1 … band-4 are the bands, left to right; band-4 (tolerance) sits apart near the right end.
+    The 3-band tab hides band-4. Bands are colored through CSS at render time, so their fills MUST
+    stay presentation attributes (fill="…"), not style="fill:…".
+  - No transform on any element: band bounds are read straight from their path data.
+  - The viewBox frames the drawing; the leads end at its left and right edges.
+  The bands lie on the straight part of the body (x 270 … 730), so they match its outline.
+-->
+<svg
+   width="800"
+   height="204"
+   viewBox="100 48 800 204"
+   id="inductor"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <rect
+     id="leads"
+     x="100"
+     y="138"
+     width="800"
+     height="24"
+     fill="#8A8A8A" />
+  <rect
+     id="body"
+     x="220"
+     y="50"
+     width="560"
+     height="200"
+     rx="50"
+     ry="50"
+     fill="#A9D3A0"
+     stroke="#5E7F5A"
+     stroke-width="3" />
+  <path
+     id="band-1"
+     fill="#F5E83A"
+     d="M 290,51.5 H 330 V 248.5 H 290 Z" />
+  <path
+     id="band-2"
+     fill="#8236AA"
+     d="M 355,51.5 H 395 V 248.5 H 355 Z" />
+  <path
+     id="band-3"
+     fill="#212121"
+     d="M 420,51.5 H 460 V 248.5 H 420 Z" />
+  <path
+     id="band-4"
+     fill="#BDBDBD"
+     d="M 660,51.5 H 700 V 248.5 H 660 Z" />
+  <rect
+     id="highlight"
+     x="250"
+     y="72"
+     width="500"
+     height="22"
+     rx="11"
+     fill="#FFFFFF"
+     fill-opacity="0.25" />
+</svg>

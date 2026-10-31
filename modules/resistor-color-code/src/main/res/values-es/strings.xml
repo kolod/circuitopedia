@@ -3,32 +3,7 @@
     <string name="resistor_color_code_title">Código de colores de resistencias</string>
     <string name="resistor_color_code_description">Resistencia a partir de 3–6 bandas</string>
 
-    <plurals name="resistor_color_code_bands">
-        <item quantity="one">%d banda</item>
-        <item quantity="many">%d bandas</item>
-        <item quantity="other">%d bandas</item>
-    </plurals>
-
-    <string name="resistor_color_code_color_black">Negro</string>
-    <string name="resistor_color_code_color_brown">Marrón</string>
-    <string name="resistor_color_code_color_red">Rojo</string>
-    <string name="resistor_color_code_color_orange">Naranja</string>
-    <string name="resistor_color_code_color_yellow">Amarillo</string>
-    <string name="resistor_color_code_color_green">Verde</string>
-    <string name="resistor_color_code_color_blue">Azul</string>
-    <string name="resistor_color_code_color_violet">Violeta</string>
-    <string name="resistor_color_code_color_gray">Gris</string>
-    <string name="resistor_color_code_color_white">Blanco</string>
-    <string name="resistor_color_code_color_gold">Dorado</string>
-    <string name="resistor_color_code_color_silver">Plateado</string>
-
-    <string name="resistor_color_code_header_band">Banda %d</string>
-    <string name="resistor_color_code_header_multiplier">Mult.</string>
-    <string name="resistor_color_code_header_tolerance">Toler.</string>
     <string name="resistor_color_code_header_tcr">CT</string>
 
-    <string name="resistor_color_code_cell_description">%1$s, %2$s, %3$s</string>
-    <string name="resistor_color_code_band_multiplier">Multiplicador</string>
-    <string name="resistor_color_code_band_tolerance">Tolerancia</string>
     <string name="resistor_color_code_band_tcr">Coeficiente de temperatura</string>
 </resources>

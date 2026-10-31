@@ -1,15 +1,16 @@
 package io.github.kolod.circuitopedia.modules.resistorcolorcode.core
 
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Black
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Brown
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Gold
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Green
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Orange
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Red
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Silver
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Violet
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.White
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Yellow
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Black
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Brown
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Gold
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Green
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Orange
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Red
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Silver
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Violet
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.White
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Yellow
 import java.math.BigDecimal
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="color_code_bands">
+        <item quantity="other">%d本</item>
+    </plurals>
+    <string name="color_code_color_black">黒</string>
+    <string name="color_code_color_brown">茶</string>
+    <string name="color_code_color_red">赤</string>
+    <string name="color_code_color_orange">橙</string>
+    <string name="color_code_color_yellow">黄</string>
+    <string name="color_code_color_green">緑</string>
+    <string name="color_code_color_blue">青</string>
+    <string name="color_code_color_violet">紫</string>
+    <string name="color_code_color_gray">灰</string>
+    <string name="color_code_color_white">白</string>
+    <string name="color_code_color_gold">金</string>
+    <string name="color_code_color_silver">銀</string>
+    <string name="color_code_header_band">第%d帯</string>
+    <string name="color_code_header_multiplier">乗数</string>
+    <string name="color_code_header_tolerance">許容差</string>
+    <string name="color_code_cell_description">%1$s、%2$s、%3$s</string>
+    <string name="color_code_band_multiplier">乗数</string>
+    <string name="color_code_band_tolerance">許容差</string>
+</resources>

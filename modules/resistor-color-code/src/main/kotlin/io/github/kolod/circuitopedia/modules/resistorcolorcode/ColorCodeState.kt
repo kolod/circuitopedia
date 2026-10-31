@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandLayout
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.Selection
 

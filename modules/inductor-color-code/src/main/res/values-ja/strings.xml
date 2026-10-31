@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inductor_color_code_title">インダクタのカラーコード</string>
+    <string name="inductor_color_code_description">色帯からインダクタンスを求める</string>
+    <string name="inductor_color_code_decimal_point">小数点</string>
+</resources>

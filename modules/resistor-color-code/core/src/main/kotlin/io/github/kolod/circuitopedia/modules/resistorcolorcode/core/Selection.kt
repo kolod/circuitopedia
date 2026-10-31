@@ -1,11 +1,13 @@
 package io.github.kolod.circuitopedia.modules.resistorcolorcode.core
 
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Black
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Brown
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Gold
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Red
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Violet
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Yellow
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Black
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Brown
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Gold
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Red
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Violet
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Yellow
+import io.github.kolod.circuitopedia.shared.colorcode.Percent
 import java.math.BigDecimal
 
 /** The resistance, tolerance and (6 bands only) temperature coefficient that a selection encodes. */

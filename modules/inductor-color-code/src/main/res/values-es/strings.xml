@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inductor_color_code_title">Código de colores de inductores</string>
+    <string name="inductor_color_code_description">Inductancia a partir de bandas de color</string>
+    <string name="inductor_color_code_decimal_point">Punto decimal</string>
+</resources>

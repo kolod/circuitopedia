@@ -1,5 +1,6 @@
 package io.github.kolod.circuitopedia.modules.resistorcolorcode.core
 
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.math.RoundingMode

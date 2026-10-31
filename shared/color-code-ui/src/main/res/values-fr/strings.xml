@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="color_code_bands">
+        <item quantity="one">%d anneau</item>
+        <item quantity="many">%d anneaux</item>
+        <item quantity="other">%d anneaux</item>
+    </plurals>
+    <string name="color_code_color_black">Noir</string>
+    <string name="color_code_color_brown">Marron</string>
+    <string name="color_code_color_red">Rouge</string>
+    <string name="color_code_color_orange">Orange</string>
+    <string name="color_code_color_yellow">Jaune</string>
+    <string name="color_code_color_green">Vert</string>
+    <string name="color_code_color_blue">Bleu</string>
+    <string name="color_code_color_violet">Violet</string>
+    <string name="color_code_color_gray">Gris</string>
+    <string name="color_code_color_white">Blanc</string>
+    <string name="color_code_color_gold">Or</string>
+    <string name="color_code_color_silver">Argent</string>
+    <string name="color_code_header_band">Anneau %d</string>
+    <string name="color_code_header_multiplier">Mult.</string>
+    <string name="color_code_header_tolerance">Tolér.</string>
+    <string name="color_code_cell_description">%1$s, %2$s, %3$s</string>
+    <string name="color_code_band_multiplier">Multiplicateur</string>
+    <string name="color_code_band_tolerance">Tolérance</string>
+</resources>

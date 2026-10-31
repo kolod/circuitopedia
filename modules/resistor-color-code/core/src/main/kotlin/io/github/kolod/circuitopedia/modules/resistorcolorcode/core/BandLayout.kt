@@ -4,6 +4,7 @@ import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandRole.Dig
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandRole.Multiplier
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandRole.TemperatureCoefficient
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandRole.Tolerance
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
 
 enum class BandRole { Digit, Multiplier, Tolerance, TemperatureCoefficient }
 

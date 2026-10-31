@@ -33,7 +33,10 @@ class AppModule(
 1. **Location**: `modules/<name>/` with its own `build.gradle.kts` (Android library), where
    `<name>` is the kebab-case module id. Settings auto-include it as `:modules:<name>`.
 2. **Dependencies**: `implementation(project(":module-api"))` plus official AndroidX/Compose
-   artifacts. It MUST NOT depend on another `:modules:*` project or on `:app`. Any calculation
+   artifacts. It MAY depend on shared libraries in the top-level `shared/` directory
+   (`:shared:<name>`, auto-included by settings; amended by spec 003). Those hold code used by
+   two or more modules and are never app modules themselves. It MUST NOT depend on another
+   `:modules:*` project or on `:app`. Any calculation
    logic goes in its own `modules/<name>/core` Kotlin/JVM subproject (no Android imports), which
    the module depends on.
 3. **Descriptor**: exactly one public top-level `val <name>Module: AppModule` in package
