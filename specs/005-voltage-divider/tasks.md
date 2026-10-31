@@ -91,12 +91,12 @@ and the combinations module behaves exactly as before.
 
 **Purpose**: Voltages can be parsed and shown.
 
-- [ ] T009 [P] Write `CORE_TEST/VoltageParserTest.kt` (test-first). Cases:
+- [X] T009 [P] Write `CORE_TEST/VoltageParserTest.kt` (test-first). Cases:
   - accepted: "5", "3.3", "3,3", "-12", "4.7m", "4,7 mV", "1k", "+5V", " 12 V ";
   - rejected: "", "abc", "0", "0.0005", "200k", "1.2.3", "5 VV", "1M";
   - exact `Rational` results.
-- [ ] T010 [P] Write `CORE_TEST/VoltageFormatTest.kt`: "3.837V", "4.7mV", "12V", "1kV", "−12V" (U+2212), and `uk` "3,837V".
-- [ ] T011 Create `CORE/Quantity.kt` (`enum class Quantity { U1, U2, R1, R2, R }`) and `CORE/Voltage.kt` (`parseVoltage`, `formatVolts`, with the sign handled outside `formatSi`), so that T009 and T010 pass.
+- [X] T010 [P] Write `CORE_TEST/VoltageFormatTest.kt`: "3.837V", "4.7mV", "12V", "1kV", "−12V" (U+2212), and `uk` "3,837V".
+- [X] T011 Create `CORE/Quantity.kt` (`enum class Quantity { U1, U2, R1, R2, R }`) and `CORE/Voltage.kt` (`parseVoltage`, `formatVolts`, with the sign handled outside `formatSi`), so that T009 and T010 pass.
 
 **Checkpoint**: Parsing and formatting are verified.
 
