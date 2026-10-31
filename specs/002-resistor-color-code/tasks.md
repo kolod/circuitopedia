@@ -280,7 +280,7 @@ dark theme and with large fonts (portrait-only, constitution 1.1.0).
 - [X] T046 Add AndroidSVG 1.4 to `gradle/libs.versions.toml` and the module's `build.gradle.kts`, and justify it in spec "New Dependencies", plan and research R10.
 - [X] T047 Move the Inkscape drawing to `RES/raw/resistor_color_code_resistor.svg` per the R10 contract (`viewBox`, `band-1` … `band-6`, fill attributes, no transforms), and write `modules/resistor-color-code/src/test/kotlin/…/ResistorSvgTest.kt` for that contract, the layout band subsets and the band CSS.
 - [X] T048 Rewrite `UI/ResistorDrawing.kt` to render the SVG with per-selection CSS and to place the leader lines from the band bounds read from the SVG. Check the 4- and 6-band pages on a device, and that T043 still passes.
-- [ ] T045 Push branch `002-resistor-color-code` and open a PR to `main`. The description cites IEC 60062:2016 and lists the differences from the reference image (spec Assumptions). Merge after CI is green and T043/T044 are done.
+- [X] T045 Push branch `002-resistor-color-code` and open a PR to `main`. The description cites IEC 60062:2016 and lists the differences from the reference image (spec Assumptions). Merge after CI is green and T043/T044 are done.
 
 ---
 
