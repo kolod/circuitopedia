@@ -112,6 +112,77 @@ class DividerScreenTest {
         assertEquals(string(R.string.voltage_divider_error_ratio), message)
     }
 
+    // US2
+
+    private fun awaitBuilds() = rule.waitUntil(10_000) {
+        rule.onAllNodes(hasTestTag("vd-build-0")).fetchSemanticsNodes().isNotEmpty()
+    }
+
+    private fun description(tag: String): String =
+        rule.onNodeWithTag(tag).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single()
+
+    private fun scrollTo(tag: String) = rule.onNodeWithTag("vd-list").performScrollToNode(hasTestTag(tag))
+
+    @Test
+    fun buildsAppearAfterCalculateWithTheExactPairFirst() {
+        launch()
+        type(Quantity.U1, "9")
+        type(Quantity.U2, "3")
+        type(Quantity.R, "30k")
+        calculate()
+        scrollTo("vd-series-E24")
+        awaitBuilds()
+        scrollTo("vd-build-0")
+        val first = description("vd-build-0")
+        val kilohm = string(R.string.voltage_divider_spoken_kilohm)
+        assertTrue(first, first.startsWith("R1 20 $kilohm, R2 10 $kilohm, "))
+        assertTrue(first, first.contains(string(R.string.voltage_divider_spoken_error, "0")))
+    }
+
+    @Test
+    fun switchingTheSeriesUpdatesTheBuilds() {
+        launch()
+        type(Quantity.U1, "5")
+        type(Quantity.U2, "3.3")
+        type(Quantity.R, "30k")
+        calculate()
+        scrollTo("vd-series-E24")
+        awaitBuilds()
+        scrollTo("vd-build-0")
+        val e24 = description("vd-build-0")
+        scrollTo("vd-series-E3")
+        rule.onNodeWithTag("vd-series-E3").performClick()
+        rule.waitUntil(10_000) {
+            rule.onAllNodes(hasTestTag("vd-build-0")).fetchSemanticsNodes().firstOrNull()
+                ?.config?.get(SemanticsProperties.ContentDescription)?.single()?.let { it != e24 } == true
+        }
+    }
+
+    @Test
+    fun noBuildsWhenBothResistorsAreEntered() {
+        launch()
+        type(Quantity.U1, "12")
+        type(Quantity.R1, "10k")
+        type(Quantity.R2, "4k7")
+        calculate()
+        rule.onNodeWithTag("vd-series-E24").assertDoesNotExist()
+    }
+
+    // US3
+
+    @Test
+    fun computedFieldIsSpokenWithUnitWordsAndState() {
+        launch()
+        type(Quantity.U1, "5")
+        type(Quantity.U2, "3.3")
+        type(Quantity.R1, "10k")
+        calculate()
+        val node = field(Quantity.R2).fetchSemanticsNode().config
+        val label = string(R.string.voltage_divider_label_r2)
+        assertEquals(listOf("$label, 19.41 ${string(R.string.voltage_divider_spoken_kilohm)}"), node[SemanticsProperties.ContentDescription])
+        assertEquals(string(R.string.voltage_divider_state_computed), node[SemanticsProperties.StateDescription])
+    }
+
     @Test
     fun valuesSurviveStateRestoration() {
         val tester = StateRestorationTester(rule)

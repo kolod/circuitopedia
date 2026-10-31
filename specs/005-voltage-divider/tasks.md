@@ -209,12 +209,12 @@ clear the results.
   - the one-arm walk;
   - the two-arm two-pass search with the window clamp;
   - `Double` keys with a margin, then an exact re-rank.
-- [ ] T022 [US2] Add the strings `builds_header`, `series_label`, `no_builds`, `build_u2` and `build_r` to `RES/values*/strings.xml` in six locales. Then extend `UI/DividerScreen.kt`:
+- [X] T022 [US2] Add the strings `builds_header`, `series_label`, `no_builds`, `build_u2` and `build_r` to `RES/values*/strings.xml` in six locales. Then extend `UI/DividerScreen.kt`:
   - after a Solved result with R1 or R2 computed, show the series chips (E24 first, `rememberSaveable`) and the build rows;
   - each row shows R1 and R2 as connection text, then "U2 = … (±…%)" and "R = … (±…%)";
   - the builds run on `Dispatchers.Default` with `ensureActive`;
   - when there are no builds, show the `no_builds` message.
-- [ ] T023 [US2] Extend `UI_TEST/DividerScreenTest.kt`:
+- [X] T023 [US2] Extend `UI_TEST/DividerScreenTest.kt`:
   - 9 / 3 / 30k, then Calculate, shows builds, and the first one reads 20kΩ / 10kΩ at 0%;
   - switching to E3 updates the list;
   - with R1 and R2 entered, no build section is shown.
@@ -230,13 +230,13 @@ clear the results.
 **Independent Test**: In Ukrainian, "3,3" works and the results show decimal commas. TalkBack reads
 "R2, 19.41 kilohm, computed".
 
-- [ ] T024 [P] [US3] Add the strings `state_entered`, `state_computed` and the spoken unit and connection words to `RES/values*/strings.xml` in six locales.
-- [ ] T025 [US3] Create `UI/Spoken.kt`, which builds:
+- [X] T024 [P] [US3] Add the strings `state_entered`, `state_computed` and the spoken unit and connection words to `RES/values*/strings.xml` in six locales.
+- [X] T025 [US3] Create `UI/Spoken.kt`, which builds:
   - field descriptions: "name, value with unit words, state";
   - build descriptions: R1 and R2 spoken, then U2 and its error, then R and its deviation.
 
   Apply both with semantics in `UI/DividerScreen.kt`.
-- [ ] T026 [US3] Extend `UI_TEST/DividerScreenTest.kt`:
+- [X] T026 [US3] Extend `UI_TEST/DividerScreenTest.kt`:
   - the computed field's content description;
   - a build row's content description.
 - [ ] T027 [US3] On the emulator, check:
