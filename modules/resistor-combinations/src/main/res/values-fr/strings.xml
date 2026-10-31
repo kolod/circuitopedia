@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resistor_combinations_title">Combinaisons de résistances</string>
+    <string name="resistor_combinations_description">Obtenir une valeur avec 1 à 3 résistances normalisées</string>
+</resources>

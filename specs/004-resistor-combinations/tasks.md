@@ -48,20 +48,20 @@ catalog.
   - `shared/color-code` (if any file uses them).
 
   Update `specs/003-inductor-color-code/contracts/core-api.md` to say the two functions moved. `./gradlew test` passes.
-- [ ] T003 [P] Create `modules/resistor-combinations/core/build.gradle.kts` (kotlin-jvm, JVM 17, `api(project(":shared:si-format"))`, `testImplementation(libs.junit)`).
-- [ ] T004 [P] Create `modules/resistor-combinations/build.gradle.kts` like `modules/inductor-color-code/build.gradle.kts`:
+- [X] T003 [P] Create `modules/resistor-combinations/core/build.gradle.kts` (kotlin-jvm, JVM 17, `api(project(":shared:si-format"))`, `testImplementation(libs.junit)`).
+- [X] T004 [P] Create `modules/resistor-combinations/build.gradle.kts` like `modules/inductor-color-code/build.gradle.kts`:
   - namespace `io.github.kolod.circuitopedia.modules.resistorcombinations`;
   - `resourcePrefix = "resistor_combinations_"`;
   - dependencies `:module-api`, `:modules:resistor-combinations:core`, the Compose BOM, foundation, material3 and ui, and the same test dependencies (no shared color code UI).
-- [ ] T005 [P] Create `RES/drawable/resistor_combinations_icon.xml`, a 24dp single-color vector of two resistors in parallel with a third in series (white, no tint).
-- [ ] T006 [P] Create `RES/values*/strings.xml` with the `title` and `description` keys:
+- [X] T005 [P] Create `RES/drawable/resistor_combinations_icon.xml`, a 24dp single-color vector of two resistors in parallel with a third in series (white, no tint).
+- [X] T006 [P] Create `RES/values*/strings.xml` with the `title` and `description` keys:
   - en: Resistor combinations / Match a value with 1–3 standard resistors;
   - de: Widerstandskombinationen / Wert aus 1–3 Normwiderständen bilden;
   - fr: Combinaisons de résistances / Obtenir une valeur avec 1 à 3 résistances normalisées;
   - es: Combinaciones de resistencias / Obtener un valor con 1–3 resistencias normalizadas;
   - ja: 抵抗の組み合わせ / 1～3本の標準抵抗で値を作る;
   - uk: Комбінації резисторів / Номінал з 1–3 стандартних резисторів.
-- [ ] T007 Create `UI/ResistorCombinationsModule.kt` (`val resistorCombinationsModule = AppModule(ModuleId("resistor-combinations"), Category.Calculations, …) { CombinationsScreen() }`) and a placeholder `UI/CombinationsScreen.kt`. Register the module in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
+- [X] T007 Create `UI/ResistorCombinationsModule.kt` (`val resistorCombinationsModule = AppModule(ModuleId("resistor-combinations"), Category.Calculations, …) { CombinationsScreen() }`) and a placeholder `UI/CombinationsScreen.kt`. Register the module in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
 
 **Checkpoint**: `./gradlew test lint :app:assembleDebug` passes. The catalog lists three calculators.
 

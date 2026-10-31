@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resistor_combinations_title">Комбінації резисторів</string>
+    <string name="resistor_combinations_description">Номінал з 1–3 стандартних резисторів</string>
+</resources>
