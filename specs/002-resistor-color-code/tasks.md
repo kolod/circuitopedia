@@ -37,10 +37,10 @@ semantics) gets Compose instrumented tests, which need an emulator or device.
 
 **Purpose**: Both subprojects build, and the module shows up in the catalog (with a placeholder screen).
 
-- [ ] T001 Add plugin alias `kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }` to `gradle/libs.versions.toml`, and add `alias(libs.plugins.kotlin.jvm) apply false` to the root `build.gradle.kts`.
-- [ ] T002 In `settings.gradle.kts`, extend the `modules/*` auto-include. For each included `modules/<name>`, also `include(":modules:<name>:core")` when `modules/<name>/core/build.gradle.kts` exists, and update the comment (research R3). App auto-dependencies must stay on direct children of `:modules` only.
-- [ ] T003 [P] Create `modules/resistor-color-code/core/build.gradle.kts`: plugin `kotlin-jvm`, `kotlin { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }`, `java { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }`, `testImplementation(libs.junit)`.
-- [ ] T004 [P] Create `modules/resistor-color-code/build.gradle.kts`, following `modules/README.md`:
+- [X] T001 Add plugin alias `kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }` to `gradle/libs.versions.toml`, and add `alias(libs.plugins.kotlin.jvm) apply false` to the root `build.gradle.kts`.
+- [X] T002 In `settings.gradle.kts`, extend the `modules/*` auto-include. For each included `modules/<name>`, also `include(":modules:<name>:core")` when `modules/<name>/core/build.gradle.kts` exists, and update the comment (research R3). App auto-dependencies must stay on direct children of `:modules` only.
+- [X] T003 [P] Create `modules/resistor-color-code/core/build.gradle.kts`: plugin `kotlin-jvm`, `kotlin { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }`, `java { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }`, `testImplementation(libs.junit)`.
+- [X] T004 [P] Create `modules/resistor-color-code/build.gradle.kts`, following `modules/README.md`:
   - plugins `android-library` and `kotlin-compose`;
   - `namespace = "io.github.kolod.circuitopedia.modules.resistorcolorcode"`, `compileSdk = 37`, `minSdk = 26`;
   - `compileOptions` source and target 17, `buildFeatures.compose = true`, `resourcePrefix = "resistor_color_code_"`;
@@ -50,15 +50,15 @@ semantics) gets Compose instrumented tests, which need an emulator or device.
     - `implementation`: `project(":module-api")`, `project(":modules:resistor-color-code:core")`, the Compose BOM, foundation, material3 and ui;
     - `debugImplementation`: `ui-test-manifest`;
     - `androidTestImplementation`: the BOM, `ui-test-junit4`, `androidx-test-ext-junit` and `androidx-test-runner`.
-- [ ] T005 [P] Create `RES/drawable/resistor_color_code_icon.xml`, a 24dp single-color vector of a resistor (zigzag or body with bands, white fill, no tint attribute).
-- [ ] T006 [P] Create `RES/values/strings.xml` with `resistor_color_code_title` "Resistor color code" and `resistor_color_code_description` "Resistance from 3–6 color bands", plus translations:
+- [X] T005 [P] Create `RES/drawable/resistor_color_code_icon.xml`, a 24dp single-color vector of a resistor (zigzag or body with bands, white fill, no tint attribute).
+- [X] T006 [P] Create `RES/values/strings.xml` with `resistor_color_code_title` "Resistor color code" and `resistor_color_code_description` "Resistance from 3–6 color bands", plus translations:
   - `values-de`: Widerstandsfarbcode / Widerstand aus 3–6 Farbringen;
   - `values-fr`: Code couleur des résistances / Résistance à partir de 3 à 6 anneaux;
   - `values-es`: Código de colores de resistencias / Resistencia a partir de 3–6 bandas;
   - `values-ja`: 抵抗器のカラーコード / 3～6本の色帯から抵抗値を求める;
   - `values-uk`: Кольорове маркування резисторів / Опір за 3–6 кольоровими смугами.
-- [ ] T007 Create `UI/ResistorColorCodeModule.kt` with `val resistorColorCodeModule = AppModule(id = ModuleId("resistor-color-code"), category = Category.Calculations, titleRes = R.string.resistor_color_code_title, descriptionRes = R.string.resistor_color_code_description, iconRes = R.drawable.resistor_color_code_icon, content = { ColorCodeScreen() })`, with a temporary empty `@Composable fun ColorCodeScreen() {}` in `UI/ColorCodeScreen.kt`.
-- [ ] T008 Register the module with one line, `resistorColorCodeModule,`, in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt` (import `io.github.kolod.circuitopedia.modules.resistorcolorcode.resistorColorCodeModule`).
+- [X] T007 Create `UI/ResistorColorCodeModule.kt` with `val resistorColorCodeModule = AppModule(id = ModuleId("resistor-color-code"), category = Category.Calculations, titleRes = R.string.resistor_color_code_title, descriptionRes = R.string.resistor_color_code_description, iconRes = R.drawable.resistor_color_code_icon, content = { ColorCodeScreen() })`, with a temporary empty `@Composable fun ColorCodeScreen() {}` in `UI/ColorCodeScreen.kt`.
+- [X] T008 Register the module with one line, `resistorColorCodeModule,`, in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt` (import `io.github.kolod.circuitopedia.modules.resistorcolorcode.resistorColorCodeModule`).
 
 **Checkpoint**: `./gradlew test lint :app:assembleDebug` passes. The catalog lists "Resistor color code".
 
@@ -70,8 +70,8 @@ semantics) gets Compose instrumented tests, which need an emulator or device.
 
 **⚠️ CRITICAL**: All stories depend on this phase.
 
-- [ ] T009 [P] Create `CORE/Units.kt`: `@JvmInline value class Ohms(val value: BigDecimal)`, `Percent(val value: BigDecimal)`, `PpmPerKelvin(val value: Int)`, each with an `init { require(value > 0) }`.
-- [ ] T010 [P] Write `CORE_TEST/ColorCodeTableTest.kt` first. Assert every `BandColor` field against a literal table copied from research R1:
+- [X] T009 [P] Create `CORE/Units.kt`: `@JvmInline value class Ohms(val value: BigDecimal)`, `Percent(val value: BigDecimal)`, `PpmPerKelvin(val value: Int)`, each with an `init { require(value > 0) }`.
+- [X] T010 [P] Write `CORE_TEST/ColorCodeTableTest.kt` first. Assert every `BandColor` field against a literal table copied from research R1:
   - `digit`: Black 0 … White 9, Gold and Silver null;
   - `multiplierExponent`: Black 0 … White 9, Gold −1, Silver −2;
   - `tolerance`: Brown 1, Red 2, Orange 0.05, Yellow 0.02, Green 0.5, Blue 0.25, Violet 0.1, Gray 0.01, Gold 5, Silver 10, Black and White null (compare with `compareTo`);
@@ -79,11 +79,11 @@ semantics) gets Compose instrumented tests, which need an emulator or device.
   - the enum order Black…Silver.
 
   It must fail to compile.
-- [ ] T011 Create `CORE/BandColor.kt`: the `TextOnColor { Light, Dark }` enum and `enum class BandColor(digit, multiplierExponent, tolerance, tcr, argb, textOnColor)` with the values from T010 and the palette from research R6.
+- [X] T011 Create `CORE/BandColor.kt`: the `TextOnColor { Light, Dark }` enum and `enum class BandColor(digit, multiplierExponent, tolerance, tcr, argb, textOnColor)` with the values from T010 and the palette from research R6.
   - A KDoc block cites "IEC 60062:2016, Marking codes for resistors and capacitors, §5, Tables 1–3", notes the pre-2016 Gray ±0.05% (EIA RS-279) caveat, and says the RGB values are illustrative.
   - Add a comment that ordinals are saved in UI state, so the order is append-only.
   - T010 now passes.
-- [ ] T012 [P] Write `CORE_TEST/SelectionTest.kt` first:
+- [X] T012 [P] Write `CORE_TEST/SelectionTest.kt` first:
   - `BandLayout.Three/Four/Five/Six.roles` match data-model.md;
   - `accepts(0, Black)` is false for every layout, while `accepts(1, Black)` and `accepts(2, Black)` (a digit in Five) are true;
   - `accepts(i, Gold)` is false for digit bands;
@@ -94,8 +94,8 @@ semantics) gets Compose instrumented tests, which need an emulator or device.
   - the `Selection` constructor throws `IllegalArgumentException` for the wrong size or an invalid color.
 
   It must fail.
-- [ ] T013 Create `CORE/BandLayout.kt`: `enum class BandRole { Digit, Multiplier, Tolerance, TemperatureCoefficient }`, `enum class BandLayout(val roles: List<BandRole>)` with `bandCount`, and `fun BandLayout.accepts(index: Int, color: BandColor): Boolean`, implementing the data-model.md rules (no Black on the first digit).
-- [ ] T014 Create `CORE/Selection.kt`: `class Selection(layout, colors)` with an `init` validation through `accepts`, `with(index, color)`, `equals`/`hashCode` (or make it a data class), and `companion object { fun default(layout) }` per FR-014. Add `data class Reading(resistance: Ohms, tolerance: Percent, tcr: PpmPerKelvin?)` and leave `read()` as `TODO()`. T012 now passes.
+- [X] T013 Create `CORE/BandLayout.kt`: `enum class BandRole { Digit, Multiplier, Tolerance, TemperatureCoefficient }`, `enum class BandLayout(val roles: List<BandRole>)` with `bandCount`, and `fun BandLayout.accepts(index: Int, color: BandColor): Boolean`, implementing the data-model.md rules (no Black on the first digit).
+- [X] T014 Create `CORE/Selection.kt`: `class Selection(layout, colors)` with an `init` validation through `accepts`, `with(index, color)`, `equals`/`hashCode` (or make it a data class), and `companion object { fun default(layout) }` per FR-014. Add `data class Reading(resistance: Ohms, tolerance: Percent, tcr: PpmPerKelvin?)` and leave `read()` as `TODO()`. T012 now passes.
 
 **Checkpoint**: `./gradlew :modules:resistor-color-code:core:test` is green for the table and the selection rules.
 
@@ -111,7 +111,7 @@ shows "10kΩ ±1%" (spec US1).
 
 ### Tests for User Story 1 ⚠️ (write first, confirm failing)
 
-- [ ] T015 [P] [US1] Write `CORE_TEST/ReadingTest.kt` (layout Four), comparing with `BigDecimal.compareTo`:
+- [X] T015 [P] [US1] Write `CORE_TEST/ReadingTest.kt` (layout Four), comparing with `BigDecimal.compareTo`:
   - Yellow, Violet, Red, Gold gives 4700 Ω ±5%;
   - Brown, Black, Orange, Brown gives 10000 Ω ±1%;
   - Red, Red, Gold, Gold gives 2.2 Ω;
@@ -119,7 +119,7 @@ shows "10kΩ ±1%" (spec US1).
   - Brown, Black, Silver, Gold gives 0.1 Ω;
   - White, White, White, Brown gives 99 000 000 000 Ω;
   - `tcr` is null.
-- [ ] T016 [P] [US1] Write `CORE_TEST/FormatTest.kt` (locale `Locale.ENGLISH`). `Reading.format` gives:
+- [X] T016 [P] [US1] Write `CORE_TEST/FormatTest.kt` (locale `Locale.ENGLISH`). `Reading.format` gives:
   - "4.7kΩ ±5%", "10kΩ ±1%", "2.2Ω ±5%", "0.22Ω ±10%", "0.1Ω ±5%";
   - "1kΩ ±5%" for Brown Black Red (no ".0");
   - "100Ω ±5%" and "99GΩ ±1%";
@@ -131,10 +131,10 @@ shows "10kΩ ±1%" (spec US1).
   - Tolerance+Gold "±5%", Blue "±0.25%".
 
   No output may contain "E", a grouping separator, or ".0" before a unit.
-- [ ] T017 [P] [US1] Write `CORE_TEST/PaletteContrastTest.kt`:
+- [X] T017 [P] [US1] Write `CORE_TEST/PaletteContrastTest.kt`:
   - `contrastRatio(0xFFFFFFFF, 0xFF000000)` is 21.0 ± 0.01 and `contrastRatio(x, x)` is 1.0;
   - for every `BandColor`, let text be white if `Light` and black if `Dark`; the contrast is ≥ 4.5 against `argb` and against `argb` lightened by 15% and darkened by 15% (mix each channel toward 255 or 0 by 0.15). The failure message names the color and the ratio.
-- [ ] T018 [US1] Write `UI_TEST/ColorCodeScreenTest.kt` with `createAndroidComposeRule<ComponentActivity>()` (the v2 API) and `setContent { MaterialTheme { ColorCodeScreen() } }`. US1 cases:
+- [X] T018 [US1] Write `UI_TEST/ColorCodeScreenTest.kt` with `createAndroidComposeRule<ComponentActivity>()` (the v2 API) and `setContent { MaterialTheme { ColorCodeScreen() } }`. US1 cases:
   - the tab `rcc-tab-4` is selected, and `rcc-value` has text "4.7kΩ ±5%";
   - the cells `rcc-cell-0-Yellow`, `rcc-cell-1-Violet`, `rcc-cell-2-Red` and `rcc-cell-3-Gold` are selected;
   - clicking `rcc-cell-0-Brown`, `rcc-cell-1-Black`, `rcc-cell-2-Orange` and `rcc-cell-3-Brown` gives "10kΩ ±1%", with only those cells selected in their columns;
@@ -144,39 +144,39 @@ shows "10kΩ ±1%" (spec US1).
 
 ### Implementation for User Story 1
 
-- [ ] T019 [US1] Implement `Selection.read()` in `CORE/Selection.kt`:
+- [X] T019 [US1] Implement `Selection.read()` in `CORE/Selection.kt`:
   - digits = the digit bands joined as an `Int`;
   - `resistance = Ohms(BigDecimal(digits).scaleByPowerOfTen(multiplierExponent))`;
   - tolerance from the tolerance band, or `Percent(BigDecimal(20))` for `Three`;
   - `tcr` from the TCR band for `Six`, otherwise null.
 
   T015 passes.
-- [ ] T020 [US1] Create `CORE/Contrast.kt` with `fun contrastRatio(argb1: Int, argb2: Int): Double` (WCAG 2.x relative luminance with the sRGB linearization `c ≤ 0.04045 ? c/12.92 : ((c+0.055)/1.055)^2.4`, ratio `(L1+0.05)/(L2+0.05)` with L1 ≥ L2). Tune the `argb`/`textOnColor` values in `CORE/BandColor.kt` until T017 passes, and record the final values back in research R6.
-- [ ] T021 [US1] Create `CORE/Format.kt`:
+- [X] T020 [US1] Create `CORE/Contrast.kt` with `fun contrastRatio(argb1: Int, argb2: Int): Double` (WCAG 2.x relative luminance with the sRGB linearization `c ≤ 0.04045 ? c/12.92 : ((c+0.055)/1.055)^2.4`, ratio `(L1+0.05)/(L2+0.05)` with L1 ≥ L2). Tune the `argb`/`textOnColor` values in `CORE/BandColor.kt` until T017 passes, and record the final values back in research R6.
+- [X] T021 [US1] Create `CORE/Format.kt`:
   - a private `formatDecimal(BigDecimal, Locale)`: `stripTrailingZeros().toPlainString()` with `.` replaced by `DecimalFormatSymbols.getInstance(locale).decimalSeparator`;
   - a private `formatOhms(Ohms, Locale)`: pick k in 0..3 so that 1 ≤ value/1000^k < 1000, with k = 0 for values < 1, and the prefixes "", "k", "M", "G";
   - `fun Reading.format(locale: Locale): String`, built as "<ohms> ±<tol>%[ ±<tcr>ppm/K]";
   - `fun BandRole.cellLabel(color: BandColor, locale: Locale): String`, per contracts/core-api.md, and `""` for invalid colors.
 
   T016 passes.
-- [ ] T022 [P] [US1] Add the table and drawing strings to `RES/values/strings.xml` (en): 12 color names `resistor_color_code_color_<name>`, `_header_band` "Band %d", `_header_multiplier` "Mult.", `_header_tolerance` "Toler.", `_header_tcr` "TCR". (The drawing has no labels of its own; see the revised FR-009.)
-- [ ] T023 [P] [US1] Translate the T022 strings into `RES/values-de`, `values-fr`, `values-es`, `values-ja` and `values-uk`. Use the standard color names (for example de Schwarz, Braun, Rot, Orange, Gelb, Grün, Blau, Violett, Grau, Weiß, Gold, Silber; uk Чорний, Коричневий, Червоний, Помаранчевий, Жовтий, Зелений, Синій, Фіолетовий, Сірий, Білий, Золотий, Срібний). The short drawing labels are translated where a common abbreviation exists, and otherwise kept as "MUL", "TOL" and "TCR".
-- [ ] T024 [US1] Create `UI/ColorCodeState.kt`:
+- [X] T022 [P] [US1] Add the table and drawing strings to `RES/values/strings.xml` (en): 12 color names `resistor_color_code_color_<name>`, `_header_band` "Band %d", `_header_multiplier` "Mult.", `_header_tolerance` "Toler.", `_header_tcr` "TCR". (The drawing has no labels of its own; see the revised FR-009.)
+- [X] T023 [P] [US1] Translate the T022 strings into `RES/values-de`, `values-fr`, `values-es`, `values-ja` and `values-uk`. Use the standard color names (for example de Schwarz, Braun, Rot, Orange, Gelb, Grün, Blau, Violett, Grau, Weiß, Gold, Silber; uk Чорний, Коричневий, Червоний, Помаранчевий, Жовтий, Зелений, Синій, Фіолетовий, Сірий, Білий, Золотий, Срібний). The short drawing labels are translated where a common abbreviation exists, and otherwise kept as "MUL", "TOL" and "TCR".
+- [X] T024 [US1] Create `UI/ColorCodeState.kt`:
   - `class ColorCodeState(initialLayout: BandLayout, initialSelections: Map<BandLayout, Selection>)`, with `var layout by mutableStateOf(...)`, a `selections` `mutableStateMapOf`, `fun select(index, color)` (applies `Selection.with` to the current layout), and `val current: Selection`;
   - a `Saver` that writes a `List<Int>` (the layout ordinal, then for each `BandLayout` in order the color ordinals of its selection) and restores it;
   - `@Composable fun rememberColorCodeState()` using `rememberSaveable(saver = …)`, with defaults `Four` and `Selection.default(it)`.
-- [ ] T025 [US1] Create `UI/ColorTable.kt` with `ColorTableHeader(layout)` and `ColorTableBody(selection, onSelect)`, plus the shared column geometry (`CellGap`, `TableSidePadding`, `NAME_COLUMN_WEIGHT`, `bandColumnCenters`).
+- [X] T025 [US1] Create `UI/ColorTable.kt` with `ColorTableHeader(layout)` and `ColorTableBody(selection, onSelect)`, plus the shared column geometry (`CellGap`, `TableSidePadding`, `NAME_COLUMN_WEIGHT`, `bandColumnCenters`).
   - The header row has an empty corner, then one header per band: Band N for digits, plus Mult., Toler. and TCR.
   - Then one row per `BandColor` with a name cell, then for each band either:
     - an empty `Box` (when `!layout.accepts(i, color)`), or
     - a cell with a `Brush.verticalGradient(lighten(argb, .15), argb, darken(argb, .15))` background, text `role.cellLabel(color, locale)` colored per `textOnColor`, `Modifier.heightIn(min = 48.dp).weight(1f).selectable(selected, role = Role.RadioButton) { onSelect(i, color) }.testTag("rcc-cell-$i-${color.name}")`, and, when selected, a 3dp `#00E5FF` border plus a 1dp inner `Color.Black.copy(alpha = .6f)` border.
   - The locale comes from `LocalConfiguration.current.locales[0]`, and theme surface colors are used for the header, the name column and empty cells.
-- [ ] T026 [US1] Create `UI/ResistorDrawing.kt`: `@Composable fun ResistorDrawing(selection: Selection, modifier: Modifier)`, a full-width `Canvas` laid out with the table's side margins.
+- [X] T026 [US1] Create `UI/ResistorDrawing.kt`: `@Composable fun ResistorDrawing(selection: Selection, modifier: Modifier)`, a full-width `Canvas` laid out with the table's side margins.
   - The resistor (gray leads, beige dog-bone body) spans the band columns.
   - Band rects are drawn in the selected colors: digits and multiplier on the left, TOL and TCR set apart on the right.
   - Each band is joined to the top edge of its header column (`bandColumnCenters`, shared with `ColorTable.kt`) by a 3dp leader line made of vertical and slanted segments only.
   - No text labels. Use `Modifier.clearAndSetSemantics {}`.
-- [ ] T027 [US1] Replace the placeholder in `UI/ColorCodeScreen.kt` with `@Composable fun ColorCodeScreen(state: ColorCodeState = rememberColorCodeState())`. Each page is a `Column` (tag `rcc-page-<bands>`) containing, in order:
+- [X] T027 [US1] Replace the placeholder in `UI/ColorCodeScreen.kt` with `@Composable fun ColorCodeScreen(state: ColorCodeState = rememberColorCodeState())`. Each page is a `Column` (tag `rcc-page-<bands>`) containing, in order:
   - the value `Text` (headlineSmall, `liveRegion`, tag `rcc-value`);
   - `ResistorDrawing`;
   - `ColorTableHeader`;
@@ -198,19 +198,19 @@ selection is kept when you leave a tab and come back.
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T028 [P] [US2] Extend `CORE_TEST/ReadingTest.kt`:
+- [X] T028 [P] [US2] Extend `CORE_TEST/ReadingTest.kt`:
   - Three: Yellow, Violet, Red gives 4700 Ω ±20%; Brown, Black, Silver gives 0.1 Ω.
   - Five: Brown, Black, Black, Red, Brown gives 10000 Ω ±1%; Yellow, Violet, Black, Brown, Brown gives 4700 Ω ±1%; Brown, Red, Brown, Black, Brown gives 121 Ω; Yellow, Violet, Green, Brown gives 4750 Ω; Brown, Black, Black, Silver gives 1 Ω; White ×4 gives 999 GΩ.
   - Six: the default gives 4700 Ω ±1% with TCR 100.
 
   Extend `CORE_TEST/FormatTest.kt` with "4.7kΩ ±20%", "121Ω ±1%", "4.75kΩ ±1%", "999GΩ ±1%" and "4.7kΩ ±1% ±100ppm/K".
-- [ ] T029 [P] [US2] Write `CORE_TEST/ExhaustiveReadingTest.kt`. For each `BandLayout`, enumerate every combination with `accepts` true for every band. For each one, compare `read()` and `format(Locale.ENGLISH)` against an independent oracle defined in the test:
+- [X] T029 [P] [US2] Write `CORE_TEST/ExhaustiveReadingTest.kt`. For each `BandLayout`, enumerate every combination with `accepts` true for every band. For each one, compare `read()` and `format(Locale.ENGLISH)` against an independent oracle defined in the test:
   - private literal maps color→digit, exponent, tolerance string and TCR, typed again rather than taken from `BandColor`;
   - resistance as `BigInteger(digits) × 10^exp`, held as a `BigDecimal`;
   - the expected string built by a simple separate algorithm (the integer and fraction split done with `BigDecimal.divide` by 1000^k).
 
   Also assert the total counts: Three 1 080, Four 10 800, Five 108 000, Six 972 000. The test must finish in under 5 s.
-- [ ] T030 [US2] Extend `UI_TEST/ColorCodeScreenTest.kt`:
+- [X] T030 [US2] Extend `UI_TEST/ColorCodeScreenTest.kt`:
   - clicking `rcc-tab-3` gives "4.7kΩ ±20%" and no column 3 cells exist;
   - `rcc-tab-5` gives "4.7kΩ ±1%";
   - `rcc-tab-6` gives "4.7kΩ ±1% ±100ppm/K";
@@ -220,17 +220,17 @@ selection is kept when you leave a tab and come back.
 
 ### Implementation for User Story 2
 
-- [ ] T031 [P] [US2] Add `<plurals name="resistor_color_code_bands">` to `RES/values/strings.xml` (one "%d band", other "%d bands") and translate it:
+- [X] T031 [P] [US2] Add `<plurals name="resistor_color_code_bands">` to `RES/values/strings.xml` (one "%d band", other "%d bands") and translate it:
   - de: one "%d Ring", other "%d Ringe";
   - fr: one "%d anneau", other "%d anneaux";
   - es: one "%d banda", other "%d bandas";
   - ja: other "%d本";
   - uk: one "%d смуга", few "%d смуги", many "%d смуг", other "%d смуги".
-- [ ] T032 [US2] In `UI/ColorCodeScreen.kt`, add a `PrimaryTabRow` with 4 tabs (`pluralStringResource(resistor_color_code_bands, n, n)`, `testTag("rcc-tab-$n")`) over a `HorizontalPager(testTag("rcc-pager"))` with one page per `BandLayout`.
+- [X] T032 [US2] In `UI/ColorCodeScreen.kt`, add a `PrimaryTabRow` with 4 tabs (`pluralStringResource(resistor_color_code_bands, n, n)`, `testTag("rcc-tab-$n")`) over a `HorizontalPager(testTag("rcc-pager"))` with one page per `BandLayout`.
   - Sync both ways: `LaunchedEffect(pagerState.currentPage) { state.layout = BandLayout.entries[it] }`, and the initial page comes from `state.layout`.
   - Each page renders that layout's selection (`state.selections[layout]`) with `onSelect` bound to that layout.
   - Change `ColorCodeState.select` to take the layout explicitly.
-- [ ] T033 [US2] Add band positions for Three, Five and Six to `UI/ResistorDrawing.kt`, with leader lines to each header column. Check on a 360dp screen that the lines don't cross confusingly. T030 passes on a device.
+- [X] T033 [US2] Add band positions for Three, Five and Six to `UI/ResistorDrawing.kt`, with leader lines to each header column. Check on a 360dp screen that the lines don't cross confusingly. T030 passes on a device.
 
 **Checkpoint**: All four layouts work and keep their own state.
 
@@ -245,21 +245,21 @@ dark theme and with large fonts (portrait-only, constitution 1.1.0).
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T034 [P] [US3] Extend `CORE_TEST/FormatTest.kt` with locales:
+- [X] T034 [P] [US3] Extend `CORE_TEST/FormatTest.kt` with locales:
   - `Locale.forLanguageTag("uk")` gives "4,7kΩ ±5%", "0,22Ω ±10%", "×0,1Ω" and "±0,25%";
   - "de" gives "4,7kΩ ±5%";
   - "ja" and "en" give "4.7kΩ ±5%";
   - "fr" gives "4,7kΩ ±5%".
-- [ ] T035 [US3] Extend `UI_TEST/ColorCodeScreenTest.kt`:
+- [X] T035 [US3] Extend `UI_TEST/ColorCodeScreenTest.kt`:
   - `rcc-cell-0-Yellow` has a content description that contains "Band 1", "Yellow" and "4", and is `assertIsSelected()`;
   - an empty cell `rcc-cell-0-Black` has no click action;
   - `rcc-value` has a polite `LiveRegion`.
 
 ### Implementation for User Story 3
 
-- [ ] T036 [P] [US3] Add the screen-reader strings to `RES/values/strings.xml` and all 5 translations: `resistor_color_code_cell_description` "%1$s, %2$s, %3$s", `_band_multiplier` "Multiplier", `_band_tolerance` "Tolerance", `_band_tcr` "Temperature coefficient". The digit bands reuse `_header_band`.
-- [ ] T037 [US3] In `UI/ColorTable.kt`, give each selectable cell `semantics { contentDescription = cell_description(bandName, colorName, label) }`. Empty cells get `clearAndSetSemantics {}`. In `UI/ColorCodeScreen.kt`, give the value `semantics { liveRegion = LiveRegionMode.Polite }`. T034 and T035 pass.
-- [ ] T038 [US3] Large font and narrow screens, in `UI/ColorTable.kt` and `UI/ColorCodeScreen.kt`:
+- [X] T036 [P] [US3] Add the screen-reader strings to `RES/values/strings.xml` and all 5 translations: `resistor_color_code_cell_description` "%1$s, %2$s, %3$s", `_band_multiplier` "Multiplier", `_band_tolerance` "Tolerance", `_band_tcr` "Temperature coefficient". The digit bands reuse `_header_band`.
+- [X] T037 [US3] In `UI/ColorTable.kt`, give each selectable cell `semantics { contentDescription = cell_description(bandName, colorName, label) }`. Empty cells get `clearAndSetSemantics {}`. In `UI/ColorCodeScreen.kt`, give the value `semantics { liveRegion = LiveRegionMode.Polite }`. T034 and T035 pass.
+- [X] T038 [US3] Large font and narrow screens, in `UI/ColorTable.kt` and `UI/ColorCodeScreen.kt`:
   - cell labels use `maxLines = 1` with `autoSize` (`TextAutoSize.StepBased(minFontSize = 10.sp)`), or `softWrap = false` with `overflow = Clip` if autoSize isn't available;
   - the name column uses weight 1.3 against 1 for band columns;
 
@@ -271,11 +271,11 @@ dark theme and with large fonts (portrait-only, constitution 1.1.0).
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T039 [P] Search `modules/resistor-color-code/src/main` for hardcoded user-facing strings: `Text("` and `contentDescription = "`. There must be none, apart from unit symbols built in `core`.
-- [ ] T040 [P] Check that `modules/resistor-color-code/core` has no `android` imports: `rg "^import android" modules/resistor-color-code/core` returns nothing.
-- [ ] T041 Update `specs/002-resistor-color-code/research.md` R6 with the final palette, if T020 changed it.
+- [X] T039 [P] Search `modules/resistor-color-code/src/main` for hardcoded user-facing strings: `Text("` and `contentDescription = "`. There must be none, apart from unit symbols built in `core`.
+- [X] T040 [P] Check that `modules/resistor-color-code/core` has no `android` imports: `rg "^import android" modules/resistor-color-code/core` returns nothing.
+- [X] T041 Update `specs/002-resistor-color-code/research.md` R6 with the final palette, if T020 changed it.
 - [ ] T042 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green, and `LocaleCoverageTest` and `ModuleRegistryTest` must pass with the new module.
-- [ ] T043 Run `./gradlew :modules:resistor-color-code:connectedDebugAndroidTest` on an emulator or device. All tests must pass.
+- [X] T043 Run `./gradlew :modules:resistor-color-code:connectedDebugAndroidTest` on an emulator or device. All tests must pass.
 - [ ] T044 Do the manual checks in `specs/002-resistor-color-code/quickstart.md` §4: compare with the reference image, the values for each tab, Ukrainian, dark theme (outline visible on White and Black), 200% font and TalkBack.
 - [ ] T045 Push branch `002-resistor-color-code` and open a PR to `main`. The description cites IEC 60062:2016 and lists the differences from the reference image (spec Assumptions). Merge after CI is green and T043/T044 are done.
 
