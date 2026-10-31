@@ -131,24 +131,24 @@ shows "100µH ±5%". Red, Red, Gold, Gold shows "2.2µH ±5%".
 
 ### Tests for User Story 1 (write first, must fail)
 
-- [ ] T023 [P] [US1] Write `CORE_TEST/ReadingTest.kt` for 4 bands without a point:
+- [X] T023 [P] [US1] Write `CORE_TEST/ReadingTest.kt` for 4 bands without a point:
   - 47µH ±10%;
   - 100µH ±5%;
   - 2.2µH ±5%;
   - Brown, Black, Silver, Silver = 0.1µH;
   - White, White, Orange, Gold = 99 000µH.
-- [ ] T024 [P] [US1] Write `CORE_TEST/SelectionTest.kt` part 1:
+- [X] T024 [P] [US1] Write `CORE_TEST/SelectionTest.kt` part 1:
   - the 4-band default;
   - `with` sets a valid band;
   - invalid taps are ignored: Black in Band 1, Silver in Band 1, Green as Mult., Red as Toler.;
   - `roleOf` is Digit, Digit, Multiplier, Tolerance.
-- [ ] T025 [P] [US1] Write `CORE_TEST/FormatTest.kt`:
+- [X] T025 [P] [US1] Write `CORE_TEST/FormatTest.kt`:
   - `format` in `en`/`uk`/`de`/`ja` ("47µH ±10%", "4,7µH ±5%", "100nH ±10%", "99mH ±5%");
   - `cellLabel` for every role: "4", ".", "×0.01µH" … "×1mH", "±5%", "±10%".
 
 ### Implementation for User Story 1
 
-- [ ] T026 [US1] Create `CORE/BandLayout.kt` (`BandRole` incl. `DecimalPoint`, `BandLayout` Three/Four), `CORE/Selection.kt` (`Selection`, `Reading`, `pointIndex`, `roleOf`, `with`, `canSelect`, `read`, `default`) and `CORE/Format.kt` (`Reading.format`, `BandRole.cellLabel` using `formatSi`), following data-model.md and contracts/core-api.md, so that T023–T025 pass.
+- [X] T026 [US1] Create `CORE/BandLayout.kt` (`BandRole` incl. `DecimalPoint`, `BandLayout` Three/Four), `CORE/Selection.kt` (`Selection`, `Reading`, `pointIndex`, `roleOf`, `with`, `canSelect`, `read`, `default`) and `CORE/Format.kt` (`Reading.format`, `BandRole.cellLabel` using `formatSi`), following data-model.md and contracts/core-api.md, so that T023–T025 pass.
 - [ ] T027 [P] [US1] Create `RES/raw/inductor_color_code_inductor.svg` following research R5:
   - a molded choke in pale green with rounded ends and gray leads;
   - `band-1` … `band-4` as paths with `fill` attributes, band 4 near the right end;
@@ -179,7 +179,7 @@ shows "100µH ±5%". Red, Red, Gold, Gold shows "2.2µH ±5%".
 
 ### Tests for User Story 2 (write first, must fail)
 
-- [ ] T031 [P] [US2] Extend `CORE_TEST/SelectionTest.kt` with the decimal-point rules (research R3):
+- [X] T031 [P] [US2] Extend `CORE_TEST/SelectionTest.kt` with the decimal-point rules (research R3):
   - Yellow, Gold, Violet → roles Digit, DecimalPoint, Digit;
   - tap Violet in Band 2 → Yellow, Violet, Black;
   - tap Gold in Band 1 → Gold, Violet, Violet;
@@ -187,18 +187,18 @@ shows "100µH ±5%". Red, Red, Gold, Gold shows "2.2µH ±5%".
   - Black is not selectable in Band 2 when the point is in Band 1;
   - Gold/Silver is not selectable in Band 3 in point mode;
   - the 3-band default.
-- [ ] T032 [P] [US2] Extend `CORE_TEST/ReadingTest.kt`:
+- [X] T032 [P] [US2] Extend `CORE_TEST/ReadingTest.kt`:
   - 4.7µH: Yellow, Gold, Violet and Yellow, Violet, Gold;
   - 220nH: Gold, Red, Red and Red, Red, Silver;
   - 770nH;
   - Gold, Brown, Black = 100nH;
   - the 3-band default = 47µH ±20%;
   - Bourns' examples: 6.8µH ±10% (Blue, Gold, Gray, Silver and Blue, Gray, Gold, Silver) and 270µH ±5%.
-- [ ] T033 [P] [US2] Write `CORE_TEST/ExhaustiveReadingTest.kt`. For both layouts, enumerate all color tuples, keep those for which `Selection` construction is valid, and compare `read()` and `format(Locale.ENGLISH)` with an independent oracle in the test (a literal table plus string arithmetic). Assert the counts 720 and 1,440.
+- [X] T033 [P] [US2] Write `CORE_TEST/ExhaustiveReadingTest.kt`. For both layouts, enumerate all color tuples, keep those for which `Selection` construction is valid, and compare `read()` and `format(Locale.ENGLISH)` with an independent oracle in the test (a literal table plus string arithmetic). Assert the counts 720 and 1,440.
 
 ### Implementation for User Story 2
 
-- [ ] T034 [US2] Complete `CORE/Selection.kt`: the `init` validity check, the point-aware `roleOf`, the replacement loop in `with`, and the three `read` cases, so that T031–T033 pass.
+- [X] T034 [US2] Complete `CORE/Selection.kt`: the `init` validity check, the point-aware `roleOf`, the replacement loop in `with`, and the three `read` cases, so that T031–T033 pass.
 - [ ] T035 [US2] In `UI/InductorScreen.kt`, the third header and band name follow `roleOf(2)`: "Band 3" in point mode, "Mult." otherwise. Every band replaced by the rules updates in the same frame (state from `Selection`).
 - [ ] T036 [US2] Extend `UI_TEST/InductorScreenTest.kt`:
   - the 3-band default "47µH ±20%";
