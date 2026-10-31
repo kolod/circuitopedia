@@ -111,7 +111,7 @@ clear the results.
 
 ### Tests for User Story 1 (write first, must fail)
 
-- [ ] T012 [P] [US1] Write `CORE_TEST/SolveTest.kt`:
+- [X] T012 [P] [US1] Write `CORE_TEST/SolveTest.kt`:
   - **Spec scenarios:**
     - 5V / 3.3V / 10k gives R2 = 19.41k and R = 29.41k, exactly 330000/17 and 500000/17;
     - 12V / 10k / 4.7k gives U2 = 3.837V and R = 14.7k;
@@ -133,20 +133,20 @@ clear the results.
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Create `CORE/Solve.kt` (`SolveResult`, `solve`, `canCalculate`) per research R1 and contracts/core-api.md, with the formula citation comment, so that T012 passes.
-- [ ] T014 [US1] Add the strings to `RES/values*/strings.xml` in all six locales:
+- [X] T013 [US1] Create `CORE/Solve.kt` (`SolveResult`, `solve`, `canCalculate`) per research R1 and contracts/core-api.md, with the formula citation comment, so that T012 passes.
+- [X] T014 [US1] Add the strings to `RES/values*/strings.xml` in all six locales:
   - `note_unloaded`;
   - `label_u1`, `label_u2`, `label_r1`, `label_r2` and `label_r`;
   - `computed` and `calculate`;
   - `need_more` and `too_many` (plurals);
   - `no_voltage`;
   - `error_parse`, `error_ratio`, `error_signs` and `error_total`.
-- [ ] T015 [US1] Create `UI/Schematic.kt`, a Canvas drawing of U1 ● ─ [R1] ─ ● U2 ─ [R2] ─ ⏚ laid out vertically:
+- [X] T015 [US1] Create `UI/Schematic.kt`, a Canvas drawing of U1 ● ─ [R1] ─ ● U2 ─ [R2] ─ ⏚ laid out vertically:
   - labels drawn with `rememberTextMeasurer`;
   - a brace for R;
   - theme colors;
   - `clearAndSetSemantics {}`.
-- [ ] T016 [US1] Implement `UI/DividerScreen.kt` per contracts/ui-contract.md as one `LazyColumn`:
+- [X] T016 [US1] Implement `UI/DividerScreen.kt` per contracts/ui-contract.md as one `LazyColumn`:
   - the schematic and the unloaded note;
   - five `OutlinedTextField`s with V/Ω suffixes, with computed ones tinted and labeled "computed";
   - the Calculate button, enabled by `canCalculate`;
@@ -154,7 +154,7 @@ clear the results.
   - the rules: Calculate fills the computed fields; editing an entered field clears them; typing into a computed field makes it entered;
   - `rememberSaveable` for the texts and origins;
   - test tags.
-- [ ] T017 [US1] Write `UI_TEST/DividerScreenTest.kt` part 1:
+- [X] T017 [US1] Write `UI_TEST/DividerScreenTest.kt` part 1:
   - Calculate is disabled with 2 fields filled and enabled with 3;
   - 5 / 3.3 / 10k then Calculate fills R2 and R;
   - editing U1 clears them;

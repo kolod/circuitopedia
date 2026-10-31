@@ -2,4 +2,44 @@
 <resources>
     <string name="voltage_divider_title">Divisor de tensión</string>
     <string name="voltage_divider_description">Calcular un divisor y elegir resistencias normalizadas</string>
+
+    <string name="voltage_divider_note_unloaded">Divisor sin carga: no se toma corriente de U2</string>
+    <string name="voltage_divider_label_u1">U1 (entrada)</string>
+    <string name="voltage_divider_label_u2">U2 (salida)</string>
+    <string name="voltage_divider_label_r1">R1 (superior)</string>
+    <string name="voltage_divider_label_r2">R2 (inferior)</string>
+    <string name="voltage_divider_label_r">R (total)</string>
+    <string name="voltage_divider_computed">calculado</string>
+    <string name="voltage_divider_calculate">Calcular</string>
+    <string name="voltage_divider_no_voltage">R1, R2 y R solas no fijan ninguna tensión: introduzca U1 o U2</string>
+    <string name="voltage_divider_error_parse">Revise %1$s: p. ej. 3,3, 4,7k o 4k7</string>
+    <string name="voltage_divider_error_ratio">U2 debe estar entre 0 y U1</string>
+    <string name="voltage_divider_error_signs">U1 y U2 deben tener el mismo signo</string>
+    <string name="voltage_divider_error_total">R1 y R2 deben ser menores que R</string>
+    <string name="voltage_divider_builds_header">Resistencias normalizadas</string>
+    <string name="voltage_divider_series_label">Serie E</string>
+    <string name="voltage_divider_no_builds" formatted="false">Ninguna solución dentro de ±10% de R</string>
+    <string name="voltage_divider_build_u2">U2 = %1$s (%2$s)</string>
+    <string name="voltage_divider_build_r">R = %1$s (%2$s)</string>
+    <string name="voltage_divider_state_entered">introducido</string>
+    <string name="voltage_divider_state_computed">calculado</string>
+    <string name="voltage_divider_spoken_volt">voltio</string>
+    <string name="voltage_divider_spoken_millivolt">milivoltio</string>
+    <string name="voltage_divider_spoken_kilovolt">kilovoltio</string>
+    <string name="voltage_divider_spoken_ohm">ohmio</string>
+    <string name="voltage_divider_spoken_kilohm">kiloohmio</string>
+    <string name="voltage_divider_spoken_megohm">megaohmio</string>
+    <string name="voltage_divider_spoken_gigohm">gigaohmio</string>
+    <string name="voltage_divider_spoken_series">más</string>
+    <string name="voltage_divider_spoken_parallel">en paralelo con</string>
+    <string name="voltage_divider_spoken_error">error %1$s por ciento</string>
+    <string name="voltage_divider_spoken_deviation">desviación %1$s por ciento</string>
+    <plurals name="voltage_divider_need_more">
+        <item quantity="one">Introduzca %d valor más</item>
+        <item quantity="other">Introduzca %d valores más</item>
+    </plurals>
+    <plurals name="voltage_divider_too_many">
+        <item quantity="one">Deje %d campo vacío</item>
+        <item quantity="other">Deje %d campos vacíos</item>
+    </plurals>
 </resources>
