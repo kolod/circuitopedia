@@ -13,7 +13,7 @@
 
 ## Requirement Completeness
 
-- [ ] No [NEEDS CLARIFICATION] markers remain
+- [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Success criteria are technology-agnostic (no implementation details)
@@ -31,5 +31,8 @@
 
 ## Notes
 
-- One open question: how the user chooses the known quantities (FR-004).
+- Clarified 2026-10-31:
+  - empty fields are computed, and a Calculate button is enabled when three independent values are entered;
+  - standard resistors for R1 and R2 are picked together in place, by U2 error, with 1–2 resistors per arm;
+  - the hand-over to the combination finder is dropped.
 - The formula and its source are cited; the plan derives the nine solved forms and verifies them (Principle II).
