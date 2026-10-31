@@ -134,8 +134,7 @@ the decimal separator. Turn on TalkBack and select a band by touch exploration.
   there, and the other band gets its default color.
 - **Smallest value**: Brown, Black, Silver and Gold, Brown, Black are both 0.1µH, shown as
   "100nH".
-- **Largest value**: the largest digits with the largest multiplier offered (see the table in
-  Constitution Constraints), shown in mH, for example "990mH".
+- **Largest value**: White, White, Orange = 99 × 1000µH, shown as "99mH".
 - **Floating-point artifacts**: results are exact. Red, Red, Silver must read "220nH", never a
   value like "220.00000000000003nH".
 - **Trailing zeros**: dropped. Brown, Black, Brown is "100µH", Brown, Black, Red is "1mH".
@@ -165,8 +164,8 @@ the decimal separator. Turn on TalkBack and select a band by touch exploration.
   selected tab with localized headers (Band 1, Band 2, Mult., Toler.). While a decimal point is
   selected, the third header reads "Band 3".
 - **FR-006**: Each cell valid for its band MUST be filled with that row's color and MUST show the
-  band meaning: a digit, a multiplier with unit ("×0.01µH", "×0.1µH", "×1µH", "×10µH" …), or a
-  tolerance ("±10%"). Invalid cells MUST be empty and not selectable.
+  band meaning: a digit, "." for the decimal point, a multiplier with unit ("×0.01µH", "×0.1µH",
+  "×1µH", "×10µH", "×100µH", "×1mH"), or a tolerance ("±5%", "±10%"). Invalid cells MUST be empty and not selectable.
 - **FR-007**: Text in each colored cell MUST have a contrast ratio of at least 4.5:1 against its
   background. The band colors are the same as in the resistor calculator.
 - **FR-008**: Exactly one cell per band column MUST be selected, shown with the same outline as
@@ -224,18 +223,19 @@ the decimal separator. Turn on TalkBack and select a band by touch exploration.
 
 ### Sources *(Principle II)*
 
-- The planning phase MUST find and cite an authoritative source for the inductor color code (for
-  example the military specification for molded RF coils, MIL-PRF-15305, or a manufacturer's
-  data sheet for color-coded inductors), cross-check it against a second source, and record any
-  discrepancy. The table below is the commonly published code and MUST be verified, not assumed:
+- **Bourns, *Color Code Marking (MIL STD)* and *(EIA STD)***, which reproduce the MIL marking for
+  cylindrical RF choke coils (MIL-C-15305 / MIL-PRF-15305 family) and the EIA marking for molded
+  inductors. Tolerances cross-checked against a Vishay color chart. Verified in plan research R1
+  (2026-10-31), which also records the discrepancies with uncited web tables (extra tolerances
+  Brown–Yellow and multipliers Yellow–Blue are not offered):
 
 | Color  | Digit | Multiplier (µH) | Tolerance |
 |--------|-------|-----------------|-----------|
-| Black  | 0 (not as 1st digit) | ×1     | ±20% |
-| Brown  | 1     | ×10             | ±1%  |
-| Red    | 2     | ×100            | ±2%  |
-| Orange | 3     | ×1000           | ±3%  |
-| Yellow | 4     | ×10000          | ±4%  |
+| Black  | 0 (not as 1st digit) | ×1     | —    |
+| Brown  | 1     | ×10             | —    |
+| Red    | 2     | ×100            | —    |
+| Orange | 3     | ×1000           | —    |
+| Yellow | 4     | —               | —    |
 | Green  | 5     | —               | —    |
 | Blue   | 6     | —               | —    |
 | Violet | 7     | —               | —    |
