@@ -12,6 +12,7 @@ resistor), R (total resistance). Circuit: U1 — R1 — U2 — R2 — GND. A res
 be passed quickly to the resistor combination finder."
 
 Clarified 2026-10-31:
+- Standard-resistor builds keep their total resistance within ±10% of R.
 - Empty fields are the ones to compute, and a "Calculate" button is enabled once enough data is
   entered.
 - Instead of handing a value to the combination finder, the divider picks standard resistors for
@@ -70,8 +71,8 @@ gives a more accurate divider than rounding each arm separately, often with fewe
 
 **Independent Test**: For U1 = 5V and U2 = 3.3V with R = 30kΩ, choose E24, and check that the list
 is sorted by U2 error. Recompute each entry's U2 and total resistance by hand. Check that no pair
-of the allowed shapes left out of the list has a smaller U2 error than the last entry of the same
-resistor count.
+of the allowed shapes, with a total within ±10% of R, left out of the list has a smaller U2 error
+than the last entry of the same resistor count.
 
 **Acceptance Scenarios**:
 
@@ -164,7 +165,10 @@ commas. With TalkBack, focus a computed field and hear its name, its value with 
   series choice (E3, E6, E12, E24, E48, E96, E192; E24 first; values from 1Ω to 10MΩ, IEC 60063 as in
   spec 004). It lists builds of the divider from standard resistors:
   - each computed arm is one resistor, or two in series or in parallel;
-  - an entered arm is kept exactly as entered.
+  - an entered arm is kept exactly as entered;
+  - the total R1 + R2 of a build MUST lie within ±10% of R, whether R was entered or computed. Without this limit, decade-scaled pairs with a tiny ratio error but a useless total, such as a few ohms, would fill the list (clarified 2026-10-31).
+
+  If no build fits the window, a short message says so.
 - **FR-010**: Builds MUST be ranked by the absolute relative error of the output voltage,
   `|U2_build − U2_target| / |U2_target|`, which equals the error of the ratio R2 / (R1 + R2). Ties
   go to fewer resistors, then to the smaller absolute deviation of the total resistance from R, then
@@ -270,8 +274,8 @@ commas. With TalkBack, focus a computed field and hear its name, its value with 
 - The divider is unloaded. Load current, power dissipation and tolerance effects are out of scope.
 - Arms of three or more resistors are out of scope (clarified 2026-10-31). Two per arm already gives
   close matches, and more would slow the search.
-- No limit is placed on the total resistance. Its deviation from R is shown and used only to break
-  ties. Constraining R (for example to keep the current low) may come later.
+- The total resistance of a build is limited to ±10% of R (FR-009). A user-adjustable window was
+  considered and left out (clarified 2026-10-31).
 - The hand-over to the combination finder from the original request is dropped in favor of picking
   standard values in place, so no app-shell mechanism for passing values between modules is
   needed.
