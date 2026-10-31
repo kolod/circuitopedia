@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.shared.colorcode
+package io.github.kolod.circuitopedia.shared.siformat
 
 import java.math.BigDecimal
 import java.util.Locale

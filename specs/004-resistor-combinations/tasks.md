@@ -41,8 +41,8 @@ feedback, filters, saved state, semantics) gets Compose instrumented tests.
 **Purpose**: The SI formatter is in its own library, and the new module builds and shows up in the
 catalog.
 
-- [ ] T001 Create `shared/si-format/build.gradle.kts` (kotlin-jvm, JVM 17, `testImplementation(libs.junit)`). Move `Format.kt` and `FormatSiTest.kt` from `shared/color-code` to `SI` and `SI_TEST` with `git mv`, changing the package to `io.github.kolod.circuitopedia.shared.siformat`.
-- [ ] T002 Add `api(project(":shared:si-format"))` to `shared/color-code/build.gradle.kts`. Update the `formatSi`/`formatDecimal` imports in:
+- [X] T001 Create `shared/si-format/build.gradle.kts` (kotlin-jvm, JVM 17, `testImplementation(libs.junit)`). Move `Format.kt` and `FormatSiTest.kt` from `shared/color-code` to `SI` and `SI_TEST` with `git mv`, changing the package to `io.github.kolod.circuitopedia.shared.siformat`.
+- [X] T002 Add `api(project(":shared:si-format"))` to `shared/color-code/build.gradle.kts`. Update the `formatSi`/`formatDecimal` imports in:
   - `modules/resistor-color-code/core/.../Format.kt`;
   - `modules/inductor-color-code/core/.../Format.kt`;
   - `shared/color-code` (if any file uses them).

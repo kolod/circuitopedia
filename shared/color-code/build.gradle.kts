@@ -19,6 +19,8 @@ kotlin {
 }
 
 dependencies {
+    api(project(":shared:si-format"))
+
     testImplementation(libs.junit)
     testFixturesImplementation(libs.junit)
 }
