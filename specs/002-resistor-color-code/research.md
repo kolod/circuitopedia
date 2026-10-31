@@ -128,10 +128,10 @@
   Each band column gets `selectableGroup()` semantics through a merged `contentDescription`
   template "%1$s, %2$s, %3$s" (band, color, meaning).
 - **ResistorDrawing**: a `Canvas`:
-  - two gray leads;
-  - a beige "dog-bone" body (rounded rect plus end caps);
-  - band rects at fixed relative positions per layout. The digit and multiplier bands are spaced
-    evenly, and the tolerance and TCR bands are pushed right, as in the reference;
+  - the resistor rendered from `res/raw/resistor_color_code_resistor.svg` (R10), centered and
+    84dp tall at most, keeping the SVG's proportions;
+  - the bands recolored per selection through render-time CSS. Each layout shows a subset of
+    the SVG's six bands; the tolerance or TCR band sits on the right end cap;
   - no text labels, which would only repeat the table headers. Each band is joined by a 3dp
     leader line to the top edge of its header column. The line is built from vertical and
     slanted segments only, because horizontal ones merge with the header edge. Column centers
@@ -169,3 +169,31 @@
     + selected).
 - **App level**: the existing `ModuleRegistryTest` and `LocaleCoverageTest` automatically cover
   the new module's id and strings.
+
+## R10. Resistor drawing from SVG
+
+- **Decision**: Render the resistor from an Inkscape SVG with **AndroidSVG 1.4**
+  (`com.caverock:androidsvg-aar`) and recolor the bands with `RenderOptions.css()`. Added after
+  the on-device review: the hand-drawn body could not follow a realistic outline, so bands near
+  the end caps did not match the body edge.
+- **SVG contract** (checked by `ResistorSvgTest` on the JVM):
+  - the root has a `viewBox`;
+  - `band-1` … `band-6` are paths, left to right, each already shaped to the body outline;
+  - band fills are presentation attributes (`fill="…"`), because CSS added at render time does
+    not override an inline `style`;
+  - no element has a `transform`, so band bounds can be read straight from their path data.
+- **Layouts**: Three shows bands 1–3; Four shows 1–3 and 6; Five shows 1–4 and 6; Six shows all.
+  Unused bands get `display:none`.
+- **Leader lines**: AndroidSVG does not expose element geometry, so the drawing reads the band
+  path data from the same raw resource with `XmlPullParser` and computes bounds with Compose's
+  `PathParser`. The SVG stays the single source of band positions.
+- **Sizing**: the root's `width`/`height` are kept for Inkscape and replaced with `100%` at load
+  time; otherwise AndroidSVG renders at the file's pixel size and only moves it into the viewport.
+- **Rationale**: Android has no SVG renderer, and a VectorDrawable cannot recolor individual
+  paths. AndroidSVG is Apache 2.0, has no transitive dependencies and makes no network access
+  (Principles I and III). Coil's SVG decoder is built on AndroidSVG but adds an image loader
+  this app does not need. Other modules are expected to use SVG drawings too. A shared SVG helper
+  will move out of this module only when a second module needs it (YAGNI).
+- **Risk**: The last AndroidSVG release is from 2019. It is stable and feature-complete for
+  static SVG. If it ever breaks, the drawing can fall back to `PathParser` plus `clipPath` in
+  Compose with the same SVG path data.

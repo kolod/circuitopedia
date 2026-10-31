@@ -23,7 +23,8 @@ module is registered with one line in `ModuleRegistry`.
 `org.jetbrains.kotlin.jvm` for `core`, JVM target 17
 
 **Primary Dependencies**: Compose BOM 2026.09.00 (foundation, material3, ui) through the existing
-catalog. `core` uses only the Kotlin stdlib and the JDK (`java.math`, `java.util.Locale`,
+catalog, and AndroidSVG 1.4 for the resistor drawing (added after the first review, R10). `core`
+uses only the Kotlin stdlib and the JDK (`java.math`, `java.util.Locale`,
 `java.text.DecimalFormatSymbols`).
 
 **Storage**: N/A. Saved UI state only.
@@ -38,7 +39,7 @@ existing `ModuleRegistryTest` and `LocaleCoverageTest`, plus Lint
 **Performance Goals**: The value updates within one frame of a tap (SC-003). The exhaustive JVM
 test runs in under 5 s.
 
-**Constraints**: Offline, no permissions, no new libraries, exact decimal arithmetic, contrast
+**Constraints**: Offline, no permissions, one justified new library (R10), exact decimal arithmetic, contrast
 ≥ 4.5:1
 
 **Scale/Scope**: 1 screen, 4 layouts, 12 colors, about 1.1 M valid combinations in total
@@ -51,7 +52,7 @@ test runs in under 5 s.
 |------|--------|----------|
 | **I. Free, Ad-Free, Private** | ✅ | No permissions, no network, no tracking. |
 | **II. Correctness** | ✅ | Every value is cited (IEC 60062:2016, verified in R1, with discrepancies documented). Explicit units: `Ohms`, `Percent` and `PpmPerKelvin` value classes. Input is selection-only and invalid cells cannot be selected (validation by construction plus `require`). Precision rules are defined in the spec and R5. Arithmetic is exact (R2). |
-| **III. Simplicity** | ✅ (see Complexity Tracking) | No new libraries. All logic is in a pure JVM subproject. The palette and contrast check are plain functions. |
+| **III. Simplicity** | ✅ (see Complexity Tracking) | One new library, AndroidSVG, justified in the spec and R10 (UI layer only). All logic is in a pure JVM subproject. The palette and contrast check are plain functions. |
 | **IV. Testability** | ✅ | Test-first JVM tests: table, readings, exhaustive oracle, formatting per locale, contrast, selection. Logic-bearing UI (taps, tabs, state, semantics) has instrumented tests. |
 | **V. Localization** | ✅ | All strings in 6 locales, including `plurals` for "N bands". The decimal separator follows the locale (R5). There is no free numeric input, so the `.`/`,` parsing rule does not apply. |
 | **VI. Version Control** | ✅ | Branch `002-resistor-color-code`. Merge after tasks and tests. |
@@ -110,10 +111,12 @@ modules/resistor-color-code/
     │   │   ├── ColorCodeScreen.kt            # tabs + pager + page
     │   │   ├── ColorCodeState.kt             # state + Saver
     │   │   ├── ColorTable.kt
-    │   │   └── ResistorDrawing.kt
+    │   │   └── ResistorDrawing.kt            # renders the SVG, band CSS, leader lines
     │   └── res/
     │       ├── drawable/resistor_color_code_icon.xml
+    │       ├── raw/resistor_color_code_resistor.svg   # editable drawing (R10)
     │       └── values{,-de,-fr,-es,-ja,-uk}/strings.xml
+    ├── test/kotlin/…/ResistorSvgTest.kt      # SVG ↔ code contract
     └── androidTest/kotlin/…/ColorCodeScreenTest.kt
 
 app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt   # + resistorColorCodeModule,

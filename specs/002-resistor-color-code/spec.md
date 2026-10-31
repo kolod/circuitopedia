@@ -173,7 +173,9 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
   apart toward the right end. The drawing has no text labels of its own: each band is joined by a
   leader line to the top edge of its column in the table header, which already names the band.
   Leader lines use only vertical and slanted segments, never horizontal ones (they would merge
-  with the header edge), and are drawn thick enough to read at a glance.
+  with the header edge), and are drawn thick enough to read at a glance. The drawing comes from a
+  bundled, editable vector image; its bands follow the body outline, so every band matches the
+  body edge wherever it sits (amended 2026-10-31).
 
 **Calculation** (see Constitution Constraints for the sources and tables)
 
@@ -263,7 +265,11 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
 
 ### New Dependencies *(Principle III)*
 
-- None.
+- **AndroidSVG 1.4** (`com.caverock:androidsvg-aar`, Apache 2.0, no transitive dependencies, no
+  network access), added 2026-10-31 to render the resistor drawing from an SVG file and recolor
+  its bands at render time. Android has no SVG renderer, and VectorDrawable cannot recolor
+  individual paths, so the platform is insufficient. The same approach is planned for drawings in
+  later modules. Details in research R10.
 
 ### Permissions & Network *(Principle I)*
 
