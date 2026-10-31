@@ -44,6 +44,7 @@ import io.github.kolod.circuitopedia.modules.resistorcombinations.core.parseTarg
 import io.github.kolod.circuitopedia.modules.resistorcombinations.core.search
 import java.util.Locale
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 
 /** The kinds the user can switch on and off; a single resistor is always searched (FR-005). */
@@ -60,10 +61,15 @@ fun CombinationsScreen() {
     val target = remember(text) { parseTarget(text) }
     val invalid = text.isNotBlank() && target == null
 
-    // Recomputed off the main thread; a newer input cancels the older search (FR-010).
+    // Recomputed off the main thread; a newer input cancels the older search, which stops at its
+    // next check instead of competing for the CPU while the user types (FR-010).
     var results by remember { mutableStateOf<List<Combination>>(emptyList()) }
     LaunchedEffect(target, series, allowed) {
-        results = if (target == null) emptyList() else withContext(Dispatchers.Default) { search(target, series, allowed) }
+        results = if (target == null) {
+            emptyList()
+        } else {
+            withContext(Dispatchers.Default) { search(target, series, allowed) { ensureActive() } }
+        }
     }
 
     // One scrolling list: the controls are its first item, so at large font sizes they scroll away

@@ -54,6 +54,17 @@ class SearchExamplesTest {
     }
 
     @Test
+    fun cancellationStopsTheSearch() {
+        var checks = 0
+        val stop = IllegalStateException("cancelled")
+        val thrown = runCatching {
+            search(ohms("1234"), ESeries.E192, all) { if (++checks == 3) throw stop }
+        }.exceptionOrNull()
+        assertTrue(thrown === stop)
+        assertEquals(3, checks)
+    }
+
+    @Test
     fun resistanceFollowsTheCircuitLaws() {
         val k10 = ohms("10000")
         val k4 = ohms("4700")

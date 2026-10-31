@@ -199,10 +199,10 @@ as one item with unit words.
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T030 [P] Check that `shared/si-format` and `modules/resistor-combinations/core` have no `android` imports.
-- [ ] T031 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green.
-- [ ] T032 Run `./gradlew connectedDebugAndroidTest` on an emulator: the app, both color code modules and the combinations tests all pass.
-- [ ] T033 Do the manual checks in `specs/004-resistor-combinations/quickstart.md` §4, including E192 responsiveness.
+- [X] T030 [P] Check that `shared/si-format` and `modules/resistor-combinations/core` have no `android` imports.
+- [X] T031 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green.
+- [X] T032 Run `./gradlew connectedDebugAndroidTest` on an emulator: the app, both color code modules and the combinations tests all pass.
+- [X] T033 Do the manual checks in `specs/004-resistor-combinations/quickstart.md` §4, including E192 responsiveness.
 - [ ] T034 Push branch `004-resistor-combinations` and open a PR to `main`. The description cites IEC 60063:2015 and the circuit-law source, explains the search and its proof against the reference, and mentions the `si-format` move. Merge after CI is green and T032/T033 are done.
 
 ---

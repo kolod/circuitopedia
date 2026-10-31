@@ -79,6 +79,13 @@ duplicates (FR-006), every enumeration uses the canonical order a ≤ b ≤ c.
      every acceptance cost seconds (E192, 30MΩ, `Parallel3`: 4.3 s). The collector now keeps the
      best 5 keys in a small sorted array and compacts its candidate list only when the list has
      doubled. After both fixes: median 47 ms, maximum 85 ms over the 20 benchmark targets.
+  3. On Android, a local wrapper function around the inline `walk` kept its lambdas from being
+     inlined, which cost about 1.8 M allocations per search. HotSpot removes them, ART does not. The
+     wrapper is gone. Measured in-process on the API 36 emulator with a debug build, the slowest of
+     8 E192 targets took 319 ms (SC-002: 1 s).
+- **Cancellation**: `search` takes a `checkCancelled` callback, called once per first resistor. The
+  UI passes the coroutine's `ensureActive`, so the search for an outdated input stops instead of
+  competing with the new one while the user types.
 - **Budget**: a JVM benchmark test runs E192 with every kind allowed over 20 targets and fails if
   the median exceeds 150 ms or any target exceeds 400 ms. Mid-range phones are about 3–5 times slower than a desktop JVM, which
   leaves SC-002 at 1 s with margin.

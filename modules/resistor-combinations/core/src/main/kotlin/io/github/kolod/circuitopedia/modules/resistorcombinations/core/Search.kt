@@ -7,9 +7,12 @@ package io.github.kolod.circuitopedia.modules.resistorcombinations.core
  * Each kind fixes its first one or two resistors in canonical order, binary-searches the ideal
  * last one and walks outward while results can still make the kind's best [PER_KIND] (research R4).
  * The search compares Double keys with a safety margin and ranks the survivors exactly.
+ *
+ * [checkCancelled] is called once per first resistor of every kind; it may throw to abandon a search
+ * whose input is already outdated (the UI passes a coroutine's `ensureActive`).
  */
-fun search(target: Rational, series: ESeries, allowed: Set<Kind>): List<Combination> {
-    val searcher = Searcher(target, series.values())
+fun search(target: Rational, series: ESeries, allowed: Set<Kind>, checkCancelled: () -> Unit = {}): List<Combination> {
+    val searcher = Searcher(target, series.values(), checkCancelled)
     return (allowed + Kind.Single).flatMap(searcher::best).sortedWith(rankingFor(target))
 }
 
@@ -20,7 +23,11 @@ fun search(target: Rational, series: ESeries, allowed: Set<Kind>): List<Combinat
 private const val RELATIVE_MARGIN = 1e-9
 private const val ABSOLUTE_MARGIN = 1e-12
 
-private class Searcher(private val target: Rational, private val values: List<Rational>) {
+private class Searcher(
+    private val target: Rational,
+    private val values: List<Rational>,
+    private val checkCancelled: () -> Unit,
+) {
     private val n = values.size
     private val v = DoubleArray(n) { values[it].toDouble() }
     private val g = DoubleArray(n) { 1 / v[it] }
@@ -40,38 +47,41 @@ private class Searcher(private val target: Rational, private val values: List<Ra
     }
 
     private fun enumerate(kind: Kind, collector: Collector, nearestOnly: Boolean) {
-        fun walk(from: Int, ideal: Double, resistance: (Int) -> Double, indices: (Int) -> IntArray) =
-            walk(collector, from, ideal, nearestOnly, resistance, indices)
         when (kind) {
-            Kind.Single -> walk(0, t, { v[it] }) { intArrayOf(it) }
+            Kind.Single -> walk(collector, nearestOnly, 0, t, { v[it] }) { intArrayOf(it) }
             Kind.Series2 -> for (a in 0 until n) {
+                checkCancelled()
                 if (2 * v[a] - t > collector.bound * t) break
-                walk(a, t - v[a], { v[a] + v[it] }) { intArrayOf(a, it) }
+                walk(collector, nearestOnly, a, t - v[a], { v[a] + v[it] }) { intArrayOf(a, it) }
             }
             Kind.Parallel2 -> for (a in 0 until n) {
+                checkCancelled()
                 if (v[a] / 2 - t > collector.bound * t) break
-                walk(a, idealParallel(1 / t - g[a]), { 1 / (g[a] + g[it]) }) { intArrayOf(a, it) }
+                walk(collector, nearestOnly, a, idealParallel(1 / t - g[a]), { 1 / (g[a] + g[it]) }) { intArrayOf(a, it) }
             }
             Kind.Series3 -> for (a in 0 until n) {
+                checkCancelled()
                 if (3 * v[a] - t > collector.bound * t) break
                 for (b in a until n) {
                     if (v[a] + 2 * v[b] - t > collector.bound * t) break
-                    walk(b, t - v[a] - v[b], { v[a] + v[b] + v[it] }) { intArrayOf(a, b, it) }
+                    walk(collector, nearestOnly, b, t - v[a] - v[b], { v[a] + v[b] + v[it] }) { intArrayOf(a, b, it) }
                 }
             }
             Kind.Parallel3 -> for (a in 0 until n) {
+                checkCancelled()
                 if (v[a] / 3 - t > collector.bound * t) break
                 for (b in a until n) {
                     if (1 / (g[a] + 2 * g[b]) - t > collector.bound * t) break
-                    walk(b, idealParallel(1 / t - g[a] - g[b]), { 1 / (g[a] + g[b] + g[it]) }) { intArrayOf(a, b, it) }
+                    walk(collector, nearestOnly, b, idealParallel(1 / t - g[a] - g[b]), { 1 / (g[a] + g[b] + g[it]) }) { intArrayOf(a, b, it) }
                 }
             }
             Kind.ParallelSeries -> for (a in 0 until n) {
+                checkCancelled()
                 if (v[a] / 2 + v[0] - t > collector.bound * t) break
                 for (b in a until n) {
                     val pair = 1 / (g[a] + g[b])
                     if (pair + v[0] - t > collector.bound * t) break
-                    walk(0, t - pair, { pair + v[it] }) { intArrayOf(a, b, it) }
+                    walk(collector, nearestOnly, 0, t - pair, { pair + v[it] }) { intArrayOf(a, b, it) }
                 }
             }
         }
@@ -88,9 +98,9 @@ private class Searcher(private val target: Rational, private val values: List<Ra
      */
     private inline fun walk(
         collector: Collector,
+        nearestOnly: Boolean,
         from: Int,
         ideal: Double,
-        nearestOnly: Boolean,
         resistance: (Int) -> Double,
         indices: (Int) -> IntArray,
     ) {
