@@ -31,7 +31,7 @@ class LocaleCoverageTest {
     private fun mainResDirs(root: File): List<File> =
         root.walk()
             .onEnter { it.name != "build" && !it.name.startsWith(".") }
-            .filter { it.isDirectory && it.name == "res" && it.parentFile.name == "main" && it.parentFile.parentFile.name == "src" }
+            .filter { it.isDirectory && it.name == "res" && it.parentFile?.name == "main" && it.parentFile?.parentFile?.name == "src" }
             .toList()
 
     private fun stringNames(valuesDir: File): Set<String> =
