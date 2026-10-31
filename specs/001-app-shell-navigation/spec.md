@@ -137,8 +137,8 @@ same identifier and check that the problem is caught by an automated check befor
 - Tapping an entry twice quickly opens the resource screen only once.
 - Unsupported device language: the app falls back to English.
 - Dark theme enabled in the system: the app follows the system light or dark theme.
-- Landscape orientation and tablet-sized screens: tabs stay at the top and the list stays
-  usable. A dedicated two-pane tablet layout is out of scope.
+- Tablet-sized screens: tabs stay at the top and the list stays usable. A dedicated two-pane
+  tablet layout is out of scope. The app is portrait-only (constitution 1.1.0).
 - The process is killed in the background and restored: the app reopens on the tab and screen
   the user last had open.
 
@@ -193,8 +193,8 @@ same identifier and check that the problem is caught by an automated check befor
 **Product baseline**
 
 - **FR-017**: The app's display name on the launcher and in the system MUST be "Circuitopedia".
-- **FR-018**: The app MUST follow the system light or dark theme and MUST support portrait and
-  landscape orientation.
+- **FR-018**: The app MUST follow the system light or dark theme. It runs in portrait orientation
+  only (amended 2026-10-31 per constitution 1.1.0; originally portrait and landscape).
 
 ### Key Entities
 
