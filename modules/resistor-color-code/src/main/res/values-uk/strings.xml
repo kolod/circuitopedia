@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resistor_color_code_title">Кольорове маркування резисторів</string>
+    <string name="resistor_color_code_description">Опір за 3–6 кольоровими смугами</string>
+
+    <plurals name="resistor_color_code_bands">
+        <item quantity="one">%d смуга</item>
+        <item quantity="few">%d смуги</item>
+        <item quantity="many">%d смуг</item>
+        <item quantity="other">%d смуги</item>
+    </plurals>
+
+    <string name="resistor_color_code_color_black">Чорний</string>
+    <string name="resistor_color_code_color_brown">Коричневий</string>
+    <string name="resistor_color_code_color_red">Червоний</string>
+    <string name="resistor_color_code_color_orange">Помаранчевий</string>
+    <string name="resistor_color_code_color_yellow">Жовтий</string>
+    <string name="resistor_color_code_color_green">Зелений</string>
+    <string name="resistor_color_code_color_blue">Синій</string>
+    <string name="resistor_color_code_color_violet">Фіолетовий</string>
+    <string name="resistor_color_code_color_gray">Сірий</string>
+    <string name="resistor_color_code_color_white">Білий</string>
+    <string name="resistor_color_code_color_gold">Золотий</string>
+    <string name="resistor_color_code_color_silver">Срібний</string>
+
+    <string name="resistor_color_code_header_band">Смуга %d</string>
+    <string name="resistor_color_code_header_multiplier">Множ.</string>
+    <string name="resistor_color_code_header_tolerance">Допуск</string>
+    <string name="resistor_color_code_header_tcr">ТКО</string>
+
+    <string name="resistor_color_code_label_1st">1-а</string>
+    <string name="resistor_color_code_label_2nd">2-а</string>
+    <string name="resistor_color_code_label_3rd">3-я</string>
+    <string name="resistor_color_code_label_mul">МНОЖ</string>
+    <string name="resistor_color_code_label_tol">ДОП</string>
+    <string name="resistor_color_code_label_tcr">ТКО</string>
+
+    <string name="resistor_color_code_cell_description">%1$s, %2$s, %3$s</string>
+    <string name="resistor_color_code_band_multiplier">Множник</string>
+    <string name="resistor_color_code_band_tolerance">Допуск</string>
+    <string name="resistor_color_code_band_tcr">Температурний коефіцієнт опору</string>
+</resources>

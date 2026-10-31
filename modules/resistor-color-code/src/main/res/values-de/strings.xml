@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resistor_color_code_title">Widerstandsfarbcode</string>
+    <string name="resistor_color_code_description">Widerstand aus 3–6 Farbringen</string>
+
+    <plurals name="resistor_color_code_bands">
+        <item quantity="one">%d Ring</item>
+        <item quantity="other">%d Ringe</item>
+    </plurals>
+
+    <string name="resistor_color_code_color_black">Schwarz</string>
+    <string name="resistor_color_code_color_brown">Braun</string>
+    <string name="resistor_color_code_color_red">Rot</string>
+    <string name="resistor_color_code_color_orange">Orange</string>
+    <string name="resistor_color_code_color_yellow">Gelb</string>
+    <string name="resistor_color_code_color_green">Grün</string>
+    <string name="resistor_color_code_color_blue">Blau</string>
+    <string name="resistor_color_code_color_violet">Violett</string>
+    <string name="resistor_color_code_color_gray">Grau</string>
+    <string name="resistor_color_code_color_white">Weiß</string>
+    <string name="resistor_color_code_color_gold">Gold</string>
+    <string name="resistor_color_code_color_silver">Silber</string>
+
+    <string name="resistor_color_code_header_band">Ring %d</string>
+    <string name="resistor_color_code_header_multiplier">Mult.</string>
+    <string name="resistor_color_code_header_tolerance">Toler.</string>
+    <string name="resistor_color_code_header_tcr">TK</string>
+
+    <string name="resistor_color_code_label_1st">1.</string>
+    <string name="resistor_color_code_label_2nd">2.</string>
+    <string name="resistor_color_code_label_3rd">3.</string>
+    <string name="resistor_color_code_label_mul">MUL</string>
+    <string name="resistor_color_code_label_tol">TOL</string>
+    <string name="resistor_color_code_label_tcr">TK</string>
+
+    <string name="resistor_color_code_cell_description">%1$s, %2$s, %3$s</string>
+    <string name="resistor_color_code_band_multiplier">Multiplikator</string>
+    <string name="resistor_color_code_band_tolerance">Toleranz</string>
+    <string name="resistor_color_code_band_tcr">Temperaturkoeffizient</string>
+</resources>

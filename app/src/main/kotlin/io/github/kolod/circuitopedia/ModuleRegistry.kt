@@ -1,8 +1,11 @@
 package io.github.kolod.circuitopedia
 
 import io.github.kolod.circuitopedia.module.AppModule
+import io.github.kolod.circuitopedia.modules.resistorcolorcode.resistorColorCodeModule
 
 /** The single place where modules are added to the app: one line per module. */
 object ModuleRegistry {
-    val modules: List<AppModule> = listOf()
+    val modules: List<AppModule> = listOf(
+        resistorColorCodeModule,
+    )
 }
