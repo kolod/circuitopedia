@@ -76,7 +76,7 @@ the expected values in the Acceptance Scenarios.
 3. **Given** the "5 bands" tab with defaults Yellow, Violet, Black, Brown, Brown, **When** shown,
    **Then** the value reads "4.7kΩ ±1%".
 4. **Given** the "6 bands" tab with defaults Yellow, Violet, Black, Brown, Brown, Brown, **When**
-   shown, **Then** the value reads "4.7kΩ ±1% 100ppm/K", and the drawing has six bands
+   shown, **Then** the value reads "4.7kΩ ±1% ±100ppm/K", and the drawing has six bands
    labeled "1st", "2nd", "3rd", "MUL", "TOL", "TCR".
 5. **Given** a selection on one tab, **When** the user switches to another tab and back,
    **Then** each tab still shows its own last selection.
@@ -157,7 +157,7 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
 - **FR-006**: Each cell that is valid for its band MUST be filled with that row's color (with a
   subtle vertical shading as in the reference) and MUST show the band meaning: a digit, a
   multiplier with unit ("×1Ω", "×10Ω", "×100Ω", "×1kΩ" … "×1GΩ", "×0.1Ω", "×0.01Ω"), a tolerance
-  ("±5%"), or a temperature coefficient ("100ppm/K"). Invalid cells MUST be empty and not
+  ("±5%"), or a temperature coefficient ("±100ppm/K"). Invalid cells MUST be empty and not
   selectable.
 - **FR-007**: Text in each colored cell MUST have a contrast ratio of at least 4.5:1 against its
   background. Use white text on dark colors and black text on light colors (Yellow, White,
@@ -250,9 +250,9 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
   - Display shows all significant digits from the digit bands, with trailing zeros dropped.
   - The SI prefix is Ω, kΩ, MΩ or GΩ, chosen so that the mantissa is in [1, 1000). Values
     below 1Ω stay in Ω (for example 0.1Ω, 0.47Ω).
-  - Tolerance is shown as given ("±0.05%"), and TCR as an integer with "ppm/K".
+  - Tolerance is shown as given ("±0.05%"), and TCR as "±" plus an integer plus "ppm/K" (IEC 60062 gives TCR as ± values).
   - Decimal separators follow the app locale.
-- **Format**: `<value><prefix>Ω ±<tolerance>%`, plus ` <tcr>ppm/K` on 6 bands. There is no space
+- **Format**: `<value><prefix>Ω ±<tolerance>%`, plus ` ±<tcr>ppm/K` on 6 bands. There is no space
   between number and unit, as in the reference design.
 
 ### New Dependencies *(Principle III)*
