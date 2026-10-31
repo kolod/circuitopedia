@@ -254,9 +254,9 @@ clear the results.
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 - [X] T028 [P] Check that `shared/resistors` and `modules/voltage-divider/core` have no `android` imports.
-- [ ] T029 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green.
-- [ ] T030 Run `./gradlew connectedDebugAndroidTest` on an emulator. All modules' tests must pass.
-- [ ] T031 Do the manual checks in `specs/005-voltage-divider/quickstart.md` §4. For E192 with both arms chosen, measure the time in-process on the emulator with a temporary instrumented timing test, then delete it, as in spec 004.
+- [X] T029 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green.
+- [X] T030 Run `./gradlew connectedDebugAndroidTest` on an emulator. All modules' tests must pass.
+- [X] T031 Do the manual checks in `specs/005-voltage-divider/quickstart.md` §4. For E192 with both arms chosen, measure the time in-process on the emulator with a temporary instrumented timing test, then delete it, as in spec 004.
 - [ ] T032 Push branch `005-voltage-divider` and open a PR to `main`. The description:
   - cites the formula source;
   - lists the nine cases;
