@@ -18,7 +18,7 @@ kotlin {
 }
 
 dependencies {
-    api(project(":shared:si-format"))
+    api(project(":shared:resistors"))
 
     testImplementation(libs.junit)
 }

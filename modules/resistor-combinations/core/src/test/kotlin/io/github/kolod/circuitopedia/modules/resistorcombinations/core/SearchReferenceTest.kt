@@ -1,5 +1,9 @@
 package io.github.kolod.circuitopedia.modules.resistorcombinations.core
 
+import io.github.kolod.circuitopedia.shared.resistors.Combination
+import io.github.kolod.circuitopedia.shared.resistors.ESeries
+import io.github.kolod.circuitopedia.shared.resistors.Kind
+import io.github.kolod.circuitopedia.shared.resistors.Rational
 import java.math.BigDecimal
 import kotlin.random.Random
 import org.junit.Assert.assertEquals

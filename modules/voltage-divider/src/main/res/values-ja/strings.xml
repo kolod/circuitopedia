@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voltage_divider_title">分圧回路</string>
+    <string name="voltage_divider_description">分圧回路を計算し標準抵抗を選ぶ</string>
+
+    <string name="voltage_divider_note_unloaded">無負荷の分圧回路: U2 から電流を取り出さない</string>
+    <string name="voltage_divider_label_u1">U1（入力）</string>
+    <string name="voltage_divider_label_u2">U2（出力）</string>
+    <string name="voltage_divider_label_r1">R1（上側）</string>
+    <string name="voltage_divider_label_r2">R2（下側）</string>
+    <string name="voltage_divider_label_r">R（合計）</string>
+    <string name="voltage_divider_computed">計算値</string>
+    <string name="voltage_divider_calculate">計算</string>
+    <string name="voltage_divider_no_voltage">R1・R2・R だけでは電圧が決まりません。U1 か U2 を入力してください</string>
+    <string name="voltage_divider_error_parse">%1$s を確認してください（例: 3.3、4.7k、4k7）</string>
+    <string name="voltage_divider_error_ratio">U2 は 0 と U1 の間である必要があります</string>
+    <string name="voltage_divider_error_signs">U1 と U2 は同じ符号である必要があります</string>
+    <string name="voltage_divider_error_total">R1 と R2 は R より小さい必要があります</string>
+    <string name="voltage_divider_builds_header">標準抵抗</string>
+    <string name="voltage_divider_series_label">E系列</string>
+    <string name="voltage_divider_no_builds" formatted="false">R の ±10% 以内の組み合わせはありません</string>
+    <string name="voltage_divider_build_u2">U2 = %1$s（%2$s）</string>
+    <string name="voltage_divider_build_r">R = %1$s（%2$s）</string>
+    <string name="voltage_divider_state_entered">入力値</string>
+    <string name="voltage_divider_state_computed">計算値</string>
+    <string name="voltage_divider_spoken_volt">ボルト</string>
+    <string name="voltage_divider_spoken_millivolt">ミリボルト</string>
+    <string name="voltage_divider_spoken_kilovolt">キロボルト</string>
+    <string name="voltage_divider_spoken_ohm">オーム</string>
+    <string name="voltage_divider_spoken_kilohm">キロオーム</string>
+    <string name="voltage_divider_spoken_megohm">メガオーム</string>
+    <string name="voltage_divider_spoken_gigohm">ギガオーム</string>
+    <string name="voltage_divider_spoken_series">プラス</string>
+    <string name="voltage_divider_spoken_parallel">並列</string>
+    <string name="voltage_divider_spoken_error">誤差 %1$s パーセント</string>
+    <string name="voltage_divider_spoken_deviation">偏差 %1$s パーセント</string>
+    <plurals name="voltage_divider_need_more">
+        <item quantity="other">あと %d 個の値を入力してください</item>
+    </plurals>
+    <plurals name="voltage_divider_too_many">
+        <item quantity="other">%d 個の欄を空けてください</item>
+    </plurals>
+</resources>

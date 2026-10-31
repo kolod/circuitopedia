@@ -33,14 +33,14 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Combination
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.ESeries
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Kind
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Rational
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.connectionText
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.formatDeviation
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.formatOhms
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.parseTarget
+import io.github.kolod.circuitopedia.shared.resistors.Combination
+import io.github.kolod.circuitopedia.shared.resistors.ESeries
+import io.github.kolod.circuitopedia.shared.resistors.Kind
+import io.github.kolod.circuitopedia.shared.resistors.Rational
+import io.github.kolod.circuitopedia.shared.resistors.connectionText
+import io.github.kolod.circuitopedia.shared.resistors.formatDeviation
+import io.github.kolod.circuitopedia.shared.resistors.formatOhms
+import io.github.kolod.circuitopedia.shared.resistors.parseResistance
 import io.github.kolod.circuitopedia.modules.resistorcombinations.core.search
 import java.util.Locale
 import kotlinx.coroutines.Dispatchers
@@ -58,7 +58,7 @@ fun CombinationsScreen() {
     var seriesOrdinal by rememberSaveable { mutableIntStateOf(ESeries.E24.ordinal) }
     var allowed by rememberSaveable(stateSaver = KindSetSaver) { mutableStateOf(SELECTABLE_KINDS.toSet()) }
     val series = ESeries.entries[seriesOrdinal]
-    val target = remember(text) { parseTarget(text) }
+    val target = remember(text) { parseResistance(text) }
     val invalid = text.isNotBlank() && target == null
 
     // Recomputed off the main thread; a newer input cancels the older search, which stops at its

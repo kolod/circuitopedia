@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voltage_divider_title">Дільник напруги</string>
+    <string name="voltage_divider_description">Розрахунок дільника й підбір стандартних резисторів</string>
+
+    <string name="voltage_divider_note_unloaded">Дільник без навантаження: струм з U2 не відбирається</string>
+    <string name="voltage_divider_label_u1">U1 (вхід)</string>
+    <string name="voltage_divider_label_u2">U2 (вихід)</string>
+    <string name="voltage_divider_label_r1">R1 (верхній)</string>
+    <string name="voltage_divider_label_r2">R2 (нижній)</string>
+    <string name="voltage_divider_label_r">R (загальний)</string>
+    <string name="voltage_divider_computed">обчислено</string>
+    <string name="voltage_divider_calculate">Розрахувати</string>
+    <string name="voltage_divider_no_voltage">R1, R2 і R не задають напруги: введіть U1 або U2</string>
+    <string name="voltage_divider_error_parse">Перевірте %1$s: напр. 3,3, 4,7k або 4k7</string>
+    <string name="voltage_divider_error_ratio">U2 має бути між 0 і U1</string>
+    <string name="voltage_divider_error_signs">U1 і U2 мають бути одного знаку</string>
+    <string name="voltage_divider_error_total">R1 і R2 мають бути менші за R</string>
+    <string name="voltage_divider_builds_header">Стандартні резистори</string>
+    <string name="voltage_divider_series_label">Ряд E</string>
+    <string name="voltage_divider_no_builds" formatted="false">Немає варіантів у межах ±10% від R</string>
+    <string name="voltage_divider_build_u2">U2 = %1$s (%2$s)</string>
+    <string name="voltage_divider_build_r">R = %1$s (%2$s)</string>
+    <string name="voltage_divider_state_entered">введено</string>
+    <string name="voltage_divider_state_computed">обчислено</string>
+    <string name="voltage_divider_spoken_volt">вольт</string>
+    <string name="voltage_divider_spoken_millivolt">мілівольт</string>
+    <string name="voltage_divider_spoken_kilovolt">кіловольт</string>
+    <string name="voltage_divider_spoken_ohm">ом</string>
+    <string name="voltage_divider_spoken_kilohm">кілоом</string>
+    <string name="voltage_divider_spoken_megohm">мегаом</string>
+    <string name="voltage_divider_spoken_gigohm">гігаом</string>
+    <string name="voltage_divider_spoken_series">плюс</string>
+    <string name="voltage_divider_spoken_parallel">паралельно з</string>
+    <string name="voltage_divider_spoken_error">похибка %1$s відсотка</string>
+    <string name="voltage_divider_spoken_deviation">відхилення %1$s відсотка</string>
+    <plurals name="voltage_divider_need_more">
+        <item quantity="one">Введіть ще %d значення</item>
+        <item quantity="few">Введіть ще %d значення</item>
+        <item quantity="many">Введіть ще %d значень</item>
+        <item quantity="other">Введіть ще %d значення</item>
+    </plurals>
+    <plurals name="voltage_divider_too_many">
+        <item quantity="one">Залиште %d поле порожнім</item>
+        <item quantity="few">Залиште %d поля порожніми</item>
+        <item quantity="many">Залиште %d полів порожніми</item>
+        <item quantity="other">Залиште %d поля порожніми</item>
+    </plurals>
+</resources>
