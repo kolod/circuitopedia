@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -31,7 +32,7 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.em
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandLayout
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.CELL_GRADIENT
@@ -164,13 +165,16 @@ private fun BandCell(
 
 @Composable
 private fun CellText(text: String, color: Color) {
+    // The floor is in dp, not sp: an sp floor grows with the system font scale (18sp at 200%), and
+    // then labels in narrow 6-band columns no longer fit and get cut. Shrinking beats truncating.
+    val minFontSize = with(LocalDensity.current) { 8.dp.toSp() }
     Text(
         text = text,
         color = color,
         maxLines = if ('\n' in text) 2 else 1,
-        lineHeight = MaterialTheme.typography.bodyLarge.fontSize,
+        lineHeight = 1.1.em,
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.bodyLarge,
-        autoSize = TextAutoSize.StepBased(minFontSize = 9.sp, maxFontSize = MaterialTheme.typography.bodyLarge.fontSize),
+        autoSize = TextAutoSize.StepBased(minFontSize = minFontSize, maxFontSize = MaterialTheme.typography.bodyLarge.fontSize),
     )
 }
