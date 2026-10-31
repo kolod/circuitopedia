@@ -11,6 +11,8 @@ fun formatSi(value: BigDecimal, unit: String, prefixes: List<String>, baseIndex:
 fun formatDecimal(value: BigDecimal, locale: Locale): String
 ```
 
+> Spec 005 moved `Rational`, `ESeries`, `Kind`, `Combination`, the parser (renamed `parseResistance`) and `Format.kt` into `:shared:resistors` (package `io.github.kolod.circuitopedia.shared.resistors`). `search`, `rankingFor` and `PER_KIND` stay in this module.
+
 ## `:modules:resistor-combinations:core` — package `io.github.kolod.circuitopedia.modules.resistorcombinations.core`
 
 ```kotlin

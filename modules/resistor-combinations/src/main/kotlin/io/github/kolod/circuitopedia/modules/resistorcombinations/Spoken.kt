@@ -2,10 +2,10 @@ package io.github.kolod.circuitopedia.modules.resistorcombinations
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Combination
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Kind
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Rational
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.formatDeviation
+import io.github.kolod.circuitopedia.shared.resistors.Combination
+import io.github.kolod.circuitopedia.shared.resistors.Kind
+import io.github.kolod.circuitopedia.shared.resistors.Rational
+import io.github.kolod.circuitopedia.shared.resistors.formatDeviation
 import io.github.kolod.circuitopedia.shared.siformat.formatDecimal
 import java.math.BigDecimal
 import java.util.Locale

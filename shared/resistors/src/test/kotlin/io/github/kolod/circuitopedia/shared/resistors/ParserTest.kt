@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcombinations.core
+package io.github.kolod.circuitopedia.shared.resistors
 
 import java.math.BigDecimal
 import org.junit.Assert.assertEquals
@@ -33,20 +33,20 @@ class ParserTest {
             "1G" to "1000000000",
             "1.234k" to "1234",
         )
-        for ((text, expected) in cases) assertEquals(text, ohms(expected), parseTarget(text))
+        for ((text, expected) in cases) assertEquals(text, ohms(expected), parseResistance(text))
     }
 
     @Test
     fun rejectedNotations() {
         val cases = listOf("", "  ", "abc", "4.7.1", "4,7,1", "4.7,1", "-1", "0", "0.0", "2G", "1.5G", "0.05", "4k7k", "k", "1.5k7", "4 k 7", "Ω", "4x")
-        for (text in cases) assertNull(text, parseTarget(text))
+        for (text in cases) assertNull(text, parseResistance(text))
     }
 
     @Test
     fun rangeBoundariesAreInclusive() {
-        assertEquals(ohms("0.1"), parseTarget("100m"))
-        assertEquals(ohms("1000000000"), parseTarget("1000M"))
-        assertNull(parseTarget("99m"))
-        assertNull(parseTarget("1000000001"))
+        assertEquals(ohms("0.1"), parseResistance("100m"))
+        assertEquals(ohms("1000000000"), parseResistance("1000M"))
+        assertNull(parseResistance("99m"))
+        assertNull(parseResistance("1000000001"))
     }
 }

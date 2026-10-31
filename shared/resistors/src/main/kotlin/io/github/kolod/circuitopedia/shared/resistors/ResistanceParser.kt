@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcombinations.core
+package io.github.kolod.circuitopedia.shared.resistors
 
 import java.math.BigDecimal
 
@@ -20,7 +20,7 @@ private val DECIMAL = Regex("^(\\d+(?:[.,]\\d+)?|[.,]\\d+)\\s*([mkKMG])?$")
  * The target resistance typed by the user (spec FR-002, research R5), or null if the text is not a
  * supported notation or the value lies outside 0.1Ω … 1GΩ.
  */
-fun parseTarget(text: String): Rational? {
+fun parseResistance(text: String): Rational? {
     val trimmed = text.trim().replace(UNIT_SUFFIX, "").trim()
     val (digits, exponent) = CODE.matchEntire(trimmed)?.let { match ->
         val (whole, letter, fraction) = match.destructured

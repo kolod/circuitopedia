@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcombinations.core
+package io.github.kolod.circuitopedia.shared.resistors
 
 /**
  * How the resistors of a combination are connected. Values are kept in a canonical order so that
@@ -15,9 +15,6 @@ enum class Kind(val resistorCount: Int) {
     Parallel3(3),
     ParallelSeries(3),
 }
-
-/** Number of results listed per kind of connection (spec FR-008). */
-const val PER_KIND = 5
 
 /**
  * A kind of connection with its resistor values in canonical order.
@@ -43,15 +40,3 @@ data class Combination(val kind: Kind, val values: List<Rational>) {
 }
 
 private fun parallel(values: List<Rational>) = values.map(Rational::reciprocal).reduce(Rational::plus).reciprocal()
-
-/**
- * The order of spec FR-007: smaller absolute deviation first, then fewer resistors, then the smaller
- * largest value, then the values in canonical order (only to make the order deterministic).
- */
-fun rankingFor(target: Rational): Comparator<Combination> =
-    compareBy<Combination> { (it.resistance - target).abs() }
-        .thenBy { it.kind.resistorCount }
-        .thenBy { it.values.max() }
-        .thenComparator { x, y ->
-            x.values.zip(y.values).map { (a, b) -> a.compareTo(b) }.firstOrNull { it != 0 } ?: 0
-        }

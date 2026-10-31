@@ -1,5 +1,10 @@
 package io.github.kolod.circuitopedia.modules.resistorcombinations.core
 
+import io.github.kolod.circuitopedia.shared.resistors.Combination
+import io.github.kolod.circuitopedia.shared.resistors.ESeries
+import io.github.kolod.circuitopedia.shared.resistors.Kind
+import io.github.kolod.circuitopedia.shared.resistors.Rational
+
 /**
  * The best [PER_KIND] combinations of a single resistor and of each [allowed] kind, merged and
  * sorted by [rankingFor] (spec FR-006–FR-008).

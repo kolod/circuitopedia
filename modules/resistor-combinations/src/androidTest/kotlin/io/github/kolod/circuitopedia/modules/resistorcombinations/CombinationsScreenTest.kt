@@ -15,9 +15,9 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.ESeries
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.Kind
-import io.github.kolod.circuitopedia.modules.resistorcombinations.core.parseTarget
+import io.github.kolod.circuitopedia.shared.resistors.ESeries
+import io.github.kolod.circuitopedia.shared.resistors.Kind
+import io.github.kolod.circuitopedia.shared.resistors.parseResistance
 import io.github.kolod.circuitopedia.modules.resistorcombinations.core.search
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -114,7 +114,7 @@ class CombinationsScreenTest {
             val rows = composedDescriptions()
             rows.isNotEmpty() && rows.none { parallel in it || it.split(plus).size > 2 }
         }
-        val expected = search(parseTarget("1.234k")!!, ESeries.E24, setOf(Kind.Series2)).size
+        val expected = search(parseResistance("1.234k")!!, ESeries.E24, setOf(Kind.Series2)).size
         assertTrue("$expected", composedDescriptions().size <= expected)
     }
 

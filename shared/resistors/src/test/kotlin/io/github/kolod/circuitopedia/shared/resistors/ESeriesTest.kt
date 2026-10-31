@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcombinations.core
+package io.github.kolod.circuitopedia.shared.resistors
 
 import java.math.BigDecimal
 import org.junit.Assert.assertEquals

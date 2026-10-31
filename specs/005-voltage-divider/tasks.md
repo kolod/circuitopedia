@@ -44,11 +44,11 @@ instrumented tests.
 **Purpose**: The reused spec 004 code lives in `:shared:resistors`, and the new module builds and
 shows up in the catalog.
 
-- [ ] T001 Create `shared/resistors/build.gradle.kts`:
+- [X] T001 Create `shared/resistors/build.gradle.kts`:
   - kotlin-jvm, JVM 17;
   - `api(project(":shared:si-format"))`;
   - `testImplementation(libs.junit)`.
-- [ ] T002 Move these files with `git mv` from `COMB_CORE` to `RES_LIB`, changing their package to
+- [X] T002 Move these files with `git mv` from `COMB_CORE` to `RES_LIB`, changing their package to
   `io.github.kolod.circuitopedia.shared.resistors`:
   - `Rational.kt`;
   - `ESeries.kt`;
@@ -60,7 +60,7 @@ shows up in the catalog.
   - `PER_KIND` and `rankingFor` stay in `COMB_CORE/Ranking.kt`.
 
   Move `RationalTest`, `ESeriesTest`, `ParserTest` and `FormatTest` to `RES_LIB_TEST`.
-- [ ] T003 Point `modules/resistor-combinations/core/build.gradle.kts` at `api(project(":shared:resistors"))`.
+- [X] T003 Point `modules/resistor-combinations/core/build.gradle.kts` at `api(project(":shared:resistors"))`.
   - Fix the imports in the combinations core, its tests, `CombinationsScreen.kt` and
     `Spoken.kt`, and the `CombinationsScreenTest`, including the `parseTarget` →
     `parseResistance` rename.

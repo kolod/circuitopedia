@@ -1,5 +1,8 @@
 package io.github.kolod.circuitopedia.modules.resistorcombinations.core
 
+import io.github.kolod.circuitopedia.shared.resistors.ESeries
+import io.github.kolod.circuitopedia.shared.resistors.Kind
+import io.github.kolod.circuitopedia.shared.resistors.Rational
 import java.math.BigDecimal
 import org.junit.Assert.assertTrue
 import org.junit.Test

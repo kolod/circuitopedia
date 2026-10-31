@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcombinations.core
+package io.github.kolod.circuitopedia.shared.resistors
 
 import io.github.kolod.circuitopedia.shared.siformat.formatDecimal
 import io.github.kolod.circuitopedia.shared.siformat.formatSi
