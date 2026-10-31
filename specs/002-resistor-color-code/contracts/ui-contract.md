@@ -8,17 +8,23 @@
 ┌───────────────────────────────────────────┐
 │ 3 bands │ 4 bands │ 5 bands │ 6 bands      │  PrimaryTabRow, default 4 bands
 ├───────────────────────────────────────────┤
-│ 4.7kΩ ±5%          1st 2nd MUL TOL        │  value (headlineSmall) │ ResistorDrawing
-│                    ─[▌▌ ▌  ▌]─            │  labels with leader lines
+│ 4.7kΩ ±5%                                 │  value (headlineSmall), fixed
+│          ─[▌ ▌ ▌        ▌]─               │  ResistorDrawing over the band columns, fixed
+│             \  |  \        \              │  leader lines: vertical + slanted only, 3dp
 ├──────────┬────────┬────────┬───────┬──────┤
-│          │ Band 1 │ Band 2 │ Mult. │Toler.│  header row (labelLarge)
+│          │ Band 1 │ Band 2 │ Mult. │Toler.│  header row, fixed
+╞══════════╪════════╪════════╪═══════╪══════╡  ── only below this line scrolls (vertically)
 │ Black    │        │   0    │  ×1Ω  │      │  empty cell = not selectable
 │ Brown    │   1    │   1    │ ×10Ω  │ ±1%  │
 │  …       │        │        │       │      │
 │ Silver   │        │        │×0.01Ω │ ±10% │
 └──────────┴────────┴────────┴───────┴──────┘
-   whole page scrolls vertically; pager swipes horizontally
+   4dp side margins; no horizontal scrolling; pager swipes between tabs
 ```
+
+The drawing has no text of its own. It is laid out with the same width and side margins as the
+table, so each leader line starts at the horizontal center of its header column
+(`bandColumnCenters`, shared with the table).
 
 ## Strings (`modules/resistor-color-code/src/main/res/values*/strings.xml`, prefix `resistor_color_code_`)
 
@@ -32,8 +38,6 @@
 | `resistor_color_code_header_multiplier`   | Mult.                           |
 | `resistor_color_code_header_tolerance`    | Toler.                          |
 | `resistor_color_code_header_tcr`          | TCR                             |
-| `resistor_color_code_label_1st` / `_2nd` / `_3rd` | 1st / 2nd / 3rd         |
-| `resistor_color_code_label_mul` / `_tol` / `_tcr` | MUL / TOL / TCR         |
 | `resistor_color_code_cell_description`    | %1$s, %2$s, %3$s (band, color, meaning) |
 | `resistor_color_code_band_multiplier` / `_tolerance` / `_tcr` | Multiplier / Tolerance / Temperature coefficient (screen reader band names) |
 
@@ -52,4 +56,6 @@ Every key exists in en, de, fr, es, ja and uk (`LocaleCoverageTest`, Lint).
 
 ## Test tags (for instrumented tests)
 
-`rcc-value`, `rcc-tab-<bands>`, `rcc-cell-<bandIndex>-<color>`, `rcc-pager`.
+`rcc-value`, `rcc-tab-<bands>`, `rcc-cell-<bandIndex>-<color>`, `rcc-pager`, and `rcc-page-<bands>`
+on each pager page. The pager can keep a neighboring page composed, so tests look up nodes inside
+the current page.

@@ -16,10 +16,10 @@ A hobbyist holds a resistor with four color bands. They open "Resistor color cod
 Calculations tab. The calculator opens on the "4 bands" tab. It shows:
 
 - the current value in large text (for example "4.7kΩ ±5%");
-- next to it, a drawing of a resistor whose bands show the selected colors, labeled
-  "1st", "2nd", "MUL" and "TOL";
+- below it, a drawing of a resistor whose bands show the selected colors. Each band is joined by
+  a leader line to its column header in the table;
 - below, a table with one row per color (Black … Silver) and one column per band (Band 1,
-  Band 2, Multiplier, Tolerance).
+  Band 2, Multiplier, Tolerance). Its header stays fixed while the color rows scroll.
 
 Each table cell is filled with its color and shows what that color means in that band: a digit,
 a multiplier such as "×100Ω", or a tolerance such as "±5%". Cells that a color cannot take in
@@ -70,14 +70,13 @@ the expected values in the Acceptance Scenarios.
 **Acceptance Scenarios**:
 
 1. **Given** the "3 bands" tab with defaults Yellow, Violet, Red, **When** shown, **Then** the value
-   reads "4.7kΩ ±20%" and the drawing shows three bands labeled "1st", "2nd", "MUL".
+   reads "4.7kΩ ±20%" and the drawing shows three bands, each joined to its header (Band 1, Band 2, Mult.).
 2. **Given** the "5 bands" tab, **When** the user selects Brown, Black, Black, Red, Brown, **Then**
    the value reads "10kΩ ±1%".
 3. **Given** the "5 bands" tab with defaults Yellow, Violet, Black, Brown, Brown, **When** shown,
    **Then** the value reads "4.7kΩ ±1%".
 4. **Given** the "6 bands" tab with defaults Yellow, Violet, Black, Brown, Brown, Brown, **When**
-   shown, **Then** the value reads "4.7kΩ ±1% ±100ppm/K", and the drawing has six bands
-   labeled "1st", "2nd", "3rd", "MUL", "TOL", "TCR".
+   shown, **Then** the value reads "4.7kΩ ±1% ±100ppm/K", and the drawing has six bands, each joined to its header column.
 5. **Given** a selection on one tab, **When** the user switches to another tab and back,
    **Then** each tab still shows its own last selection.
 6. **Given** any tab, **When** the user taps another tab or swipes horizontally across the
@@ -89,8 +88,8 @@ the expected values in the Acceptance Scenarios.
 
 A user whose phone is set to Ukrainian (or German, French, Spanish, Japanese) sees translated
 color names, column headers, band labels and tab names. The number uses the locale's decimal
-separator (for example "4,7kΩ ±5%" in Ukrainian and German). The screen works in dark theme, in
-landscape, and with a large system font. It is also usable with a screen reader.
+separator (for example "4,7kΩ ±5%" in Ukrainian and German). The screen works in dark theme and
+with a large system font (the app is portrait-only, constitution 1.1.0). It is also usable with a screen reader.
 
 **Why this priority**: The constitution requires every feature in all six languages with
 locale formatting. Accessibility matters for a reference tool, but the calculation itself is
@@ -109,8 +108,8 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
 3. **Given** dark theme, **When** the calculator is shown, **Then** all color cells keep their real
    band colors, the text in each cell stays readable, and the selection outline is visible
    on every color, including Black and White.
-4. **Given** landscape orientation or 200% font size, **When** the calculator is shown, **Then** the
-   whole table can be reached by scrolling and no cell text is clipped beyond recognition.
+4. **Given** 200% font size, **When** the calculator is shown, **Then** the whole table can be
+   reached by scrolling and no cell text is clipped beyond recognition.
 
 ---
 
@@ -142,12 +141,17 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
   title ("Resistor color code") and a one-line description ("Resistance from 3–6 color
   bands"). It follows the module contract of spec 001.
 
-**Layout** (per [design/reference-4-bands.png](design/reference-4-bands.png))
+**Layout** (based on [design/reference-4-bands.png](design/reference-4-bands.png), revised 2026-10-31 so that translated headers fit without horizontal scrolling)
 
 - **FR-002**: The screen MUST show, from top to bottom:
   1. tabs "3 bands", "4 bands", "5 bands", "6 bands";
-  2. a summary area with the formatted value on the left and the resistor drawing on the right;
-  3. the color table.
+  2. the formatted value;
+  3. the resistor drawing;
+  4. the color table header;
+  5. the color rows.
+
+  Only the color rows scroll, vertically. Everything above them stays fixed, and nothing scrolls
+  horizontally. The table uses minimal side margins so that long translated headers fit.
 - **FR-003**: The "4 bands" tab MUST be selected the first time the calculator is opened.
 - **FR-004**: Users MUST be able to switch band tabs by tap and by horizontal swipe.
 - **FR-005**: The color table MUST have a first column of localized color names. It has one row
@@ -166,8 +170,10 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
   outline in an accent color that contrasts with every band color.
 - **FR-009**: The resistor drawing MUST show the body, the leads and one band per column in the
   selected colors, in band order from left to right. The tolerance band (and TCR band) is set
-  apart toward the right end, as in the reference. Above the bands are localized leader-line
-  labels: "1st", "2nd", "3rd" (5/6-band), "MUL", "TOL" (4–6-band) and "TCR" (6-band).
+  apart toward the right end. The drawing has no text labels of its own: each band is joined by a
+  leader line to the top edge of its column in the table header, which already names the band.
+  Leader lines use only vertical and slanted segments, never horizontal ones (they would merge
+  with the header edge), and are drawn thick enough to read at a glance.
 
 **Calculation** (see Constitution Constraints for the sources and tables)
 
@@ -266,7 +272,7 @@ and the decimal separator. Turn on TalkBack and select a band by touch explorati
 ### Localization *(Principle V)*
 
 - New strings in en, de, fr, es, ja, uk: module title and description, 12 color names, column
-  headers (Band 1/2/3, Mult., Toler., TCR), drawing labels (1st, 2nd, 3rd, MUL, TOL, TCR), tab
+  headers (Band 1/2/3, Mult., Toler., TCR), tab
   labels, and screen-reader descriptions.
 - The tab label "N bands" MUST use plurals resources (for example uk "3 смуги" / "5 смуг",
   ja without plural forms).

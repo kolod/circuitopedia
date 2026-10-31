@@ -159,28 +159,30 @@ shows "10kΩ ±1%" (spec US1).
   - `fun BandRole.cellLabel(color: BandColor, locale: Locale): String`, per contracts/core-api.md, and `""` for invalid colors.
 
   T016 passes.
-- [ ] T022 [P] [US1] Add the table and drawing strings to `RES/values/strings.xml` (en): 12 color names `resistor_color_code_color_<name>`, `_header_band` "Band %d", `_header_multiplier` "Mult.", `_header_tolerance` "Toler.", `_header_tcr` "TCR", `_label_1st` "1st", `_label_2nd` "2nd", `_label_3rd` "3rd", `_label_mul` "MUL", `_label_tol` "TOL", `_label_tcr` "TCR".
+- [ ] T022 [P] [US1] Add the table and drawing strings to `RES/values/strings.xml` (en): 12 color names `resistor_color_code_color_<name>`, `_header_band` "Band %d", `_header_multiplier` "Mult.", `_header_tolerance` "Toler.", `_header_tcr` "TCR". (The drawing has no labels of its own; see the revised FR-009.)
 - [ ] T023 [P] [US1] Translate the T022 strings into `RES/values-de`, `values-fr`, `values-es`, `values-ja` and `values-uk`. Use the standard color names (for example de Schwarz, Braun, Rot, Orange, Gelb, Grün, Blau, Violett, Grau, Weiß, Gold, Silber; uk Чорний, Коричневий, Червоний, Помаранчевий, Жовтий, Зелений, Синій, Фіолетовий, Сірий, Білий, Золотий, Срібний). The short drawing labels are translated where a common abbreviation exists, and otherwise kept as "MUL", "TOL" and "TCR".
 - [ ] T024 [US1] Create `UI/ColorCodeState.kt`:
   - `class ColorCodeState(initialLayout: BandLayout, initialSelections: Map<BandLayout, Selection>)`, with `var layout by mutableStateOf(...)`, a `selections` `mutableStateMapOf`, `fun select(index, color)` (applies `Selection.with` to the current layout), and `val current: Selection`;
   - a `Saver` that writes a `List<Int>` (the layout ordinal, then for each `BandLayout` in order the color ordinals of its selection) and restores it;
   - `@Composable fun rememberColorCodeState()` using `rememberSaveable(saver = …)`, with defaults `Four` and `Selection.default(it)`.
-- [ ] T025 [US1] Create `UI/ColorTable.kt`: `@Composable fun ColorTable(selection: Selection, onSelect: (Int, BandColor) -> Unit)`.
+- [ ] T025 [US1] Create `UI/ColorTable.kt` with `ColorTableHeader(layout)` and `ColorTableBody(selection, onSelect)`, plus the shared column geometry (`CellGap`, `TableSidePadding`, `NAME_COLUMN_WEIGHT`, `bandColumnCenters`).
   - The header row has an empty corner, then one header per band: Band N for digits, plus Mult., Toler. and TCR.
   - Then one row per `BandColor` with a name cell, then for each band either:
     - an empty `Box` (when `!layout.accepts(i, color)`), or
     - a cell with a `Brush.verticalGradient(lighten(argb, .15), argb, darken(argb, .15))` background, text `role.cellLabel(color, locale)` colored per `textOnColor`, `Modifier.heightIn(min = 48.dp).weight(1f).selectable(selected, role = Role.RadioButton) { onSelect(i, color) }.testTag("rcc-cell-$i-${color.name}")`, and, when selected, a 3dp `#00E5FF` border plus a 1dp inner `Color.Black.copy(alpha = .6f)` border.
   - The locale comes from `LocalConfiguration.current.locales[0]`, and theme surface colors are used for the header, the name column and empty cells.
-- [ ] T026 [US1] Create `UI/ResistorDrawing.kt`: `@Composable fun ResistorDrawing(selection: Selection, modifier: Modifier)`, a `Canvas` with `aspectRatio(2.2f)`.
-  - Draw two gray leads and a beige (#E8C39E, darker edge #D9A877) dog-bone body.
-  - Band rects in the selected colors at relative x positions per layout. Digit and multiplier bands are evenly spaced in the left 60% of the body, and the TOL and TCR bands sit in the right part (research R7).
-  - Above the bands, labels (`_label_*` strings) are drawn with `rememberTextMeasurer()`, each with a leader line down to its band.
-  - Use `Modifier.clearAndSetSemantics {}`.
-- [ ] T027 [US1] Replace the placeholder in `UI/ColorCodeScreen.kt` with `@Composable fun ColorCodeScreen(state: ColorCodeState = rememberColorCodeState())`. For now it renders only the current layout, `Four`, as a vertically scrollable `Column`:
-  - a `Row` with the value `Text(state.current.read().format(locale), style = headlineSmall, modifier = Modifier.weight(1f).testTag("rcc-value"))` and `ResistorDrawing(state.current, Modifier.fillMaxWidth(0.5f))`;
-  - then `ColorTable(state.current, state::select)`.
+- [ ] T026 [US1] Create `UI/ResistorDrawing.kt`: `@Composable fun ResistorDrawing(selection: Selection, modifier: Modifier)`, a full-width `Canvas` laid out with the table's side margins.
+  - The resistor (gray leads, beige dog-bone body) spans the band columns.
+  - Band rects are drawn in the selected colors: digits and multiplier on the left, TOL and TCR set apart on the right.
+  - Each band is joined to the top edge of its header column (`bandColumnCenters`, shared with `ColorTable.kt`) by a 3dp leader line made of vertical and slanted segments only.
+  - No text labels. Use `Modifier.clearAndSetSemantics {}`.
+- [ ] T027 [US1] Replace the placeholder in `UI/ColorCodeScreen.kt` with `@Composable fun ColorCodeScreen(state: ColorCodeState = rememberColorCodeState())`. Each page is a `Column` (tag `rcc-page-<bands>`) containing, in order:
+  - the value `Text` (headlineSmall, `liveRegion`, tag `rcc-value`);
+  - `ResistorDrawing`;
+  - `ColorTableHeader`;
+  - `ColorTableBody` inside `Modifier.weight(1f).verticalScroll(...)`. Only the body scrolls.
 
-  T018 passes on a device.
+  Use 4dp side margins and no horizontal scrolling. T018 passes on a device.
 
 **Checkpoint**: The MVP works: the 4-band calculator is fully usable from the catalog.
 
@@ -228,7 +230,7 @@ selection is kept when you leave a tab and come back.
   - Sync both ways: `LaunchedEffect(pagerState.currentPage) { state.layout = BandLayout.entries[it] }`, and the initial page comes from `state.layout`.
   - Each page renders that layout's selection (`state.selections[layout]`) with `onSelect` bound to that layout.
   - Change `ColorCodeState.select` to take the layout explicitly.
-- [ ] T033 [US2] Extend `UI/ResistorDrawing.kt` with band positions and labels for Three (1st, 2nd, MUL), Five (1st, 2nd, 3rd, MUL, TOL) and Six (… TOL, TCR). Check that labels don't overlap at a 0.5-width drawing on a 360dp screen, and shorten the leader layout if needed. T030 passes on a device.
+- [ ] T033 [US2] Add band positions for Three, Five and Six to `UI/ResistorDrawing.kt`, with leader lines to each header column. Check on a 360dp screen that the lines don't cross confusingly. T030 passes on a device.
 
 **Checkpoint**: All four layouts work and keep their own state.
 
@@ -237,7 +239,7 @@ selection is kept when you leave a tab and come back.
 ## Phase 5: User Story 3 - Any supported language and setting (Priority: P2)
 
 **Goal**: Locale-aware numbers, plural tab names, a working screen reader, and good behavior in
-dark theme, landscape and with large fonts.
+dark theme and with large fonts (portrait-only, constitution 1.1.0).
 
 **Independent Test**: Ukrainian shows "4,7kΩ ±5%" and "5 смуг". TalkBack reads "Band 1, Yellow, 4, selected".
 
@@ -260,7 +262,6 @@ dark theme, landscape and with large fonts.
 - [ ] T038 [US3] Large font and narrow screens, in `UI/ColorTable.kt` and `UI/ColorCodeScreen.kt`:
   - cell labels use `maxLines = 1` with `autoSize` (`TextAutoSize.StepBased(minFontSize = 10.sp)`), or `softWrap = false` with `overflow = Clip` if autoSize isn't available;
   - the name column uses weight 1.3 against 1 for band columns;
-  - in landscape (width > height), put the summary row above the table at full width, with the drawing at 40% width.
 
   Check visually at 360dp and 200% font size.
 
@@ -275,7 +276,7 @@ dark theme, landscape and with large fonts.
 - [ ] T041 Update `specs/002-resistor-color-code/research.md` R6 with the final palette, if T020 changed it.
 - [ ] T042 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green, and `LocaleCoverageTest` and `ModuleRegistryTest` must pass with the new module.
 - [ ] T043 Run `./gradlew :modules:resistor-color-code:connectedDebugAndroidTest` on an emulator or device. All tests must pass.
-- [ ] T044 Do the manual checks in `specs/002-resistor-color-code/quickstart.md` §4: compare with the reference image, the values for each tab, Ukrainian, dark theme (outline visible on White and Black), landscape, 200% font and TalkBack.
+- [ ] T044 Do the manual checks in `specs/002-resistor-color-code/quickstart.md` §4: compare with the reference image, the values for each tab, Ukrainian, dark theme (outline visible on White and Black), 200% font and TalkBack.
 - [ ] T045 Push branch `002-resistor-color-code` and open a PR to `main`. The description cites IEC 60062:2016 and lists the differences from the reference image (spec Assumptions). Merge after CI is green and T043/T044 are done.
 
 ---
@@ -313,7 +314,7 @@ Task: "T022 English table strings in RES/values/strings.xml"
 1. Setup, then Foundational: the module is listed and the model is tested.
 2. US1: a usable 4-band calculator. **Stop and validate** against the reference image.
 3. US2: all layouts, plus the exhaustive check.
-4. US3: locale formatting, the screen reader, and large font and landscape support.
+4. US3: locale formatting, the screen reader, and large font support.
 5. Polish, then the PR.
 
 Commit after each task or logical group, in English (Principle VI).

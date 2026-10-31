@@ -46,6 +46,6 @@ restoration and cell semantics.
 4. Check each tab's defaults: 3 bands "4.7kΩ ±20%", 5 bands "4.7kΩ ±1%", 6 bands
    "4.7kΩ ±1% ±100ppm/K".
 5. In Ukrainian, it shows "4,7kΩ ±5%" and the tabs read "3 смуги … 5 смуг".
-6. Check dark theme, landscape and 200% font size: cells stay readable and the outline is visible
+6. Check dark theme and 200% font size: cells stay readable and the outline is visible
    on White and Black.
 7. With TalkBack, a cell reads like "Band 1, Yellow, 4, selected".

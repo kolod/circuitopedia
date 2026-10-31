@@ -113,10 +113,14 @@
 ## R7. UI structure
 
 - **Decision**: Compose. `PrimaryTabRow` with 4 tabs over a `HorizontalPager` (the same pattern as
-  the catalog, spec 001 R3). Each page is a vertically scrollable `Column`:
-  - a `Row` with the value `Text` (headlineSmall, weight 1) and a `ResistorDrawing` (fixed aspect
-    ratio of about 2.2:1, at most 50% of the width);
-  - the `ColorTable`.
+  the catalog, spec 001 R3). Each page is a `Column`:
+  - the value `Text` (headlineSmall);
+  - the `ResistorDrawing` at full table width;
+  - the `ColorTableHeader`, all fixed;
+  - the `ColorTableBody`, the only part that scrolls (vertically).
+
+  The table has 4dp side margins and never scrolls horizontally. This was revised after the
+  first on-device review: long translated headers would not fit next to a half-width drawing.
 - **ColorTable**: built from `Row`s and `Column`s with weights (12 rows + header, up to 7 columns).
   It is not a `LazyColumn`: 13 short rows are cheap, and a lazy list nested in a scroll
   container is an anti-pattern. Each selectable cell gets `Modifier.selectable(selected, role =
@@ -128,7 +132,10 @@
   - a beige "dog-bone" body (rounded rect plus end caps);
   - band rects at fixed relative positions per layout. The digit and multiplier bands are spaced
     evenly, and the tolerance and TCR bands are pushed right, as in the reference;
-  - labels drawn with `rememberTextMeasurer`, with leader lines.
+  - no text labels, which would only repeat the table headers. Each band is joined by a 3dp
+    leader line to the top edge of its header column. The line is built from vertical and
+    slanted segments only, because horizontal ones merge with the header edge. Column centers
+    come from `bandColumnCenters`, shared with the table layout.
 
   It carries `Modifier.clearAndSetSemantics {}` because it is decorative (FR-016).
 - **Rationale**: Uses existing Compose and Material 3 only (Principle III).
