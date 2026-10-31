@@ -67,20 +67,20 @@ shows up in the catalog.
   - Update `specs/004-resistor-combinations/contracts/core-api.md` to note the move.
   - Run `./gradlew test` and `./gradlew :modules:resistor-combinations:connectedDebugAndroidTest`:
     all pass, unchanged.
-- [ ] T004 [P] Create `modules/voltage-divider/core/build.gradle.kts` (kotlin-jvm, JVM 17, `api(project(":shared:resistors"))`, `testImplementation(libs.junit)`).
-- [ ] T005 [P] Create `modules/voltage-divider/build.gradle.kts` like `modules/resistor-combinations/build.gradle.kts`:
+- [X] T004 [P] Create `modules/voltage-divider/core/build.gradle.kts` (kotlin-jvm, JVM 17, `api(project(":shared:resistors"))`, `testImplementation(libs.junit)`).
+- [X] T005 [P] Create `modules/voltage-divider/build.gradle.kts` like `modules/resistor-combinations/build.gradle.kts`:
   - namespace `io.github.kolod.circuitopedia.modules.voltagedivider`;
   - `resourcePrefix = "voltage_divider_"`;
   - dependency on `:modules:voltage-divider:core`.
-- [ ] T006 [P] Create `RES/drawable/voltage_divider_icon.xml`: a 24dp single-color vector of two resistor boxes in a vertical chain with a tap between them (white, no tint).
-- [ ] T007 [P] Create `RES/values*/strings.xml` with `title` and `description`:
+- [X] T006 [P] Create `RES/drawable/voltage_divider_icon.xml`: a 24dp single-color vector of two resistor boxes in a vertical chain with a tap between them (white, no tint).
+- [X] T007 [P] Create `RES/values*/strings.xml` with `title` and `description`:
   - en: Voltage divider / Solve a resistive divider and pick standard resistors;
   - de: Spannungsteiler / Teiler berechnen und Normwiderstände wählen;
   - fr: Diviseur de tension / Calculer un diviseur et choisir des résistances normalisées;
   - es: Divisor de tensión / Calcular un divisor y elegir resistencias normalizadas;
   - ja: 分圧回路 / 分圧回路を計算し標準抵抗を選ぶ;
   - uk: Дільник напруги / Розрахунок дільника й підбір стандартних резисторів.
-- [ ] T008 Create `UI/VoltageDividerModule.kt` (`val voltageDividerModule = AppModule(ModuleId("voltage-divider"), Category.Calculations, …) { DividerScreen() }`) and a placeholder `UI/DividerScreen.kt`. Register the module in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
+- [X] T008 Create `UI/VoltageDividerModule.kt` (`val voltageDividerModule = AppModule(ModuleId("voltage-divider"), Category.Calculations, …) { DividerScreen() }`) and a placeholder `UI/DividerScreen.kt`. Register the module in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
 
 **Checkpoint**: `./gradlew test lint :app:assembleDebug` passes. The catalog lists four calculators,
 and the combinations module behaves exactly as before.

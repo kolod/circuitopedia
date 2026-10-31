@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voltage_divider_title">Spannungsteiler</string>
+    <string name="voltage_divider_description">Teiler berechnen und Normwiderstände wählen</string>
+</resources>

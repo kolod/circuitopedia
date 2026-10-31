@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voltage_divider_title">Дільник напруги</string>
+    <string name="voltage_divider_description">Розрахунок дільника й підбір стандартних резисторів</string>
+</resources>

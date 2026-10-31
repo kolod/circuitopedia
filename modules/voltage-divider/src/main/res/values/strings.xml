@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voltage_divider_title">Voltage divider</string>
+    <string name="voltage_divider_description">Solve a resistive divider and pick standard resistors</string>
+</resources>
