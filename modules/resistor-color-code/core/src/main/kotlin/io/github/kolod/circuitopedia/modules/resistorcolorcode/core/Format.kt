@@ -1,8 +1,8 @@
 package io.github.kolod.circuitopedia.modules.resistorcolorcode.core
 
 import io.github.kolod.circuitopedia.shared.colorcode.BandColor
-import io.github.kolod.circuitopedia.shared.colorcode.formatDecimal
-import io.github.kolod.circuitopedia.shared.colorcode.formatSi
+import io.github.kolod.circuitopedia.shared.siformat.formatDecimal
+import io.github.kolod.circuitopedia.shared.siformat.formatSi
 import java.math.BigDecimal
 import java.util.Locale
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resistor_combinations_title">Combinaisons de résistances</string>
+    <string name="resistor_combinations_description">Obtenir une valeur avec 1 à 3 résistances normalisées</string>
+
+    <string name="resistor_combinations_target_label">Résistance cible</string>
+    <string name="resistor_combinations_target_hint">p. ex. 4.7k, 4k7 ou 4700</string>
+    <string name="resistor_combinations_target_error">Saisissez une valeur de 0,1Ω à 1GΩ, p. ex. 4,7k</string>
+    <string name="resistor_combinations_series_label">Série E</string>
+    <string name="resistor_combinations_empty">Saisissez une valeur cible pour voir les combinaisons</string>
+    <string name="resistor_combinations_kind_series2">2 en série</string>
+    <string name="resistor_combinations_kind_series3">3 en série</string>
+    <string name="resistor_combinations_kind_parallel2">2 en parallèle</string>
+    <string name="resistor_combinations_kind_parallel3">3 en parallèle</string>
+    <string name="resistor_combinations_kind_parallel_series">2 en parallèle + 1</string>
+    <string name="resistor_combinations_spoken_series">plus</string>
+    <string name="resistor_combinations_spoken_parallel">en parallèle avec</string>
+    <string name="resistor_combinations_spoken_deviation">écart %1$s pour cent</string>
+    <string name="resistor_combinations_spoken_ohm">ohm</string>
+    <string name="resistor_combinations_spoken_kilohm">kilohm</string>
+    <string name="resistor_combinations_spoken_megohm">mégohm</string>
+    <string name="resistor_combinations_spoken_gigohm">gigaohm</string>
+</resources>

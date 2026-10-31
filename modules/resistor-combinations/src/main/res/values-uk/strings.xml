@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="resistor_combinations_title">Комбінації резисторів</string>
+    <string name="resistor_combinations_description">Номінал з 1–3 стандартних резисторів</string>
+
+    <string name="resistor_combinations_target_label">Цільовий опір</string>
+    <string name="resistor_combinations_target_hint">напр. 4.7k, 4k7 або 4700</string>
+    <string name="resistor_combinations_target_error">Введіть значення від 0,1Ω до 1GΩ, напр. 4,7k</string>
+    <string name="resistor_combinations_series_label">Ряд E</string>
+    <string name="resistor_combinations_empty">Введіть цільовий номінал, щоб побачити комбінації</string>
+    <string name="resistor_combinations_kind_series2">2 послідовно</string>
+    <string name="resistor_combinations_kind_series3">3 послідовно</string>
+    <string name="resistor_combinations_kind_parallel2">2 паралельно</string>
+    <string name="resistor_combinations_kind_parallel3">3 паралельно</string>
+    <string name="resistor_combinations_kind_parallel_series">2 паралельно + 1</string>
+    <string name="resistor_combinations_spoken_series">плюс</string>
+    <string name="resistor_combinations_spoken_parallel">паралельно з</string>
+    <string name="resistor_combinations_spoken_deviation">відхилення %1$s відсотка</string>
+    <string name="resistor_combinations_spoken_ohm">ом</string>
+    <string name="resistor_combinations_spoken_kilohm">кілоом</string>
+    <string name="resistor_combinations_spoken_megohm">мегаом</string>
+    <string name="resistor_combinations_spoken_gigohm">гігаом</string>
+</resources>

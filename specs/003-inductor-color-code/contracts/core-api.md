@@ -16,6 +16,9 @@ fun contrastRatio(argb1: Int, argb2: Int): Double
 fun lighten(argb: Int, amount: Double): Int
 fun darken(argb: Int, amount: Double): Int
 
+// formatDecimal and formatSi moved to :shared:si-format (package ...shared.siformat) in spec 004;
+// :shared:color-code exposes that library through api(...).
+
 /** Plain digits, no trailing zeros, exponent or grouping, locale decimal separator. */
 fun formatDecimal(value: BigDecimal, locale: Locale): String
 
