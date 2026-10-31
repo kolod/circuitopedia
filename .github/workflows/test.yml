@@ -1,10 +1,16 @@
 name: Test
 
+# Pushes and pull requests that change only spec documents don't run the build; any other changed
+# file in the same push or pull request still triggers it.
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "specs/**"
   pull_request:
     branches: [main]
+    paths-ignore:
+      - "specs/**"
 
 permissions:
   contents: read
