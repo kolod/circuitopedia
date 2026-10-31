@@ -1,22 +1,26 @@
 <!--
 Sync Impact Report
 ==================
-Version change: 1.0.0 → 1.0.1
-Bump rationale: PATCH — product name corrected from "Voltpedia" to "Circuitopedia" to match the
-repository, Gradle project and release artifacts. No principle or rule changed.
+Version change: 1.0.1 → 1.1.0
+Bump rationale: MINOR — new technical constraint: the app is portrait-only. Calculator tables
+with fixed headers leave too little vertical space in landscape on phones.
 
-Modified principles: none (wording only: title and preamble)
+Modified principles: none
+Modified sections: Technical Constraints (+ Orientation)
 Added sections: none
 Removed sections: none
 
 Templates:
-  ✅ .specify/templates/plan-template.md      — no product-name references; no change needed
-  ✅ .specify/templates/spec-template.md      — no product-name references; no change needed
-  ✅ .specify/templates/tasks-template.md     — no product-name references; no change needed
-  ✅ .specify/templates/checklist-template.md — no product-name references; no change needed
-  ⚠ README.md                                 — not present; create when the project is published
+  ✅ .specify/templates/plan-template.md      — no orientation references; no change needed
+  ✅ .specify/templates/spec-template.md      — no orientation references; no change needed
+  ✅ .specify/templates/tasks-template.md     — no orientation references; no change needed
+  ✅ .specify/templates/checklist-template.md — no orientation references; no change needed
 
-Follow-up TODOs: none (the 1.0.0 naming TODO is resolved by this amendment)
+Dependent specs:
+  ✅ specs/001-app-shell-navigation — FR-018 and quickstart updated (landscape removed)
+  ✅ specs/002-resistor-color-code  — landscape requirements removed
+
+Follow-up TODOs: none
 -->
 
 # Circuitopedia Constitution
@@ -122,6 +126,9 @@ installable on de-Googled devices.
 ## Technical Constraints
 
 - Language: Kotlin. Target platform: Android.
+- Orientation: portrait only. The activity is locked to portrait, and features MUST NOT design or
+  test for landscape. (On large screens Android 16+ may ignore the lock for apps targeting
+  API 36+; layouts must stay usable there, but need no landscape-specific design.)
 - Architecture: a pure-Kotlin core (calculations, models, units, reference data) with no Android
   dependencies, plus a thin Android UI/app-shell layer.
 - Permissions: none by default; any permission MUST be justified in the spec of the feature that
@@ -159,4 +166,4 @@ installable on de-Googled devices.
 - Compliance is reviewed at each Constitution Check during planning and again before every merge
   into `main`.
 
-**Version**: 1.0.1 | **Ratified**: 2026-10-31 | **Last Amended**: 2026-10-31
+**Version**: 1.1.0 | **Ratified**: 2026-10-31 | **Last Amended**: 2026-10-31

@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.click
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -15,12 +16,14 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTouchInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.kolod.circuitopedia.module.AppModule
 import io.github.kolod.circuitopedia.samples.manySampleCalculations
 import io.github.kolod.circuitopedia.samples.sampleModules
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -38,14 +41,23 @@ class NavigationTest {
 
     private fun entry(id: String) = rule.onNodeWithTag(ENTRY_TAG_PREFIX + id)
 
-    private fun pressBack() = rule.runOnUiThread { rule.activity.onBackPressedDispatcher.onBackPressed() }
+    /** A Calculations entry, scrolled into view first (with 40 bulk samples most entries start off screen). */
+    private fun calculation(id: String) =
+        rule.onNodeWithTag("module-list-Calculations").performScrollToNode(hasTestTag(ENTRY_TAG_PREFIX + id)).let { entry(id) }
+
+    /** Waits for pending recomposition first, so a BackHandler added by the last action is registered. */
+    private fun pressBack() {
+        rule.waitForIdle()
+        rule.runOnUiThread { rule.activity.onBackPressedDispatcher.onBackPressed() }
+        rule.waitForIdle()
+    }
 
     private fun assertCatalogShown() = rule.onNodeWithTag("catalog-pager").assertIsDisplayed()
 
     @Test
     fun tappingAnEntryOpensItsScreenWithTitle() {
         launch()
-        entry("sample-ohm").performClick()
+        calculation("sample-ohm").performClick()
         rule.onNodeWithText("Ohm's law").assertIsDisplayed()
         rule.onNodeWithTag("content-sample-ohm").assertIsDisplayed()
     }
@@ -53,7 +65,7 @@ class NavigationTest {
     @Test
     fun systemBackReturnsToTheSameTab() {
         launch()
-        entry("sample-ohm").performClick()
+        calculation("sample-ohm").performClick()
         pressBack()
         assertCatalogShown()
         rule.onNodeWithText(rule.str(R.string.tab_calculations)).assertIsSelected()
@@ -82,7 +94,7 @@ class NavigationTest {
     @Test
     fun doubleTapOpensOneScreen() {
         launch()
-        entry("sample-ohm").performTouchInput { click(); click() }
+        calculation("sample-ohm").performTouchInput { click(); click() }
         assertEquals(1, rule.onAllNodesWithTag("content-sample-ohm").fetchSemanticsNodes().size)
         pressBack()
         assertCatalogShown()
@@ -92,7 +104,7 @@ class NavigationTest {
     fun openModuleSurvivesStateRestoration() {
         val tester = StateRestorationTester(rule)
         tester.setContent { CircuitopediaApp(modules) }
-        entry("sample-ohm").performClick()
+        calculation("sample-ohm").performClick()
         tester.emulateSavedInstanceStateRestore()
         rule.onNodeWithTag("content-sample-ohm").assertIsDisplayed()
     }
@@ -102,7 +114,7 @@ class NavigationTest {
         var current by mutableStateOf(modules)
         val tester = StateRestorationTester(rule)
         tester.setContent { CircuitopediaApp(current) }
-        entry("sample-ohm").performClick()
+        calculation("sample-ohm").performClick()
         // As after an update that removed the module: the saved id is no longer registered.
         current = modules.filterNot { it.id.value == "sample-ohm" }
         tester.emulateSavedInstanceStateRestore()
@@ -110,9 +122,14 @@ class NavigationTest {
     }
 
     @Test
-    fun backOnTheCatalogFinishesTheActivity() {
+    fun catalogLeavesSystemBackToTheActivity() {
+        // Since Android 12 back on a task's root activity moves the task to the background instead
+        // of finishing it, so the check is that the catalog registers no back handler of its own.
         launch()
-        pressBack()
-        assertTrue(rule.activity.isFinishing)
+        rule.waitForIdle()
+        assertFalse(rule.activity.onBackPressedDispatcher.hasEnabledCallbacks())
+        calculation("sample-ohm").performClick()
+        rule.waitForIdle()
+        assertTrue(rule.activity.onBackPressedDispatcher.hasEnabledCallbacks())
     }
 }
