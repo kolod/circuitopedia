@@ -45,21 +45,21 @@ emulator or device. The resistor's existing tests guard the refactor in Phase 2.
 
 **Purpose**: The shared libraries and the new module build, and the module shows up in the catalog.
 
-- [ ] T001 In `settings.gradle.kts`, auto-include every `shared/<name>` that has a `build.gradle.kts` as `:shared:<name>`, sorted, with a comment saying shared libraries are not app modules and are never auto-added to `:app` (research R4).
-- [ ] T002 [P] Create `shared/color-code/build.gradle.kts`: plugins `kotlin-jvm` and `java-test-fixtures`, JVM target 17 (as `modules/resistor-color-code/core/build.gradle.kts`), `testImplementation(libs.junit)`, `testFixturesImplementation(libs.junit)`.
-- [ ] T003 [P] Create `shared/color-code-ui/build.gradle.kts`: android-library + kotlin-compose, `namespace = "io.github.kolod.circuitopedia.shared.colorcode.ui"`, compileSdk 37, minSdk 26, compileOptions 17, compose on, `resourcePrefix = "color_code_"`, the same lint errors as the modules; `api(project(":shared:color-code"))`, `implementation` Compose BOM, foundation, material3, ui and `libs.androidsvg`.
-- [ ] T004 [P] Create `modules/inductor-color-code/core/build.gradle.kts` (kotlin-jvm, JVM 17), with `api(project(":shared:color-code"))`, `testImplementation(libs.junit)` and `testImplementation(testFixtures(project(":shared:color-code")))`.
-- [ ] T005 [P] Create `modules/inductor-color-code/build.gradle.kts` like the resistor module's: namespace `io.github.kolod.circuitopedia.modules.inductorcolorcode`, `resourcePrefix = "inductor_color_code_"`. Dependencies are `:module-api`, `:modules:inductor-color-code:core`, `:shared:color-code-ui`, Compose, the test and androidTest dependencies of the resistor module, and `testImplementation(testFixtures(project(":shared:color-code")))`.
-- [ ] T006 [P] Create `RES/drawable/inductor_color_code_icon.xml`, a 24dp single-color vector of a coil (loops between two leads, white fill, no tint attribute).
-- [ ] T007 [P] Create `RES/values*/strings.xml` with `inductor_color_code_title` and `inductor_color_code_description`:
+- [X] T001 In `settings.gradle.kts`, auto-include every `shared/<name>` that has a `build.gradle.kts` as `:shared:<name>`, sorted, with a comment saying shared libraries are not app modules and are never auto-added to `:app` (research R4).
+- [X] T002 [P] Create `shared/color-code/build.gradle.kts`: plugins `kotlin-jvm` and `java-test-fixtures`, JVM target 17 (as `modules/resistor-color-code/core/build.gradle.kts`), `testImplementation(libs.junit)`, `testFixturesImplementation(libs.junit)`.
+- [X] T003 [P] Create `shared/color-code-ui/build.gradle.kts`: android-library + kotlin-compose, `namespace = "io.github.kolod.circuitopedia.shared.colorcode.ui"`, compileSdk 37, minSdk 26, compileOptions 17, compose on, `resourcePrefix = "color_code_"`, the same lint errors as the modules; `api(project(":shared:color-code"))`, `implementation` Compose BOM, foundation, material3, ui and `libs.androidsvg`.
+- [X] T004 [P] Create `modules/inductor-color-code/core/build.gradle.kts` (kotlin-jvm, JVM 17), with `api(project(":shared:color-code"))` and `testImplementation(libs.junit)`.
+- [X] T005 [P] Create `modules/inductor-color-code/build.gradle.kts` like the resistor module's: namespace `io.github.kolod.circuitopedia.modules.inductorcolorcode`, `resourcePrefix = "inductor_color_code_"`. Dependencies are `:module-api`, `:modules:inductor-color-code:core`, `:shared:color-code-ui`, Compose, the test and androidTest dependencies of the resistor module, and `testImplementation(testFixtures(project(":shared:color-code")))`.
+- [X] T006 [P] Create `RES/drawable/inductor_color_code_icon.xml`, a 24dp single-color vector of a coil (loops between two leads, white fill, no tint attribute).
+- [X] T007 [P] Create `RES/values*/strings.xml` with `inductor_color_code_title` and `inductor_color_code_description`:
   - en: Inductor color code / Inductance from color bands;
   - de: Induktivitäts-Farbcode / Induktivität aus Farbringen;
   - fr: Code couleur des inductances / Inductance à partir des anneaux de couleur;
   - es: Código de colores de inductores / Inductancia a partir de bandas de color;
   - ja: インダクタのカラーコード / 色帯からインダクタンスを求める;
   - uk: Кольорове маркування котушок індуктивності / Індуктивність за кольоровими смугами.
-- [ ] T008 Create `UI/InductorColorCodeModule.kt` with `val inductorColorCodeModule = AppModule(ModuleId("inductor-color-code"), Category.Calculations, R.string.inductor_color_code_title, R.string.inductor_color_code_description, R.drawable.inductor_color_code_icon) { InductorScreen() }`, and a temporary empty `@Composable fun InductorScreen() {}` in `UI/InductorScreen.kt`.
-- [ ] T009 Register `inductorColorCodeModule,` in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
+- [X] T008 Create `UI/InductorColorCodeModule.kt` with `val inductorColorCodeModule = AppModule(ModuleId("inductor-color-code"), Category.Calculations, R.string.inductor_color_code_title, R.string.inductor_color_code_description, R.drawable.inductor_color_code_icon) { InductorScreen() }`, and a temporary empty `@Composable fun InductorScreen() {}` in `UI/InductorScreen.kt`.
+- [X] T009 Register `inductorColorCodeModule,` in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
 
 **Checkpoint**: `./gradlew test lint :app:assembleDebug` passes. The catalog lists both calculators.
 

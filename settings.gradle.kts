@@ -31,3 +31,10 @@ file("modules").listFiles()
         include(":modules:${module.name}")
         if (module.resolve("core/build.gradle.kts").isFile) include(":modules:${module.name}:core")
     }
+
+// Libraries shared by several modules live in shared/<name> and are included as :shared:<name>.
+// They are not app modules: the app never depends on them automatically, modules declare what they use.
+file("shared").listFiles()
+    ?.filter { it.isDirectory && it.resolve("build.gradle.kts").isFile }
+    ?.sortedBy { it.name }
+    ?.forEach { include(":shared:${it.name}") }

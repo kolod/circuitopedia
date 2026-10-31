@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inductor_color_code_title">Inductor color code</string>
+    <string name="inductor_color_code_description">Inductance from color bands</string>
+</resources>
