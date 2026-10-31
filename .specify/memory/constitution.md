@@ -1,45 +1,27 @@
 <!--
 Sync Impact Report
 ==================
-Version change: (template, unversioned) → 1.0.0
-Bump rationale: initial ratification — all placeholders replaced with concrete principles.
+Version change: 1.0.0 → 1.0.1
+Bump rationale: PATCH — product name corrected from "Voltpedia" to "Circuitopedia" to match the
+repository, Gradle project and release artifacts. No principle or rule changed.
 
-Principles defined (template slot → new title):
-  - [PRINCIPLE_1_NAME] → I. Free, Ad-Free, Private (NON-NEGOTIABLE)
-  - [PRINCIPLE_2_NAME] → II. Correctness of Calculations (NON-NEGOTIABLE)
-  - [PRINCIPLE_3_NAME] → III. Simplicity
-  - [PRINCIPLE_4_NAME] → IV. Testability
-  - [PRINCIPLE_5_NAME] → V. Localization
-  - (added)            → VI. Version Control
-  - (added)            → VII. Distribution
-
-Sections:
-  - [SECTION_2_NAME] → Technical Constraints
-  - [SECTION_3_NAME] → Development Workflow & Quality Gates
-  - Governance       → filled
-
+Modified principles: none (wording only: title and preamble)
+Added sections: none
 Removed sections: none
 
 Templates:
-  ✅ .specify/templates/plan-template.md   — Constitution Check gates enumerated per principle
-  ✅ .specify/templates/spec-template.md   — added "Constitution Constraints" section
-                                             (sources, units/precision, dependencies, permissions,
-                                             localization)
-  ✅ .specify/templates/tasks-template.md  — tests mandatory for calculation logic (test-first);
-                                             localization + release-readiness tasks in Polish phase
-  ✅ .specify/templates/checklist-template.md — no principle references; no change needed
-  ✅ .specify/templates/commands/*.md      — directory not present; nothing to check
-  ⚠ README.md                              — not present; create when the project is published
+  ✅ .specify/templates/plan-template.md      — no product-name references; no change needed
+  ✅ .specify/templates/spec-template.md      — no product-name references; no change needed
+  ✅ .specify/templates/tasks-template.md     — no product-name references; no change needed
+  ✅ .specify/templates/checklist-template.md — no product-name references; no change needed
+  ⚠ README.md                                 — not present; create when the project is published
 
-Follow-up TODOs:
-  - Project directory and Gradle rootProject.name are still "circuitopedia"; the product name in
-    this constitution is "Voltpedia". Align naming (settings.gradle.kts, applicationId, app_name,
-    release artifact names) in a dedicated change.
+Follow-up TODOs: none (the 1.0.0 naming TODO is resolved by this amendment)
 -->
 
-# Voltpedia Constitution
+# Circuitopedia Constitution
 
-Voltpedia is a free, ad-free, open-source electronics and electrical engineering reference and
+Circuitopedia is a free, ad-free, open-source electronics and electrical engineering reference and
 calculator app for Android, written in Kotlin. It provides calculators (Ohm's law, resistor
 color/SMD codes, voltage dividers, LED resistors, RC/LC, 555 timer, wire gauge, voltage drop,
 power, unit conversion, etc.), reference tables, pinouts and formulas as an alternative to apps
@@ -177,4 +159,4 @@ installable on de-Googled devices.
 - Compliance is reviewed at each Constitution Check during planning and again before every merge
   into `main`.
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-31 | **Last Amended**: 2026-10-31
+**Version**: 1.0.1 | **Ratified**: 2026-10-31 | **Last Amended**: 2026-10-31
