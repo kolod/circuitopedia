@@ -85,19 +85,19 @@
 - **Decision**: The palette (sRGB) lives in `core` as `BandColor.argb`. Each cell's text color
   (black or white) is chosen at build time by the WCAG 2.x contrast ratio, and a JVM test
   asserts ≥ 4.5:1 for every color against both gradient extremes (base lightened by 15% and
-  darkened by 15%). Starting palette, to be tuned only if the test fails:
+  darkened by 15%). Final palette (Red, Blue, Violet and Gray were darkened from the first draft to pass the test):
 
   | Color  | Base     | Text  |
   |--------|----------|-------|
   | Black  | #212121  | white |
   | Brown  | #8B4A3C  | white |
-  | Red    | #D32020  | white |
+  | Red    | #C01818  | white |
   | Orange | #F2861E  | black |
   | Yellow | #F5E83A  | black |
   | Green  | #2EA83A  | black |
-  | Blue   | #1F5FC8  | white |
-  | Violet | #8E3FB8  | white |
-  | Gray   | #6E6E6E  | white |
+  | Blue   | #1A55B8  | white |
+  | Violet | #8236AA  | white |
+  | Gray   | #585858  | white |
   | White  | #F4F4F4  | black |
   | Gold   | #D4A62A  | black |
   | Silver | #BDBDBD  | black |
