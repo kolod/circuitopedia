@@ -29,6 +29,11 @@ minimum width).
 
 ## Behavior
 
+- As implemented:
+  - the five fields are stacked in one column;
+  - a computed field shows the number with its SI prefix ("19.41k"), because the suffix already shows the unit, and the text stays parseable;
+  - the schematic labels have a fixed size.
+
 - **Calculate**: enabled iff `canCalculate`. It fills the empty fields with `formatVolts` or
   `formatOhms` text and marks them computed.
 - **Editing an entered field**: clears every computed field (their text and origin become Empty)

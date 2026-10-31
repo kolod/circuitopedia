@@ -360,8 +360,26 @@ private class BuildSearcher(
             compactAt = maxOf(64, keys.size * 2)
         }
 
-        fun ranked(ranking: Comparator<DividerBuild>): List<DividerBuild> =
-            keys.indices.filter { keys[it] <= bound }
+        /**
+         * The best [BUILDS_PER_TIER] in exact order. Exact ranking is costly, and a ratio like ½ ties
+         * thousands of builds at 0% error, so candidates are first narrowed in Double by error and then
+         * total deviation (FR-010's first and third keys; the second is equal within a tier). Every
+         * candidate within the margins of the 5th one on both keys is kept for the exact step.
+         */
+        fun ranked(ranking: Comparator<DividerBuild>): List<DividerBuild> {
+            val within = keys.indices.filter { keys[it] <= bound }
+            val deviation = within.associateWith { abs(total(codes[it]) - t) / t }
+            val order = within.sortedWith(compareBy<Int> { keys[it] }.thenBy { deviation.getValue(it) })
+            val fifth = order.getOrNull(BUILDS_PER_TIER - 1)
+            val candidates = if (fifth == null) {
+                order
+            } else {
+                val keyEdge = keys[fifth] * (1 + RELATIVE_MARGIN) + ABSOLUTE_MARGIN
+                val tieEdge = keys[fifth] * (1 - RELATIVE_MARGIN) - ABSOLUTE_MARGIN
+                val deviationEdge = deviation.getValue(fifth) * (1 + RELATIVE_MARGIN) + ABSOLUTE_MARGIN
+                order.filter { keys[it] < tieEdge || (keys[it] <= keyEdge && deviation.getValue(it) <= deviationEdge) }
+            }
+            return candidates
                 .map { i ->
                     val (r1, n1) = arm(codes[i], 0, Quantity.R1)
                     val (r2, n2) = arm(codes[i], 3, Quantity.R2)
@@ -369,6 +387,21 @@ private class BuildSearcher(
                 }
                 .sortedWith(ranking)
                 .take(BUILDS_PER_TIER)
+        }
+    }
+
+    /** The Double total R1 + R2 of a candidate record. */
+    private fun total(code: IntArray): Double = armValue(code, 0, Quantity.R1) + armValue(code, 3, Quantity.R2)
+
+    private fun armValue(code: IntArray, offset: Int, entered: Quantity): Double {
+        val a = code[offset + 1]
+        val b = code[offset + 2]
+        return when (code[offset]) {
+            FIXED -> solved.values.getValue(entered).toDouble()
+            SINGLE -> v[a]
+            SERIES -> v[a] + v[b]
+            else -> 1 / (1 / v[a] + 1 / v[b])
+        }
     }
 
     private companion object {

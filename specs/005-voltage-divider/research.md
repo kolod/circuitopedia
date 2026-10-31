@@ -109,6 +109,12 @@ each B1 the best B2 is the one nearest to `q·B1` with `q = k/(1−k)`, clamped 
   parallel-pair bound then has to accept every b. A bug here dropped all parallel pairs, and the
   reference test caught it.
 - **Arm-list sort.** Arm lists are sorted in place, without boxing.
+- **Exact ties.** A ratio like ½ ties thousands of builds at 0% error, for example every pair of
+  equal arms, and ranking all of them exactly took about 1 s on the emulator. Candidates are now
+  narrowed in `Double` by error and then by total deviation, keeping everything within the 1e-9
+  margins of the 5th one, before the exact ranking.
+- **Measured in-process** on the API 36 emulator (debug build, 10 E192 targets, both arms
+  chosen): at most 334 ms, with the ½ case at 166 ms instead of 992 ms (SC-003: 1 s).
 
 **Ranking (FR-010)**: |error| (exact), then the resistor count, then |T − Rt| (exact), then the
 values in order. The best 5 per tier are merged and sorted.
