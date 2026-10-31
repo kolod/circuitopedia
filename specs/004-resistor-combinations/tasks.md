@@ -71,14 +71,14 @@ catalog.
 
 **Purpose**: Exact numbers and the cited E-series data that every story uses.
 
-- [ ] T008 [P] Write `CORE_TEST/RationalTest.kt` (test-first):
+- [X] T008 [P] Write `CORE_TEST/RationalTest.kt` (test-first):
   - reduction;
   - `+`;
   - `reciprocal`;
   - parallel of 10k and 10k equals 5k exactly;
   - `compareTo`, including the near-tie 1/3 against 0.3333333333;
   - `round(4)` HALF_UP (1234.5 → 1235 and 0.012345 → 0.01235).
-- [ ] T009 [P] Write `CORE_TEST/ESeriesTest.kt` (test-first):
+- [X] T009 [P] Write `CORE_TEST/ESeriesTest.kt` (test-first):
   - counts 3/6/12/24/48/96/192;
   - all base values of E3–E24 literally;
   - spot values of E48/E96/E192;
@@ -87,7 +87,7 @@ catalog.
   - E24 ⊄ E48 (150 missing);
   - E3 ⊂ … ⊂ E24 and E48 ⊂ E96 ⊂ E192;
   - `values()` from 1Ω to 10MΩ, ascending, with size 7·N+1.
-- [ ] T010 Create `CORE/Rational.kt` and `CORE/ESeries.kt`. `ESeries.kt` holds the R1 tables as literal integer lists, with the IEC 60063:2015 citation and the Wikipedia reproduction, plus the cached `values()`. T008 and T009 must pass.
+- [X] T010 Create `CORE/Rational.kt` and `CORE/ESeries.kt`. `ESeries.kt` holds the R1 tables as literal integer lists, with the IEC 60063:2015 citation and the Wikipedia reproduction, plus the cached `values()`. T008 and T009 must pass.
 
 **Checkpoint**: The data and arithmetic are verified.
 
