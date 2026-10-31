@@ -111,12 +111,12 @@ and the inductor's code table is in place.
 
 ### Inductor code table
 
-- [ ] T021 [P] Write `CORE_TEST/InductorCodeTableTest.kt` (test-first), checking every cell of the research R1 table:
+- [X] T021 [P] Write `CORE_TEST/InductorCodeTableTest.kt` (test-first), checking every cell of the research R1 table:
   - `digit` for Black … White, null for Gold and Silver;
   - `multiplierExponent` 0, 1, 2, 3 for Black … Orange, −1 for Gold, −2 for Silver, null otherwise;
   - `tolerance` 5 for Gold, 10 for Silver, null otherwise;
   - `isDecimalPoint` only for Gold.
-- [ ] T022 Create `CORE/Units.kt` (`Microhenries`, BigDecimal > 0) and `CORE/InductorCode.kt` with the four extensions and the Bourns citation comment (research R1, including the discrepancies), so that T021 passes.
+- [X] T022 Create `CORE/Units.kt` (`Microhenries`, BigDecimal > 0) and `CORE/InductorCode.kt` with the four extensions and the Bourns citation comment (research R1, including the discrepancies), so that T021 passes.
 
 **Checkpoint**: The resistor works on the shared libraries; the inductor table is verified.
 
