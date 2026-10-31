@@ -16,6 +16,13 @@ fun search(target: Rational, series: ESeries, allowed: Set<Kind>, checkCancelled
     return (allowed + Kind.Single).flatMap(searcher::best).sortedWith(rankingFor(target))
 }
 
+/** How many combinations [search] evaluates for these inputs; lets tests bound the work without timing. */
+internal fun searchEvaluations(target: Rational, series: ESeries, allowed: Set<Kind>): Long {
+    val searcher = Searcher(target, series.values()) {}
+    (allowed + Kind.Single).forEach { searcher.best(it) }
+    return searcher.evaluations
+}
+
 /**
  * Relative margin above the kind's current [PER_KIND]-th best Double key. It is far above the
  * Double rounding error (about 1e-15), so nothing that ranks in the exact top [PER_KIND] is dropped.
@@ -32,6 +39,10 @@ private class Searcher(
     private val v = DoubleArray(n) { values[it].toDouble() }
     private val g = DoubleArray(n) { 1 / v[it] }
     private val t = target.toDouble()
+
+    /** Number of combinations evaluated so far: a machine-independent measure of the search's work. */
+    var evaluations = 0L
+        private set
 
     /**
      * Two passes: a quick one that only tries the two values next to each ideal, which yields real
@@ -111,7 +122,10 @@ private class Searcher(
         while (i < n && collector.offer(key(resistance(i))) { indices(i) } && !nearestOnly) i++
     }
 
-    private fun key(resistance: Double) = kotlin.math.abs(resistance - t) / t
+    private fun key(resistance: Double): Double {
+        evaluations++
+        return kotlin.math.abs(resistance - t) / t
+    }
 
     /** The first index ≥ [from] whose value is ≥ [ideal], or n. */
     private fun lowerBound(from: Int, ideal: Double): Int {

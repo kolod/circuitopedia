@@ -87,7 +87,7 @@ duplicates (FR-006), every enumeration uses the canonical order a ≤ b ≤ c.
   UI passes the coroutine's `ensureActive`, so the search for an outdated input stops instead of
   competing with the new one while the user types.
 - **Budget**: a JVM benchmark test runs E192 with every kind allowed over 20 targets and fails if
-  the median exceeds 150 ms or any target exceeds 400 ms. Mid-range phones are about 3–5 times slower than a desktop JVM, which
+  any target evaluates 30 million combinations or more. The measured maximum is 8.7 M, with a median of 5 M. A wall-clock limit failed on the shared CI runner, which is slower and noisy, so timing is now only printed (desktop median about 40 ms). The evaluation count does not depend on the machine and still catches the O(n³) class of regression. Mid-range phones are about 3–5 times slower than a desktop JVM, which
   leaves SC-002 at 1 s with margin.
 - **Correctness (SC-003)**: a JVM test runs a slow reference search that enumerates every
   combination with exact rationals. It compares the reference with the fast search for all
