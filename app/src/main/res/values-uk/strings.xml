@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_calculations">Розрахунки</string>
+    <string name="tab_reference">Довідник</string>
+    <string name="empty_calculations">Калькуляторів поки немає.</string>
+    <string name="empty_reference">Довідкових сторінок поки немає.</string>
+    <string name="navigate_up">Угору</string>
+</resources>

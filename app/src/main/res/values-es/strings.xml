@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_calculations">Cálculos</string>
+    <string name="tab_reference">Referencia</string>
+    <string name="empty_calculations">Aún no hay calculadoras.</string>
+    <string name="empty_reference">Aún no hay páginas de referencia.</string>
+    <string name="navigate_up">Subir</string>
+</resources>

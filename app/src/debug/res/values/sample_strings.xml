@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Debug-only sample modules used by instrumented tests. Never shipped in release builds. -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="sample_zener_title">Zener diode</string>
+    <string name="sample_zener_description">Sample calculation module</string>
+    <string name="sample_ohm_title">Ohm\'s law</string>
+    <string name="sample_ohm_description">Sample calculation module</string>
+    <string name="sample_alpha_title">Attenuator</string>
+    <string name="sample_alpha_description">Sample calculation module</string>
+    <string name="sample_long_title">Long sample title that is meant to wrap onto a second line on phones</string>
+    <string name="sample_long_description">A long sample description that must be cut to a single line with an ellipsis</string>
+    <string name="sample_pinouts_title">Pinouts</string>
+    <string name="sample_pinouts_description">Sample reference module</string>
+    <string name="sample_many_title">Bulk sample</string>
+    <string name="sample_many_description">Sample used to fill long lists</string>
+</resources>

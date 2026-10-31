@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Circuitopedia</string>
+    <string name="tab_calculations">Calculations</string>
+    <string name="tab_reference">Reference</string>
+    <string name="empty_calculations">No calculators yet.</string>
+    <string name="empty_reference">No reference pages yet.</string>
+    <string name="navigate_up">Navigate up</string>
+</resources>
