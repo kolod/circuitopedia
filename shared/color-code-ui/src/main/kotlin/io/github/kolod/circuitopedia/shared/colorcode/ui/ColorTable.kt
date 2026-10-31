@@ -50,6 +50,8 @@ data class TableColumn(
      */
     val labels: Map<BandColor, String>,
     val selected: BandColor,
+    /** Meaning read by screen readers where the cell text alone is not speakable, e.g. "Decimal point" for ".". */
+    val spokenLabels: Map<BandColor, String> = emptyMap(),
 )
 
 /** Cyan ring as in the reference design; the dark hairline keeps it visible on light band colors. */
@@ -101,7 +103,7 @@ internal fun ColorTableBody(
                                 R.string.color_code_cell_description,
                                 column.bandName,
                                 colorName,
-                                label.replace("\n", ""),
+                                column.spokenLabels[color] ?: label.replace("\n", ""),
                             ),
                             selected = column.selected == color,
                             onClick = { onSelect(i, color) },

@@ -19,9 +19,10 @@ Same layout as the resistor screen (spec 002 `contracts/ui-contract.md`), built 
 
 ## Behavior
 
-- A cell is selectable iff `Selection.canSelect(column, color)`. Its text is
-  `roleOf(column).cellLabel(color)` for the *current* selection, except that Gold in Bands 1–2
-  always shows ".". Non-selectable cells are empty and hidden from screen readers.
+- A cell is selectable iff `Selection.canSelect(column, color)`. Its text is what the color would
+  mean once tapped: `with(column, color).roleOf(column).cellLabel(color)`. So Gold in Bands 1–2
+  shows ".", and the band holding the point still shows digits in its other cells.
+  Non-selectable cells are empty and hidden from screen readers.
 - A tap calls `Selection.with`; every band replaced by the rules updates in the same frame,
   including the third header ("Mult." ↔ "Band 3").
 - Screen-reader text of a cell: "<band name>, <color>, <meaning>", where the band name is

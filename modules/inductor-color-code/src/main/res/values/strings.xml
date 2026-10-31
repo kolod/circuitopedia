@@ -2,4 +2,5 @@
 <resources>
     <string name="inductor_color_code_title">Inductor color code</string>
     <string name="inductor_color_code_description">Inductance from color bands</string>
+    <string name="inductor_color_code_decimal_point">Decimal point</string>
 </resources>

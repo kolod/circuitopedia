@@ -149,18 +149,18 @@ shows "100µH ±5%". Red, Red, Gold, Gold shows "2.2µH ±5%".
 ### Implementation for User Story 1
 
 - [X] T026 [US1] Create `CORE/BandLayout.kt` (`BandRole` incl. `DecimalPoint`, `BandLayout` Three/Four), `CORE/Selection.kt` (`Selection`, `Reading`, `pointIndex`, `roleOf`, `with`, `canSelect`, `read`, `default`) and `CORE/Format.kt` (`Reading.format`, `BandRole.cellLabel` using `formatSi`), following data-model.md and contracts/core-api.md, so that T023–T025 pass.
-- [ ] T027 [P] [US1] Create `RES/raw/inductor_color_code_inductor.svg` following research R5:
+- [X] T027 [P] [US1] Create `RES/raw/inductor_color_code_inductor.svg` following research R5:
   - a molded choke in pale green with rounded ends and gray leads;
   - `band-1` … `band-4` as paths with `fill` attributes, band 4 near the right end;
   - a `viewBox`, no transforms.
 
   Add `modules/inductor-color-code/src/test/…/InductorSvgTest.kt`, which asserts `SvgContract.check(file, 4)` is empty.
-- [ ] T028 [US1] Create `UI/InductorState.kt`: the selected layout plus one `Selection` per layout, `select(layout, index, color)` via `with`, a `Saver` as in data-model.md, and `rememberInductorState()` defaulting to `Four`.
-- [ ] T029 [US1] Create `UI/InductorDrawing.kt` (`BandDrawing` with the inductor SVG; `shownBands` [1,2,3] or [1,2,3,4]). Replace the placeholder in `UI/InductorScreen.kt` with `ColorCodeScaffold`:
+- [X] T028 [US1] Create `UI/InductorState.kt`: the selected layout plus one `Selection` per layout, `select(layout, index, color)` via `with`, a `Saver` as in data-model.md, and `rememberInductorState()` defaulting to `Four`.
+- [X] T029 [US1] Create `UI/InductorDrawing.kt` (`BandDrawing` with the inductor SVG; `shownBands` [1,2,3] or [1,2,3,4]). Replace the placeholder in `UI/InductorScreen.kt` with `ColorCodeScaffold`:
   - `bandCounts` [3, 4], `tagPrefix = "icc"`;
   - each page's columns: header and band name from `roleOf`, `labels` = the colors with `canSelect`, text from `roleOf(i).cellLabel`, with Gold in Bands 1–2 always ".";
   - the value from `read().format(locale)`.
-- [ ] T030 [US1] Write `UI_TEST/InductorScreenTest.kt` part 1 (page-scoped lookups as in the resistor test):
+- [X] T030 [US1] Write `UI_TEST/InductorScreenTest.kt` part 1 (page-scoped lookups as in the resistor test):
   - the 4-band default "47µH ±10%";
   - Brown, Black, Brown, Gold → "100µH ±5%";
   - an invalid cell does nothing.
@@ -199,8 +199,8 @@ shows "100µH ±5%". Red, Red, Gold, Gold shows "2.2µH ±5%".
 ### Implementation for User Story 2
 
 - [X] T034 [US2] Complete `CORE/Selection.kt`: the `init` validity check, the point-aware `roleOf`, the replacement loop in `with`, and the three `read` cases, so that T031–T033 pass.
-- [ ] T035 [US2] In `UI/InductorScreen.kt`, the third header and band name follow `roleOf(2)`: "Band 3" in point mode, "Mult." otherwise. Every band replaced by the rules updates in the same frame (state from `Selection`).
-- [ ] T036 [US2] Extend `UI_TEST/InductorScreenTest.kt`:
+- [X] T035 [US2] In `UI/InductorScreen.kt`, the third header and band name follow `roleOf(2)`: "Band 3" in point mode, "Mult." otherwise. Every band replaced by the rules updates in the same frame (state from `Selection`).
+- [X] T036 [US2] Extend `UI_TEST/InductorScreenTest.kt`:
   - the 3-band default "47µH ±20%";
   - Yellow, Gold, Violet, Silver → "4.7µH ±10%" with header "Band 3";
   - tap Gold in Band 1 → "770nH ±10%";
@@ -218,9 +218,9 @@ shows "100µH ±5%". Red, Red, Gold, Gold shows "2.2µH ±5%".
 **Independent Test**: Ukrainian shows "4,7µH ±5%" and "3 смуги". TalkBack reads "Band 2, Gold,
 Decimal point, selected".
 
-- [ ] T037 [P] [US3] Add `inductor_color_code_decimal_point` to `RES/values*/strings.xml`: Decimal point / Dezimalpunkt / Virgule décimale / Punto decimal / 小数点 / Десяткова кома. Use it as the cell meaning in screen-reader descriptions of Gold in Bands 1–2.
-- [ ] T038 [US3] Extend `UI_TEST/InductorScreenTest.kt`: the cell semantics are a content description of "Band 2, Gold, Decimal point" plus the selected state.
-- [ ] T039 [US3] On the emulator, check:
+- [X] T037 [P] [US3] Add `inductor_color_code_decimal_point` to `RES/values*/strings.xml`: Decimal point / Dezimalpunkt / Virgule décimale / Punto decimal / 小数点 / Десяткова кома. Use it as the cell meaning in screen-reader descriptions of Gold in Bands 1–2.
+- [X] T038 [US3] Extend `UI_TEST/InductorScreenTest.kt`: the cell semantics are a content description of "Band 2, Gold, Decimal point" plus the selected state.
+- [X] T039 [US3] On the emulator, check:
   - Ukrainian: value, tabs, colors;
   - dark theme: outline visible on White and Black;
   - 200% font: no label cut off in the 4-band table;

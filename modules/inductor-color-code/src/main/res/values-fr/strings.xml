@@ -2,4 +2,5 @@
 <resources>
     <string name="inductor_color_code_title">Code couleur des inductances</string>
     <string name="inductor_color_code_description">Inductance à partir des anneaux de couleur</string>
+    <string name="inductor_color_code_decimal_point">Virgule décimale</string>
 </resources>

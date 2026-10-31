@@ -10,6 +10,7 @@ data class TableColumn(
     val bandName: String,                   // for screen readers, e.g. "Multiplier"
     val labels: Map<BandColor, String>,     // cell text (may contain one "\n"); missing = not selectable
     val selected: BandColor,
+    val spokenLabels: Map<BandColor, String> = emptyMap(),  // screen-reader meaning, e.g. "Decimal point"
 )
 
 /** One tab's page content (a plain class: it holds a lambda). */
