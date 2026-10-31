@@ -66,62 +66,80 @@ fun CombinationsScreen() {
         results = if (target == null) emptyList() else withContext(Dispatchers.Default) { search(target, series, allowed) }
     }
 
-    Column(Modifier.fillMaxSize()) {
-        Column(Modifier.padding(horizontal = 16.dp).padding(top = 8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedTextField(
-                value = text,
-                onValueChange = { text = it },
-                label = { Text(stringResource(R.string.resistor_combinations_target_label)) },
-                supportingText = {
-                    if (invalid) {
-                        Text(stringResource(R.string.resistor_combinations_target_error), Modifier.testTag("rcomb-error"))
-                    } else {
-                        Text(stringResource(R.string.resistor_combinations_target_hint))
-                    }
-                },
-                isError = invalid,
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii, autoCorrectEnabled = false),
-                modifier = Modifier.fillMaxWidth().testTag("rcomb-target"),
-            )
-            Text(stringResource(R.string.resistor_combinations_series_label), style = MaterialTheme.typography.labelLarge)
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                ESeries.entries.forEach { entry ->
-                    FilterChip(
-                        selected = entry == series,
-                        onClick = { seriesOrdinal = entry.ordinal },
-                        label = { Text(entry.name) },
-                        modifier = Modifier.testTag("rcomb-series-${entry.name}"),
-                    )
-                }
-            }
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                SELECTABLE_KINDS.forEach { kind ->
-                    FilterChip(
-                        selected = kind in allowed,
-                        onClick = { allowed = if (kind in allowed) allowed - kind else allowed + kind },
-                        label = { Text(kindLabel(kind)) },
-                        modifier = Modifier.testTag("rcomb-kind-${kind.name}"),
-                    )
-                }
-            }
+    // One scrolling list: the controls are its first item, so at large font sizes they scroll away
+    // instead of leaving only a strip of the screen for the results.
+    LazyColumn(Modifier.fillMaxSize().testTag("rcomb-list")) {
+        item(key = "controls") {
+            Controls(text, { text = it }, invalid, series, { seriesOrdinal = it.ordinal }, allowed, { allowed = it })
+            HorizontalDivider()
         }
-        HorizontalDivider()
         if (target == null) {
             if (!invalid) {
-                Text(
-                    stringResource(R.string.resistor_combinations_empty),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(16.dp).testTag("rcomb-empty"),
-                )
+                item(key = "empty") {
+                    Text(
+                        stringResource(R.string.resistor_combinations_empty),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(16.dp).testTag("rcomb-empty"),
+                    )
+                }
             }
         } else {
-            LazyColumn(Modifier.weight(1f).testTag("rcomb-list")) {
-                itemsIndexed(results) { index, combination ->
-                    ResultRow(combination, target, locale, "rcomb-result-$index")
-                    HorizontalDivider()
+            itemsIndexed(results) { index, combination ->
+                ResultRow(combination, target, locale, "rcomb-result-$index")
+                HorizontalDivider()
+            }
+        }
+    }
+}
+
+/** Target field, series chips and kind chips (FR-002, FR-003, FR-005). */
+@Composable
+private fun Controls(
+    text: String,
+    onText: (String) -> Unit,
+    invalid: Boolean,
+    series: ESeries,
+    onSeries: (ESeries) -> Unit,
+    allowed: Set<Kind>,
+    onAllowed: (Set<Kind>) -> Unit,
+) {
+    Column(Modifier.padding(horizontal = 16.dp).padding(top = 8.dp, bottom = 8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        OutlinedTextField(
+            value = text,
+            onValueChange = onText,
+            label = { Text(stringResource(R.string.resistor_combinations_target_label)) },
+            supportingText = {
+                if (invalid) {
+                    Text(stringResource(R.string.resistor_combinations_target_error), Modifier.testTag("rcomb-error"))
+                } else {
+                    Text(stringResource(R.string.resistor_combinations_target_hint))
                 }
+            },
+            isError = invalid,
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii, autoCorrectEnabled = false),
+            modifier = Modifier.fillMaxWidth().testTag("rcomb-target"),
+        )
+        Text(stringResource(R.string.resistor_combinations_series_label), style = MaterialTheme.typography.labelLarge)
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            ESeries.entries.forEach { entry ->
+                FilterChip(
+                    selected = entry == series,
+                    onClick = { onSeries(entry) },
+                    label = { Text(entry.name) },
+                    modifier = Modifier.testTag("rcomb-series-${entry.name}"),
+                )
+            }
+        }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            SELECTABLE_KINDS.forEach { kind ->
+                FilterChip(
+                    selected = kind in allowed,
+                    onClick = { onAllowed(if (kind in allowed) allowed - kind else allowed + kind) },
+                    label = { Text(kindLabel(kind)) },
+                    modifier = Modifier.testTag("rcomb-kind-${kind.name}"),
+                )
             }
         }
     }

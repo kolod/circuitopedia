@@ -185,7 +185,7 @@ as one item with unit words.
 - [X] T026 [P] [US3] Add the spoken strings `spoken_series`, `spoken_parallel`, `spoken_deviation`, `spoken_ohm`, `spoken_kilohm`, `spoken_megohm` and `spoken_gigohm` to `RES/values*/strings.xml` in all six locales.
 - [X] T027 [US3] Create `UI/Spoken.kt`, which builds a row's description ("10 kilohm parallel 10 kilohm, 5 kilohm, deviation 0 percent") from those strings, using the locale decimal separator. Apply it with `clearAndSetSemantics` on each row in `UI/CombinationsScreen.kt`.
 - [X] T028 [US3] Extend `UI_TEST/CombinationsScreenTest.kt`: a row's content description equals the expected spoken text.
-- [ ] T029 [US3] On the emulator, check:
+- [X] T029 [US3] On the emulator, check:
   - Ukrainian ("1,234k", decimal commas, all labels);
   - dark theme;
   - 200% font, with nothing cut off in the field, chips or rows;

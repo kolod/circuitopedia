@@ -24,6 +24,8 @@
 - The series selector is a row of chips rather than the dropdown planned in research R7. Seven short
   labels wrap well even at 200% font, they match the kind chips, and every choice stays visible
   (changed during implementation).
+- The field and chips are the first item of the result list and scroll with it. At 200% font they
+  took about two thirds of the screen when fixed (changed after the on-device check, T029).
 
 - The list updates on every change of the text, the series or the chips (FR-010). The search
   runs off the main thread, and only the latest input's results are shown.
@@ -42,7 +44,7 @@
 | `target_label` | Target resistance |
 | `target_hint` | e.g. 4.7k, 4k7 or 4700 |
 | `target_error` | Enter a value from 0.1Ω to 1GΩ, e.g. 4.7k |
-| `series_label` | Series |
+| `series_label` | E-series |
 | `kind_series2` / `kind_series3` | 2 in series / 3 in series |
 | `kind_parallel2` / `kind_parallel3` | 2 in parallel / 3 in parallel |
 | `kind_parallel_series` | 2 in parallel + 1 |

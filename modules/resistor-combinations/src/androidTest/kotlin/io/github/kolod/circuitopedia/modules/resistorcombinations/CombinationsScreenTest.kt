@@ -50,7 +50,7 @@ class CombinationsScreenTest {
     fun emptyFieldShowsTheHintAndNoList() {
         launch()
         rule.onNodeWithTag("rcomb-empty").assertExists()
-        rule.onNodeWithTag("rcomb-list").assertDoesNotExist()
+        rule.onNodeWithTag("rcomb-result-0").assertDoesNotExist()
         rule.onNodeWithTag("rcomb-series-E24").assertIsSelected()
     }
 
@@ -70,7 +70,7 @@ class CombinationsScreenTest {
         launch()
         type("abc")
         rule.onNodeWithTag("rcomb-error", useUnmergedTree = true).assertExists()
-        rule.onNodeWithTag("rcomb-list").assertDoesNotExist()
+        rule.onNodeWithTag("rcomb-result-0").assertDoesNotExist()
         rule.onNodeWithTag("rcomb-empty").assertDoesNotExist()
     }
 
