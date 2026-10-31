@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_calculations">計算</string>
+    <string name="tab_reference">リファレンス</string>
+    <string name="empty_calculations">計算ツールはまだありません。</string>
+    <string name="empty_reference">リファレンスはまだありません。</string>
+    <string name="navigate_up">上へ移動</string>
+</resources>
