@@ -60,8 +60,8 @@ class DividerScreenTest {
         type(Quantity.U2, "3.3")
         type(Quantity.R1, "10k")
         calculate()
-        assertTrue(text(Quantity.R2), text(Quantity.R2).startsWith("19") && text(Quantity.R2).endsWith("41kΩ"))
-        assertTrue(text(Quantity.R), text(Quantity.R).startsWith("29") && text(Quantity.R).endsWith("41kΩ"))
+        assertTrue(text(Quantity.R2), text(Quantity.R2).startsWith("19") && text(Quantity.R2).endsWith("41k"))
+        assertTrue(text(Quantity.R), text(Quantity.R).startsWith("29") && text(Quantity.R).endsWith("41k"))
     }
 
     @Test
@@ -193,7 +193,7 @@ class DividerScreenTest {
         calculate()
         tester.emulateSavedInstanceStateRestore()
         assertEquals("12", text(Quantity.U1))
-        assertTrue(text(Quantity.U2), text(Quantity.U2).endsWith("837V"))
+        assertTrue(text(Quantity.U2), text(Quantity.U2).endsWith("837"))
         rule.onNodeWithTag("vd-list").performScrollToNode(hasTestTag("vd-calculate"))
     }
 }

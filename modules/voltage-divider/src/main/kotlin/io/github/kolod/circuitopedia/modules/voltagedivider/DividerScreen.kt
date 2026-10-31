@@ -69,8 +69,9 @@ private val FieldsSaver = listSaver<List<Field>, Any>(
 
 internal fun Quantity.parse(text: String): Rational? = if (isVoltage) parseVoltage(text) else parseResistance(text)
 
+/** A computed value as field text: "19.41k" or "3.837"; the field's suffix shows the unit, and the text stays parseable. */
 internal fun Quantity.format(value: Rational, locale: Locale): String =
-    if (isVoltage) formatVolts(value, locale) else value.formatOhms(locale)
+    if (isVoltage) formatVolts(value, locale).removeSuffix("V") else value.formatOhms(locale).removeSuffix("Ω")
 
 /** The divider: schematic, five fields, Calculate, then standard-resistor builds (spec 005). */
 @Composable

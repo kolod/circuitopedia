@@ -239,7 +239,7 @@ clear the results.
 - [X] T026 [US3] Extend `UI_TEST/DividerScreenTest.kt`:
   - the computed field's content description;
   - a build row's content description.
-- [ ] T027 [US3] On the emulator, check:
+- [X] T027 [US3] On the emulator, check:
   - Ukrainian ("3,3", "4,7k", decimal commas);
   - dark theme;
   - 200% font (everything reachable, nothing cut off);

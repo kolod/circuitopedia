@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
@@ -27,7 +28,8 @@ internal fun Schematic(modifier: Modifier = Modifier) {
     val measurer = rememberTextMeasurer()
     val color = MaterialTheme.colorScheme.onSurface
     val accent = MaterialTheme.colorScheme.primary
-    val labelStyle = MaterialTheme.typography.titleMedium.copy(color = color)
+    // A fixed size: the drawing has fixed geometry, and the fields below carry the text that scales.
+    val labelStyle = MaterialTheme.typography.titleMedium.copy(color = color, fontSize = with(LocalDensity.current) { 16.dp.toSp() })
     Canvas(modifier.fillMaxWidth().height(220.dp).clearAndSetSemantics {}) {
         val stroke = 2.dp.toPx()
         val x = size.width * 0.42f
