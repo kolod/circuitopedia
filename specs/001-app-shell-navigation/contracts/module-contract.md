@@ -78,7 +78,7 @@ Removing a module means deleting that line and the `modules/<name>/` directory.
 | Unique ids                             | `ModuleRegistryTest` (JVM unit test, `:app`)  | `./gradlew test` |
 | Well-formed id                         | `ModuleId` constructor + `ModuleIdTest`       | `./gradlew test` |
 | English text present                   | Lint `MissingDefaultResource` (error)         | `./gradlew lint` |
-| All six locales present                | Lint `MissingTranslation` (error)             | `./gradlew lint` |
+| All six locales present                | `LocaleCoverageTest` (JVM, `:app`) + Lint `MissingTranslation` (error) | `./gradlew test`, `./gradlew lint` |
 | No stray locales/keys                  | Lint `ExtraTranslation` (error)               | `./gradlew lint` |
 | Resource name prefix                   | `resourcePrefix` + Lint `ResourceName`        | `./gradlew lint` |
 | No module→module / module→app deps     | Code review against this contract. A build check can be added once two modules exist | — |

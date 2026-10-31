@@ -29,7 +29,8 @@ Expected: all green. This covers:
 - `ModuleIdTest`: valid and invalid ids.
 - `ModuleRegistryTest`: the registry ids are unique, and `duplicateIds()` names duplicates.
 - `CatalogOrderingTest`: filtering by category, locale collation (`uk`: Г < Ґ < Д; `de`: umlauts).
-- Lint: no missing default or translated strings for `en, de, fr, es, ja, uk`.
+- `LocaleCoverageTest`: every string of every project exists in `de, fr, es, ja, uk`.
+- Lint: no missing default or translated strings.
 
 ## 3. Instrumented UI tests (US1–US3, edge cases)
 
@@ -74,4 +75,6 @@ To check the contract by hand (do not commit this):
 4. `./gradlew :app:installDebug`. "Demo" appears in its declared tab and opens.
 5. Duplicate the registry line and run `./gradlew :app:testDebugUnitTest`. It fails and names
    `demo`.
-6. Delete a locale's string and run `./gradlew lint`. It fails with `MissingTranslation`.
+6. Delete one key from a locale and run `./gradlew lint`. It fails with `MissingTranslation`.
+   Delete a whole locale directory and run `./gradlew :app:testDebugUnitTest`.
+   `LocaleCoverageTest` fails and names the directory.

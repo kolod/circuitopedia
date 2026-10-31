@@ -56,6 +56,17 @@ android {
         // Also checks the resources of every :modules:* project.
         checkDependencies = true
     }
+
+    testOptions.unitTests.all { test ->
+        // LocaleCoverageTest scans the string resources of every project.
+        test.systemProperty("circuitopedia.rootDir", rootDir.absolutePath)
+        test.inputs.files(
+            fileTree(rootDir) {
+                include("**/src/main/res/values*/*.xml")
+                exclude("**/build/**")
+            },
+        ).withPathSensitivity(PathSensitivity.RELATIVE)
+    }
 }
 
 dependencies {

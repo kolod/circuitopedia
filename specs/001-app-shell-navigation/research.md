@@ -128,6 +128,11 @@ Each decision below resolves an open point from the plan's Technical Context.
   - *Missing English (default) text or missing locale*: Android Lint with
     `MissingDefaultResource`, `MissingTranslation` and `ExtraTranslation` raised to errors in every
     module. CI already runs `./gradlew lint`.
+  - *Missing locale directory* (found during implementation): Lint's `MissingTranslation` only
+    checks locales that a project already has. A module with no `values-ja` at all passes lint,
+    even with `checkDependencies`. `LocaleCoverageTest` (a JVM test in `app`) scans every
+    `src/main/res` in the repository and requires each translatable string of `values` in all five
+    other locales.
 - **Rationale**: The test and lint steps already exist in `.github/workflows/test.yml`, so
   enforcement costs nothing extra. Lint checks every locale, which also enforces the
   constitution's "all six locales" gate.
