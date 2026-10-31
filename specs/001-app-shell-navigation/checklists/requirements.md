@@ -34,5 +34,6 @@
 - "Android" appears only as the platform the constitution fixes; no toolkit, library or code
   structure is prescribed. The UI toolkit and navigation library are left to `/speckit-plan`.
 - Two potentially ambiguous points were resolved with documented defaults instead of
-  clarification markers (see Assumptions): the product name is "Circuitopedia", and the
-  release ships with an empty module list (sample modules only in tests).
+  clarification markers (see Assumptions): the product name is "Circuitopedia" (confirmed by
+  constitution v1.0.1), and the release ships with an empty module list (sample modules only in
+  tests).

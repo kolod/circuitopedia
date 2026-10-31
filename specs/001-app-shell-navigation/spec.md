@@ -257,9 +257,8 @@ same identifier and check that the problem is caught by an automated check befor
 
 ## Assumptions
 
-- The product name is "Circuitopedia", matching the repository and the Gradle project name. The
-  "Voltpedia" name in the constitution is treated as outdated. Aligning the constitution text is
-  a separate follow-up.
+- The product name is "Circuitopedia", as set in the constitution (v1.0.1) and matching the
+  repository and the Gradle project name.
 - The release app ships with no modules, so both tabs show the empty-state message. Real
   calculators and reference pages come in later specs, one module each.
 - Both categories use a single flat list. Subcategories, search, favorites and recently used
