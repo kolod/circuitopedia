@@ -26,13 +26,6 @@
     <string name="resistor_color_code_header_tolerance">Toler.</string>
     <string name="resistor_color_code_header_tcr">TK</string>
 
-    <string name="resistor_color_code_label_1st">1.</string>
-    <string name="resistor_color_code_label_2nd">2.</string>
-    <string name="resistor_color_code_label_3rd">3.</string>
-    <string name="resistor_color_code_label_mul">MUL</string>
-    <string name="resistor_color_code_label_tol">TOL</string>
-    <string name="resistor_color_code_label_tcr">TK</string>
-
     <string name="resistor_color_code_cell_description">%1$s, %2$s, %3$s</string>
     <string name="resistor_color_code_band_multiplier">Multiplikator</string>
     <string name="resistor_color_code_band_tolerance">Toleranz</string>

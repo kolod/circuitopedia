@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor
+import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandLayout
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.CELL_GRADIENT
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.Selection
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.TextOnColor
@@ -44,18 +45,33 @@ import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.lighten
 /** Cyan ring as in the reference design; the dark hairline keeps it visible on light band colors. */
 private val SelectionRing = Color(0xFF00E5FF)
 private val SelectionHairline = Color.Black.copy(alpha = 0.6f)
-private val CellGap = 2.dp
-private const val NAME_COLUMN_WEIGHT = 1.3f
+
+// Column geometry shared by the header, the body and the leader lines of ResistorDrawing.
+internal val CellGap = 2.dp
+internal val TableSidePadding = 4.dp
+internal const val NAME_COLUMN_WEIGHT = 1.3f
+
+/** Horizontal centers of the band columns in a table row [width] px wide with [gap] px between cells. */
+internal fun bandColumnCenters(width: Float, gap: Float, bandCount: Int): List<Float> {
+    val unit = (width - gap * bandCount) / (NAME_COLUMN_WEIGHT + bandCount)
+    val firstLeft = unit * NAME_COLUMN_WEIGHT + gap
+    return List(bandCount) { firstLeft + it * (unit + gap) + unit / 2 }
+}
+
+/** The header row: an empty corner over the color names, then one header per band. Stays fixed above the body. */
+@Composable
+fun ColorTableHeader(layout: BandLayout, modifier: Modifier = Modifier) {
+    TableRow(modifier) {
+        SurfaceCell(Modifier.weight(NAME_COLUMN_WEIGHT), "")
+        for (i in 0 until layout.bandCount) SurfaceCell(Modifier.weight(1f), layout.headerText(i))
+    }
+}
 
 /** One row per color, one column per band; tapping a valid cell selects it for that band. */
 @Composable
-fun ColorTable(selection: Selection, onSelect: (index: Int, color: BandColor) -> Unit, modifier: Modifier = Modifier) {
+fun ColorTableBody(selection: Selection, onSelect: (index: Int, color: BandColor) -> Unit, modifier: Modifier = Modifier) {
     val layout = selection.layout
     Column(modifier, verticalArrangement = Arrangement.spacedBy(CellGap)) {
-        TableRow {
-            SurfaceCell(Modifier.weight(NAME_COLUMN_WEIGHT), "")
-            for (i in 0 until layout.bandCount) SurfaceCell(Modifier.weight(1f), layout.headerText(i))
-        }
         for (color in BandColor.entries) {
             TableRow {
                 SurfaceCell(Modifier.weight(NAME_COLUMN_WEIGHT), stringResource(color.nameRes()))
@@ -63,7 +79,9 @@ fun ColorTable(selection: Selection, onSelect: (index: Int, color: BandColor) ->
                     if (layout.accepts(i, color)) {
                         BandCell(
                             color = color,
-                            label = layout.roles[i].cellLabel(color, LocalConfiguration.current.locales[0]),
+                            // "±250ppm/K" does not fit a narrow 6-band column on one line.
+                            label = layout.roles[i].cellLabel(color, LocalConfiguration.current.locales[0])
+                                .replace("ppm/K", "\nppm/K"),
                             description = stringResource(
                                 R.string.resistor_color_code_cell_description,
                                 layout.bandName(i),
@@ -90,9 +108,9 @@ fun ColorTable(selection: Selection, onSelect: (index: Int, color: BandColor) ->
 }
 
 @Composable
-private fun TableRow(content: @Composable RowScope.() -> Unit) {
+private fun TableRow(modifier: Modifier = Modifier, content: @Composable RowScope.() -> Unit) {
     Row(
-        Modifier.fillMaxWidth().height(IntrinsicSize.Min).heightIn(min = 48.dp),
+        modifier.fillMaxWidth().height(IntrinsicSize.Min).heightIn(min = 48.dp),
         horizontalArrangement = Arrangement.spacedBy(CellGap),
         content = content,
     )
@@ -149,7 +167,8 @@ private fun CellText(text: String, color: Color) {
     Text(
         text = text,
         color = color,
-        maxLines = 1,
+        maxLines = if ('\n' in text) 2 else 1,
+        lineHeight = MaterialTheme.typography.bodyLarge.fontSize,
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.bodyLarge,
         autoSize = TextAutoSize.StepBased(minFontSize = 9.sp, maxFontSize = MaterialTheme.typography.bodyLarge.fontSize),

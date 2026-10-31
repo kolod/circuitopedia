@@ -28,13 +28,6 @@
     <string name="resistor_color_code_header_tolerance">Допуск</string>
     <string name="resistor_color_code_header_tcr">ТКО</string>
 
-    <string name="resistor_color_code_label_1st">1-а</string>
-    <string name="resistor_color_code_label_2nd">2-а</string>
-    <string name="resistor_color_code_label_3rd">3-я</string>
-    <string name="resistor_color_code_label_mul">МНОЖ</string>
-    <string name="resistor_color_code_label_tol">ДОП</string>
-    <string name="resistor_color_code_label_tcr">ТКО</string>
-
     <string name="resistor_color_code_cell_description">%1$s, %2$s, %3$s</string>
     <string name="resistor_color_code_band_multiplier">Множник</string>
     <string name="resistor_color_code_band_tolerance">Допуск</string>

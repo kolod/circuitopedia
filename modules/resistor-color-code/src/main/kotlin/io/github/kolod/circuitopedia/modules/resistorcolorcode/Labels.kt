@@ -40,16 +40,3 @@ internal fun BandLayout.bandName(index: Int): String = when (roles[index]) {
     BandRole.Tolerance -> stringResource(R.string.resistor_color_code_band_tolerance)
     BandRole.TemperatureCoefficient -> stringResource(R.string.resistor_color_code_band_tcr)
 }
-
-/** Label above a band in the drawing: "1st", "2nd", "3rd", "MUL", "TOL", "TCR". */
-@StringRes
-internal fun BandLayout.drawingLabelRes(index: Int): Int = when (roles[index]) {
-    BandRole.Digit -> listOf(
-        R.string.resistor_color_code_label_1st,
-        R.string.resistor_color_code_label_2nd,
-        R.string.resistor_color_code_label_3rd,
-    )[index]
-    BandRole.Multiplier -> R.string.resistor_color_code_label_mul
-    BandRole.Tolerance -> R.string.resistor_color_code_label_tol
-    BandRole.TemperatureCoefficient -> R.string.resistor_color_code_label_tcr
-}
