@@ -274,7 +274,7 @@ dark theme and with large fonts (portrait-only, constitution 1.1.0).
 - [X] T039 [P] Search `modules/resistor-color-code/src/main` for hardcoded user-facing strings: `Text("` and `contentDescription = "`. There must be none, apart from unit symbols built in `core`.
 - [X] T040 [P] Check that `modules/resistor-color-code/core` has no `android` imports: `rg "^import android" modules/resistor-color-code/core` returns nothing.
 - [X] T041 Update `specs/002-resistor-color-code/research.md` R6 with the final palette, if T020 changed it.
-- [ ] T042 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green, and `LocaleCoverageTest` and `ModuleRegistryTest` must pass with the new module.
+- [X] T042 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green, and `LocaleCoverageTest` and `ModuleRegistryTest` must pass with the new module.
 - [X] T043 Run `./gradlew :modules:resistor-color-code:connectedDebugAndroidTest` on an emulator or device. All tests must pass.
 - [ ] T044 Do the manual checks in `specs/002-resistor-color-code/quickstart.md` §4: compare with the reference image, the values for each tab, Ukrainian, dark theme (outline visible on White and Black), 200% font and TalkBack.
 - [X] T046 Add AndroidSVG 1.4 to `gradle/libs.versions.toml` and the module's `build.gradle.kts`, and justify it in spec "New Dependencies", plan and research R10.
