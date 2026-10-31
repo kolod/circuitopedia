@@ -238,7 +238,7 @@ Decimal point, selected".
 - [X] T041 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. It must be green, with `LocaleCoverageTest` and `ModuleRegistryTest` passing.
 - [X] T042 Run `./gradlew connectedDebugAndroidTest` on an emulator: app 16, resistor 8 and inductor tests all pass.
 - [X] T043 Do the manual checks in `specs/003-inductor-color-code/quickstart.md` §4, including step 7, which checks that the resistor is unchanged.
-- [ ] T044 Push branch `003-inductor-color-code` and open a PR to `main`. The description cites the Bourns MIL/EIA sheets, summarizes the R1 discrepancies and describes the shared-library refactor. Merge after CI is green and T042/T043 are done.
+- [X] T044 Push branch `003-inductor-color-code` and open a PR to `main`. The description cites the Bourns MIL/EIA sheets, summarizes the R1 discrepancies and describes the shared-library refactor. Merge after CI is green and T042/T043 are done.
 
 ---
 
