@@ -42,8 +42,8 @@ class AppModule(
    - `titleRes` and `descriptionRes` in `res/values/strings.xml` (English), and in
      `values-de`, `values-fr`, `values-es`, `values-ja`, `values-uk`.
    - The description fits on one line on a phone in English (about 60 characters or fewer).
-   - `iconRes` is a 24dp vector drawable that uses `?attr/colorControlNormal` or a single tint
-     color so it works in both light and dark themes.
+   - `iconRes` is a 24dp single-color vector drawable. The shell tints it with the theme's
+     content color, so it works in both light and dark themes.
    - Resource names start with the module prefix (`<name_underscored>_`) to avoid merge
      collisions (enforced by `resourcePrefix` in the module's build file).
 5. **Screen**: `content` draws only the module's body. It MUST NOT draw its own top app bar or
