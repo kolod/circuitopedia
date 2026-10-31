@@ -7,7 +7,8 @@
 │ │ 1.234k                               │ │
 │ └──────────────────────────────────────┘ │
 │   e.g. 4.7k, 4k7 or 4700  (or error)     │  supporting text
-│ ┌ Series ──────────────────────── E24 ▾┐ │  ExposedDropdownMenuBox
+│ E-series                                 │  label
+│ [E3][E6][E12][E24][E48][E96][E192]       │  single-choice FilterChips in a FlowRow, E24 first
 │ [2 series][3 series][2 ∥][3 ∥][2 ∥ + 1]  │  FilterChips in a FlowRow, all on first
 ├──────────────────────────────────────────┤
 │ 1.2kΩ + 33Ω + 1Ω                         │  LazyColumn, one item per result
@@ -19,6 +20,10 @@
 ```
 
 ## Behavior
+
+- The series selector is a row of chips rather than the dropdown planned in research R7. Seven short
+  labels wrap well even at 200% font, they match the kind chips, and every choice stays visible
+  (changed during implementation).
 
 - The list updates on every change of the text, the series or the chips (FR-010). The search
   runs off the main thread, and only the latest input's results are shown.
@@ -48,5 +53,5 @@
 
 ## Test tags
 
-`rcomb-target`, `rcomb-series`, `rcomb-series-<E24>`, `rcomb-kind-<Kind>`, `rcomb-list`,
+`rcomb-target`, `rcomb-series-<E24>`, `rcomb-kind-<Kind>`, `rcomb-list`,
 `rcomb-result-<index>`, `rcomb-error`, `rcomb-empty`.

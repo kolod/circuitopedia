@@ -134,14 +134,14 @@ gives 4.7kΩ (0%) first. E12 5k gives an exact 2-resistor result before any exac
 
   T012, T013 and T015 must pass.
 - [X] T018 [US1] Create `CORE/Format.kt` (`connectionText`, `formatOhms`, `formatDeviation`) using `formatSi`/`formatDecimal`, so that T014 passes.
-- [ ] T019 [US1] Add the input and list strings to `RES/values*/strings.xml`: `target_label`, `target_hint`, `target_error`, `series_label` and `empty` (contracts/ui-contract.md), in all six locales.
-- [ ] T020 [US1] Implement `UI/CombinationsScreen.kt` per contracts/ui-contract.md:
+- [X] T019 [US1] Add the input and list strings to `RES/values*/strings.xml`: `target_label`, `target_hint`, `target_error`, `series_label` and `empty` (contracts/ui-contract.md), in all six locales.
+- [X] T020 [US1] Implement `UI/CombinationsScreen.kt` per contracts/ui-contract.md:
   - an `OutlinedTextField` (text keyboard) with the hint or error as supporting text;
   - the series `ExposedDropdownMenuBox` (E24 default);
   - a `LazyColumn` of result rows (connection text, resistance, signed deviation).
 
   The search runs through `snapshotFlow` → `collectLatest` → `withContext(Dispatchers.Default)`. Use `rememberSaveable` for the text and the series. Add the test tags.
-- [ ] T021 [US1] Write `UI_TEST/CombinationsScreenTest.kt` part 1:
+- [X] T021 [US1] Write `UI_TEST/CombinationsScreenTest.kt` part 1:
   - empty → the empty message;
   - "4.7k" in E12 → the first row is "4.7kΩ" and "0%";
   - "abc" → the error and no list;
@@ -161,13 +161,13 @@ gives 4.7kΩ (0%) first. E12 5k gives an exact 2-resistor result before any exac
 **Independent Test**: With only "2 in series" on, every row is a single resistor or a 2-resistor
 series connection.
 
-- [ ] T022 [P] [US2] Extend `CORE_TEST/SearchExamplesTest.kt` and `SearchReferenceTest.kt`:
+- [X] T022 [P] [US2] Extend `CORE_TEST/SearchExamplesTest.kt` and `SearchReferenceTest.kt`:
   - a forbidden kind never appears;
   - with no kinds allowed, only Single results;
   - the reference equality holds for 3 restricted kind sets.
-- [ ] T023 [US2] Make `search` honor `allowed`, always adding `Single`. T022 must pass.
-- [ ] T024 [US2] Add the chip strings `kind_series2`, `kind_series3`, `kind_parallel2`, `kind_parallel3` and `kind_parallel_series` to `RES/values*/strings.xml` in all six locales. Add a `FlowRow` of `FilterChip`s to `UI/CombinationsScreen.kt`, all on by default and saved with `rememberSaveable` as ordinals.
-- [ ] T025 [US2] Extend `UI_TEST/CombinationsScreenTest.kt`:
+- [X] T023 [US2] Make `search` honor `allowed`, always adding `Single`. T022 must pass.
+- [X] T024 [US2] Add the chip strings `kind_series2`, `kind_series3`, `kind_parallel2`, `kind_parallel3` and `kind_parallel_series` to `RES/values*/strings.xml` in all six locales. Add a `FlowRow` of `FilterChip`s to `UI/CombinationsScreen.kt`, all on by default and saved with `rememberSaveable` as ordinals.
+- [X] T025 [US2] Extend `UI_TEST/CombinationsScreenTest.kt`:
   - turning chips off removes those kinds from the list;
   - the chips survive state restoration.
 
@@ -182,9 +182,9 @@ series connection.
 **Independent Test**: In Ukrainian, "1,234k" works and shows decimal commas. TalkBack reads a row
 as one item with unit words.
 
-- [ ] T026 [P] [US3] Add the spoken strings `spoken_series`, `spoken_parallel`, `spoken_deviation`, `spoken_ohm`, `spoken_kilohm`, `spoken_megohm` and `spoken_gigohm` to `RES/values*/strings.xml` in all six locales.
-- [ ] T027 [US3] Create `UI/Spoken.kt`, which builds a row's description ("10 kilohm parallel 10 kilohm, 5 kilohm, deviation 0 percent") from those strings, using the locale decimal separator. Apply it with `clearAndSetSemantics` on each row in `UI/CombinationsScreen.kt`.
-- [ ] T028 [US3] Extend `UI_TEST/CombinationsScreenTest.kt`: a row's content description equals the expected spoken text.
+- [X] T026 [P] [US3] Add the spoken strings `spoken_series`, `spoken_parallel`, `spoken_deviation`, `spoken_ohm`, `spoken_kilohm`, `spoken_megohm` and `spoken_gigohm` to `RES/values*/strings.xml` in all six locales.
+- [X] T027 [US3] Create `UI/Spoken.kt`, which builds a row's description ("10 kilohm parallel 10 kilohm, 5 kilohm, deviation 0 percent") from those strings, using the locale decimal separator. Apply it with `clearAndSetSemantics` on each row in `UI/CombinationsScreen.kt`.
+- [X] T028 [US3] Extend `UI_TEST/CombinationsScreenTest.kt`: a row's content description equals the expected spoken text.
 - [ ] T029 [US3] On the emulator, check:
   - Ukrainian ("1,234k", decimal commas, all labels);
   - dark theme;

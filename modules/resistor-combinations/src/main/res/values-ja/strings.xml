@@ -2,4 +2,22 @@
 <resources>
     <string name="resistor_combinations_title">抵抗の組み合わせ</string>
     <string name="resistor_combinations_description">1～3本の標準抵抗で値を作る</string>
+
+    <string name="resistor_combinations_target_label">目標抵抗値</string>
+    <string name="resistor_combinations_target_hint">例: 4.7k、4k7、4700</string>
+    <string name="resistor_combinations_target_error">0.1Ω～1GΩの値を入力してください（例: 4.7k）</string>
+    <string name="resistor_combinations_series_label">E系列</string>
+    <string name="resistor_combinations_empty">目標値を入力すると組み合わせが表示されます</string>
+    <string name="resistor_combinations_kind_series2">2本直列</string>
+    <string name="resistor_combinations_kind_series3">3本直列</string>
+    <string name="resistor_combinations_kind_parallel2">2本並列</string>
+    <string name="resistor_combinations_kind_parallel3">3本並列</string>
+    <string name="resistor_combinations_kind_parallel_series">2本並列＋1本</string>
+    <string name="resistor_combinations_spoken_series">プラス</string>
+    <string name="resistor_combinations_spoken_parallel">並列</string>
+    <string name="resistor_combinations_spoken_deviation">偏差 %1$s パーセント</string>
+    <string name="resistor_combinations_spoken_ohm">オーム</string>
+    <string name="resistor_combinations_spoken_kilohm">キロオーム</string>
+    <string name="resistor_combinations_spoken_megohm">メガオーム</string>
+    <string name="resistor_combinations_spoken_gigohm">ギガオーム</string>
 </resources>
