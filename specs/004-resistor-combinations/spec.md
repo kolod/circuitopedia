@@ -42,8 +42,9 @@ deviation, and each line's resistance and deviation can be recomputed by hand fr
    first, for example 10kΩ ∥ 10kΩ = 5kΩ (0%). An exact two-resistor result ranks above any
    three-resistor result with the same deviation.
 3. **Given** the E24 series and the target 1.234kΩ, **When** the results appear, **Then** every
-   listed result's deviation is no worse than the one below it, and no single resistor or
-   combination left out of the list is closer to the target than the last one shown.
+   listed result's deviation is no worse than the one below it, each kind of connection appears
+   at most 5 times, and no combination left out of the list is closer to the target than the
+   worst listed result of its own kind.
 4. **Given** results are shown, **When** the user changes the target or the series, **Then** the
    list updates immediately, without a separate "calculate" action.
 5. **Given** a combination, **When** it differs from another one only in the order of the
@@ -154,8 +155,11 @@ reader reads each result as one item with its connection, values, resistance and
 - **FR-007**: Results MUST be sorted by the absolute value of the relative deviation
   `(R − target) / target`. Ties go to the combination with fewer resistors, then to the one with
   the smaller largest resistor value.
-- **FR-008**: The module MUST show the best 50 results. No combination outside the list may have
-  a smaller deviation than the last one in it.
+- **FR-008**: The module MUST show, for each considered kind of connection (single resistor
+  included), its 5 best results under the order of FR-007, merged into one list sorted by FR-007
+  (at most 30 results). Within each kind, no combination outside the list may come before the
+  last one of that kind in the list. This keeps simple combinations visible next to the more
+  precise three-resistor ones (decided 2026-10-31).
 - **FR-009**: Each result MUST show:
   - the connection, using the symbols "+" for series and "∥" for parallel, for example
     "4.7kΩ ∥ 10kΩ + 220Ω";
@@ -163,17 +167,13 @@ reader reads each result as one item with its connection, values, resistance and
   - the deviation in percent with sign and 3 significant digits, or "0%" when exact.
 - **FR-010**: The list MUST update immediately whenever the target, the series or the allowed
   connections change.
-- **FR-011**: [NEEDS CLARIFICATION: How should the list balance precision against the number of
-  resistors? (a) one list sorted only by deviation, which three-resistor results will usually
-  dominate; (b) the best result of each kind of connection, sorted by deviation; (c) one sorted
-  list in which each kind of connection keeps at most a few entries.]
 
 **State and accessibility**
 
-- **FR-012**: The target text, the series and the allowed connections MUST survive rotation and
+- **FR-011**: The target text, the series and the allowed connections MUST survive rotation and
   process recreation. After a cold start the defaults apply (empty target, E24, all connections
   allowed).
-- **FR-013**: Each result MUST be read by screen readers as one item containing the connection,
+- **FR-012**: Each result MUST be read by screen readers as one item containing the connection,
   the values, the resulting resistance and the deviation. Its unit symbols are spoken as words.
 
 ### Key Entities
@@ -240,8 +240,8 @@ reader reads each result as one item with its connection, values, resistance and
   module (type the value, read the top result).
 - **SC-002**: For any valid target and series up to E192 with all connections allowed, the list
   appears within 1 second on a mid-range phone, and typing stays responsive.
-- **SC-003**: For every tested target, the listed results are exactly the best ones under FR-007
-  and FR-008. This is checked automatically against a slow, obviously correct search over all
+- **SC-003**: For every tested target, the listed results are exactly the best 5 of each kind
+  under FR-007, merged as FR-008 says. This is checked automatically against a slow, obviously correct search over all
   combinations.
 - **SC-004**: Every shown resistance and deviation matches a hand calculation from the listed
   values, to the shown number of digits.

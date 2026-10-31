@@ -13,7 +13,7 @@
 
 ## Requirement Completeness
 
-- [ ] No [NEEDS CLARIFICATION] markers remain
+- [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Success criteria are technology-agnostic (no implementation details)
@@ -31,5 +31,6 @@
 
 ## Notes
 
-- One open question: how the list balances precision against the number of resistors (FR-011).
+- Clarified 2026-10-31 (option C): up to 5 best results per kind of connection, merged into one
+  list sorted by deviation (FR-008).
 - E-series values and the resistor code notation are cited; the plan must verify them (Principle II).
