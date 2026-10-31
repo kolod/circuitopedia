@@ -36,11 +36,11 @@ restore) is covered by Compose UI instrumented tests. Those need an emulator or 
 
 **Purpose**: The Gradle projects build. The app installs and opens an empty screen.
 
-- [ ] T001 Extend `gradle/libs.versions.toml`. Add plugin alias `android-library` (`com.android.library`, `version.ref = "agp"`). Add libraries `androidx-compose-foundation` (`androidx.compose.foundation:foundation`, BOM-managed), `androidx-compose-ui-test-junit4` and `androidx-compose-ui-test-manifest` (BOM-managed), `androidx-test-ext-junit` and `androidx-test-runner`, each with a version entry set to the latest stable release that is at least two weeks old.
-- [ ] T002 Add `alias(libs.plugins.android.library) apply false` to the root `build.gradle.kts`. Do not add `kotlin-android`, because AGP 9 has built-in Kotlin (research R2).
-- [ ] T003 Update `settings.gradle.kts`. Add `include(":module-api")`, then auto-include every direct subdirectory of `modules/` that contains a `build.gradle.kts` as `:modules:<dirName>` (research R6). Keep `include(":app")`.
-- [ ] T004 [P] Create `module-api/build.gradle.kts`. Apply `com.android.library` and `kotlin.plugin.compose`. Set `namespace = "io.github.kolod.circuitopedia.module"`, `compileSdk = 37`, `minSdk = 26`, `buildFeatures { compose = true }`. Dependencies: `api(platform(compose BOM))`, `api(androidx-compose-ui)` (it brings `androidx.annotation` and the Compose runtime), `testImplementation(junit)`.
-- [ ] T005 Create `app/build.gradle.kts`:
+- [X] T001 Extend `gradle/libs.versions.toml`. Add plugin alias `android-library` (`com.android.library`, `version.ref = "agp"`). Add libraries `androidx-compose-foundation` (`androidx.compose.foundation:foundation`, BOM-managed), `androidx-compose-ui-test-junit4` and `androidx-compose-ui-test-manifest` (BOM-managed), `androidx-test-ext-junit` and `androidx-test-runner`, each with a version entry set to the latest stable release that is at least two weeks old.
+- [X] T002 Add `alias(libs.plugins.android.library) apply false` to the root `build.gradle.kts`. Do not add `kotlin-android`, because AGP 9 has built-in Kotlin (research R2).
+- [X] T003 Update `settings.gradle.kts`. Add `include(":module-api")`, then auto-include every direct subdirectory of `modules/` that contains a `build.gradle.kts` as `:modules:<dirName>` (research R6). Keep `include(":app")`.
+- [X] T004 [P] Create `module-api/build.gradle.kts`. Apply `com.android.library` and `kotlin.plugin.compose`. Set `namespace = "io.github.kolod.circuitopedia.module"`, `compileSdk = 37`, `minSdk = 26`, `buildFeatures { compose = true }`. Dependencies: `api(platform(compose BOM))`, `api(androidx-compose-ui)` (it brings `androidx.annotation` and the Compose runtime), `testImplementation(junit)`.
+- [X] T005 Create `app/build.gradle.kts`:
   - Plugins: `com.android.application` and `kotlin.plugin.compose`.
   - `namespace`/`applicationId = "io.github.kolod.circuitopedia"`, `compileSdk = 37`, `minSdk = 26`, `targetSdk = 37`.
   - `versionCode = providers.gradleProperty("appVersionCode")` (default `1`) and `versionName = providers.gradleProperty("appVersionName")` (default `"0.1.0-dev"`).
@@ -48,11 +48,11 @@ restore) is covered by Compose UI instrumented tests. Those need an emulator or 
   - Release signing config created only when `app/keystore.properties` exists, reading `storeFile`, `storePassword`, `keyAlias` and `keyPassword`, the exact keys written by `.github/workflows/release.yml`.
   - Release: `isMinifyEnabled = true`, `isShrinkResources = true` with `proguard-android-optimize.txt` and `proguard-rules.pro`. `buildFeatures { compose = true }`.
   - Dependencies: `implementation(project(":module-api"))`. Also every `:modules:*` project from `rootProject.childProjects["modules"]?.childProjects` (or from the same `modules/*` scan as settings) as `implementation`. Plus core-ktx, activity-compose, lifecycle-runtime-compose, Compose BOM, ui, ui-graphics, foundation, material3, ui-tooling-preview, `debugImplementation(ui-tooling, ui-test-manifest)`, `testImplementation(junit)`, `androidTestImplementation(platform(BOM), ui-test-junit4, androidx-test-ext-junit, androidx-test-runner)`.
-- [ ] T006 [P] Create an empty `app/proguard-rules.pro` with a header comment. No rules are needed, because nothing uses reflection.
-- [ ] T007 [P] Create `modules/README.md`. It explains that each subdirectory is one calculator or reference module, is auto-included by `settings.gradle.kts`, and must follow `specs/001-app-shell-navigation/contracts/module-contract.md`. Include a minimal sample `build.gradle.kts` for a module (android-library + compose, `implementation(project(":module-api"))`, `resourcePrefix = "<name>_"`). The file also keeps `modules/` in git.
-- [ ] T008 [P] Create launcher icon resources: `app/src/main/res/drawable/ic_launcher_foreground.xml` (a simple vector, for example a resistor or zigzag glyph inside the 66dp safe zone), `app/src/main/res/values/ic_launcher_background.xml` (color), `app/src/main/res/mipmap-anydpi/ic_launcher.xml` and `ic_launcher_round.xml` (adaptive icons with a `<monochrome>` layer).
-- [ ] T009 Create `app/src/main/res/values/strings.xml` with `app_name` = `Circuitopedia`. Add the same `app_name` to `app/src/main/res/values-de/strings.xml`, `values-fr`, `values-es`, `values-ja` and `values-uk` (it is a proper name, not translated).
-- [ ] T010 Create `app/src/main/AndroidManifest.xml`. Declare no `<uses-permission>`. The `<application>` uses `android:label="@string/app_name"`, the `@mipmap/ic_launcher` and `ic_launcher_round` icons, `android:theme="@android:style/Theme.Material.Light.NoActionBar"` and `android:supportsRtl="true"`. Declare `MainActivity` as `exported` with the MAIN/LAUNCHER intent filter.
+- [X] T006 [P] Create an empty `app/proguard-rules.pro` with a header comment. No rules are needed, because nothing uses reflection.
+- [X] T007 [P] Create `modules/README.md`. It explains that each subdirectory is one calculator or reference module, is auto-included by `settings.gradle.kts`, and must follow `specs/001-app-shell-navigation/contracts/module-contract.md`. Include a minimal sample `build.gradle.kts` for a module (android-library + compose, `implementation(project(":module-api"))`, `resourcePrefix = "<name>_"`). The file also keeps `modules/` in git.
+- [X] T008 [P] Create launcher icon resources: `app/src/main/res/drawable/ic_launcher_foreground.xml` (a simple vector, for example a resistor or zigzag glyph inside the 66dp safe zone), `app/src/main/res/values/ic_launcher_background.xml` (color), `app/src/main/res/mipmap-anydpi/ic_launcher.xml` and `ic_launcher_round.xml` (adaptive icons with a `<monochrome>` layer).
+- [X] T009 Create `app/src/main/res/values/strings.xml` with `app_name` = `Circuitopedia`. Add the same `app_name` to `app/src/main/res/values-de/strings.xml`, `values-fr`, `values-es`, `values-ja` and `values-uk` (it is a proper name, not translated).
+- [X] T010 Create `app/src/main/AndroidManifest.xml`. Declare no `<uses-permission>`. The `<application>` uses `android:label="@string/app_name"`, the `@mipmap/ic_launcher` and `ic_launcher_round` icons, `android:theme="@android:style/Theme.Material.Light.NoActionBar"` and `android:supportsRtl="true"`. Declare `MainActivity` as `exported` with the MAIN/LAUNCHER intent filter.
 
 **Checkpoint**: `./gradlew :app:assembleDebug` succeeds once Phase 2 adds `MainActivity`.
 
@@ -65,20 +65,20 @@ that every story depends on.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T011 [P] Write `module-api/src/test/kotlin/io/github/kolod/circuitopedia/module/ModuleIdTest.kt` first. It accepts `a`, `ohms-law`, `555-timer`, and a 64-char id. It rejects `""`, `Ohms`, `ohms_law`, `-x`, `x-`, `a--b`, `ом`, and a 65-char id, each with `IllegalArgumentException`. Run it and confirm it FAILS.
-- [ ] T012 [P] Create `module-api/src/main/kotlin/io/github/kolod/circuitopedia/module/Category.kt`: `enum class Category { Calculations, Reference }`, with KDoc saying that the entry order is the tab order and that the first entry is the default tab.
-- [ ] T013 Create `module-api/src/main/kotlin/io/github/kolod/circuitopedia/module/ModuleId.kt`: `@JvmInline value class ModuleId(val value: String)` with an `init` `require` for the regex `[a-z0-9]+(-[a-z0-9]+)*` and length 1..64. `./gradlew :module-api:test` now passes.
-- [ ] T014 Create `module-api/src/main/kotlin/io/github/kolod/circuitopedia/module/AppModule.kt`: `class AppModule(id: ModuleId, category: Category, @StringRes titleRes: Int, @StringRes descriptionRes: Int, @DrawableRes iconRes: Int, content: @Composable () -> Unit)`, exactly as in `contracts/module-contract.md`, with KDoc stating the module's obligations from that contract.
-- [ ] T015 [P] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`: `object ModuleRegistry { val modules: List<AppModule> = listOf() }`, with a comment that this is the single place where modules are registered, one line each.
-- [ ] T016 [P] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/theme/Theme.kt`: `CircuitopediaTheme(content)` using Material 3, with `dynamicDarkColorScheme`/`dynamicLightColorScheme` on API 31+ and `darkColorScheme()`/`lightColorScheme()` otherwise, chosen by `isSystemInDarkTheme()`.
-- [ ] T017 Create `app/src/main/kotlin/io/github/kolod/circuitopedia/CircuitopediaApp.kt`: `@Composable fun CircuitopediaApp(modules: List<AppModule>)`, which wraps content in `CircuitopediaTheme` and for now shows an empty `Surface`. Phases 3 and 5 will extend it.
-- [ ] T018 Create `app/src/main/kotlin/io/github/kolod/circuitopedia/MainActivity.kt`: a `ComponentActivity` that calls `enableEdgeToEdge()` and then `setContent { CircuitopediaApp(ModuleRegistry.modules) }`.
-- [ ] T019 [P] Create the debug-only samples (research R10):
+- [X] T011 [P] Write `module-api/src/test/kotlin/io/github/kolod/circuitopedia/module/ModuleIdTest.kt` first. It accepts `a`, `ohms-law`, `555-timer`, and a 64-char id. It rejects `""`, `Ohms`, `ohms_law`, `-x`, `x-`, `a--b`, `ом`, and a 65-char id, each with `IllegalArgumentException`. Run it and confirm it FAILS.
+- [X] T012 [P] Create `module-api/src/main/kotlin/io/github/kolod/circuitopedia/module/Category.kt`: `enum class Category { Calculations, Reference }`, with KDoc saying that the entry order is the tab order and that the first entry is the default tab.
+- [X] T013 Create `module-api/src/main/kotlin/io/github/kolod/circuitopedia/module/ModuleId.kt`: `@JvmInline value class ModuleId(val value: String)` with an `init` `require` for the regex `[a-z0-9]+(-[a-z0-9]+)*` and length 1..64. `./gradlew :module-api:test` now passes.
+- [X] T014 Create `module-api/src/main/kotlin/io/github/kolod/circuitopedia/module/AppModule.kt`: `class AppModule(id: ModuleId, category: Category, @StringRes titleRes: Int, @StringRes descriptionRes: Int, @DrawableRes iconRes: Int, content: @Composable () -> Unit)`, exactly as in `contracts/module-contract.md`, with KDoc stating the module's obligations from that contract.
+- [X] T015 [P] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`: `object ModuleRegistry { val modules: List<AppModule> = listOf() }`, with a comment that this is the single place where modules are registered, one line each.
+- [X] T016 [P] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/theme/Theme.kt`: `CircuitopediaTheme(content)` using Material 3, with `dynamicDarkColorScheme`/`dynamicLightColorScheme` on API 31+ and `darkColorScheme()`/`lightColorScheme()` otherwise, chosen by `isSystemInDarkTheme()`.
+- [X] T017 Create `app/src/main/kotlin/io/github/kolod/circuitopedia/CircuitopediaApp.kt`: `@Composable fun CircuitopediaApp(modules: List<AppModule>)`, which wraps content in `CircuitopediaTheme` and for now shows an empty `Surface`. Phases 3 and 5 will extend it.
+- [X] T018 Create `app/src/main/kotlin/io/github/kolod/circuitopedia/MainActivity.kt`: a `ComponentActivity` that calls `enableEdgeToEdge()` and then `setContent { CircuitopediaApp(ModuleRegistry.modules) }`.
+- [X] T019 [P] Create the debug-only samples (research R10):
   - `app/src/debug/res/values/sample_strings.xml` with `tools:ignore="MissingTranslation"`, holding titles and descriptions for these samples:
     - Calculations: `sample-zener` "Zener diode", `sample-ohm` "Ohm's law", `sample-alpha` "Attenuator", `sample-long` with a 70+ character title and description.
     - Reference: `sample-pinouts` "Pinouts".
   - `app/src/debug/res/drawable/sample_icon.xml`, a 24dp vector.
-- [ ] T020 Create `app/src/debug/kotlin/io/github/kolod/circuitopedia/samples/SampleModules.kt`. Expose `val sampleModules: List<AppModule>` built from T019 resources, where each `content` shows a `Text` tagged `Modifier.testTag("content-<id>")`. Also expose `fun manySampleCalculations(n: Int)`, which reuses the long-title strings with ids `sample-n-<i>` for scroll tests.
+- [X] T020 Create `app/src/debug/kotlin/io/github/kolod/circuitopedia/samples/SampleModules.kt`. Expose `val sampleModules: List<AppModule>` built from T019 resources, where each `content` shows a `Text` tagged `Modifier.testTag("content-<id>")`. Also expose `fun manySampleCalculations(n: Int)`, which reuses the long-title strings with ids `sample-n-<i>` for scroll tests.
 
 **Checkpoint**: `./gradlew :module-api:test :app:assembleDebug` passes. The app launches to an
 empty themed screen.
@@ -95,7 +95,7 @@ stays marked and kept (spec US1).
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T021 [US1] Write `app/src/androidTest/kotlin/io/github/kolod/circuitopedia/CatalogScreenTest.kt` using `createAndroidComposeRule<ComponentActivity>()` with `setContent { CircuitopediaApp(emptyList()) }`. Assert:
+- [X] T021 [US1] Write `app/src/androidTest/kotlin/io/github/kolod/circuitopedia/CatalogScreenTest.kt` using `createAndroidComposeRule<ComponentActivity>()` with `setContent { CircuitopediaApp(emptyList()) }`. Assert:
   - The app name appears in the top bar.
   - The tabs "Calculations" and "Reference" exist in that order, and "Calculations" `assertIsSelected()`.
   - Clicking "Reference" makes it selected.
@@ -106,16 +106,16 @@ stays marked and kept (spec US1).
 
 ### Implementation for User Story 1
 
-- [ ] T022 [P] [US1] Add `tab_calculations` ("Calculations") and `tab_reference` ("Reference") to `app/src/main/res/values/strings.xml`.
-- [ ] T023 [P] [US1] Translate `tab_calculations` and `tab_reference` in `app/src/main/res/values-de/strings.xml` (Berechnungen / Nachschlagen), `values-fr` (Calculs / Référence), `values-es` (Cálculos / Referencia), `values-ja` (計算 / リファレンス) and `values-uk` (Розрахунки / Довідник).
-- [ ] T024 [US1] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogScreen.kt`:
+- [X] T022 [P] [US1] Add `tab_calculations` ("Calculations") and `tab_reference` ("Reference") to `app/src/main/res/values/strings.xml`.
+- [X] T023 [P] [US1] Translate `tab_calculations` and `tab_reference` in `app/src/main/res/values-de/strings.xml` (Berechnungen / Nachschlagen), `values-fr` (Calculs / Référence), `values-es` (Cálculos / Referencia), `values-ja` (計算 / リファレンス) and `values-uk` (Розрахунки / Довідник).
+- [X] T024 [US1] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogScreen.kt`:
   - `@Composable fun CatalogScreen(modules: List<AppModule>, onOpen: (ModuleId) -> Unit)`.
   - A `Scaffold` with a `TopAppBar` showing `app_name`.
   - `PrimaryTabRow(selectedTabIndex = pagerState.currentPage)` over `Category.entries`, with labels from a private `Category.labelRes()` mapping and `maxLines = 2` for large fonts.
   - Below it, `HorizontalPager(state = pagerState, modifier = Modifier.testTag("catalog-pager"))`, where `pagerState = rememberPagerState { Category.entries.size }`.
   - A tab click calls `scope.launch { pagerState.animateScrollToPage(i) }`.
   - Each page calls a private `CategoryPage(category, …)`, which is an empty `Box` for now.
-- [ ] T025 [US1] Update `app/src/main/kotlin/io/github/kolod/circuitopedia/CircuitopediaApp.kt` to show `CatalogScreen(modules, onOpen = {})` inside the theme. T021 now passes on an emulator.
+- [X] T025 [US1] Update `app/src/main/kotlin/io/github/kolod/circuitopedia/CircuitopediaApp.kt` to show `CatalogScreen(modules, onOpen = {})` inside the theme. T021 now passes on an emulator.
 
 **Checkpoint**: The MVP runs. Tabs switch by tap and swipe, the default tab is correct, and the
 state survives rotation.
@@ -132,7 +132,7 @@ show each entry in the right tab, sorted, with icon, title and description (spec
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T026 [P] [US2] Write `app/src/test/kotlin/io/github/kolod/circuitopedia/catalog/CatalogOrderingTest.kt` (JVM) first, against the signature `fun <T> entriesFor(category: Category, items: List<T>, categoryOf: (T) -> Category, titleOf: (T) -> String, collator: Comparator<in String>): List<T>`, using simple test data classes. Cases:
+- [X] T026 [P] [US2] Write `app/src/test/kotlin/io/github/kolod/circuitopedia/catalog/CatalogOrderingTest.kt` (JVM) first, against the signature `fun <T> entriesFor(category: Category, items: List<T>, categoryOf: (T) -> Category, titleOf: (T) -> String, collator: Comparator<in String>): List<T>`, using simple test data classes. Cases:
   - Filters to the category, and other-category items are absent.
   - An empty input or a category with no items gives an empty result.
   - English `["Zener","ohm","Attenuator"]` sorts to `Attenuator, ohm, Zener`, because the sort ignores case.
@@ -142,7 +142,7 @@ show each entry in the right tab, sorted, with icon, title and description (spec
   - Equal titles keep registry order (stable sort).
 
   Run it and confirm it FAILS.
-- [ ] T027 [US2] Extend `app/src/androidTest/kotlin/io/github/kolod/circuitopedia/CatalogScreenTest.kt`:
+- [X] T027 [US2] Extend `app/src/androidTest/kotlin/io/github/kolod/circuitopedia/CatalogScreenTest.kt`:
   - With `emptyList()`, each tab shows its empty message (`empty_calculations` / `empty_reference`).
   - With `sampleModules`, Calculations shows the 4 calculation samples in order "Attenuator", "Ohm's law", the long title, "Zener diode" (check the order with `onAllNodesWithTag("module-entry")`), and does not show "Pinouts". Reference shows only "Pinouts".
   - With `manySampleCalculations(40)`, `performScrollToIndex(39)` on the list (tag `module-list-Calculations`) makes the last entry displayed.
@@ -150,14 +150,14 @@ show each entry in the right tab, sorted, with icon, title and description (spec
 
 ### Implementation for User Story 2
 
-- [ ] T028 [P] [US2] Add `empty_calculations` ("No calculators yet.") and `empty_reference` ("No reference pages yet.") to `app/src/main/res/values/strings.xml`.
-- [ ] T029 [P] [US2] Translate `empty_calculations` and `empty_reference` in `values-de` (Noch keine Rechner. / Noch keine Nachschlageseiten.), `values-fr` (Aucun calculateur pour l'instant. / Aucune page de référence pour l'instant.), `values-es` (Aún no hay calculadoras. / Aún no hay páginas de referencia.), `values-ja` (計算ツールはまだありません。 / リファレンスはまだありません。) and `values-uk` (Калькуляторів поки немає. / Довідкових сторінок поки немає.), each under `app/src/main/res/`.
-- [ ] T030 [US2] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogOrdering.kt` with the pure generic `entriesFor` from T026 (`filter` then `sortedWith(compareBy(collator, titleOf))`). No `android.*` imports. T026 now passes.
-- [ ] T031 [US2] Implement `CategoryPage` in `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogScreen.kt`:
+- [X] T028 [P] [US2] Add `empty_calculations` ("No calculators yet.") and `empty_reference` ("No reference pages yet.") to `app/src/main/res/values/strings.xml`.
+- [X] T029 [P] [US2] Translate `empty_calculations` and `empty_reference` in `values-de` (Noch keine Rechner. / Noch keine Nachschlageseiten.), `values-fr` (Aucun calculateur pour l'instant. / Aucune page de référence pour l'instant.), `values-es` (Aún no hay calculadoras. / Aún no hay páginas de referencia.), `values-ja` (計算ツールはまだありません。 / リファレンスはまだありません。) and `values-uk` (Калькуляторів поки немає. / Довідкових сторінок поки немає.), each under `app/src/main/res/`.
+- [X] T030 [US2] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogOrdering.kt` with the pure generic `entriesFor` from T026 (`filter` then `sortedWith(compareBy(collator, titleOf))`). No `android.*` imports. T026 now passes.
+- [X] T031 [US2] Implement `CategoryPage` in `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogScreen.kt`:
   - Resolve titles with `LocalContext.current.getString(titleRes)`. Build `collator = remember(locale) { Collator.getInstance(locale) }` with `locale = LocalConfiguration.current.locales[0]`. Compute the entries with `entriesFor`, inside `remember(modules, locale)`.
   - If the result is empty, show a centered `Text` with the category's empty-message resource (a private `Category.emptyRes()` mapping).
   - Otherwise show a `LazyColumn(state = listState, modifier = Modifier.testTag("module-list-${category.name}"))` keyed by `id.value`, with one `ListItem` per entry (tag `module-entry`): `leadingContent` is `Icon(painterResource(iconRes), contentDescription = null)`, `headlineContent` is the title with `maxLines = 2` and ellipsis, `supportingContent` is the description with `maxLines = 1` and ellipsis. The whole item is `Modifier.clickable { onOpen(id) }`.
-- [ ] T032 [US2] Hoist the list states in `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogScreen.kt`. Add `val listStates = Category.entries.map { rememberLazyListState() }` at the `CatalogScreen` level and pass `listStates[page]` to `CategoryPage`, so scroll positions survive pager page disposal (research R4). T027 now passes.
+- [X] T032 [US2] Hoist the list states in `app/src/main/kotlin/io/github/kolod/circuitopedia/catalog/CatalogScreen.kt`. Add `val listStates = Category.entries.map { rememberLazyListState() }` at the `CatalogScreen` level and pass `listStates[page]` to `CategoryPage`, so scroll positions survive pager page disposal (research R4). T027 now passes.
 
 **Checkpoint**: US1 and US2 both work. The release app shows both empty messages.
 
@@ -174,7 +174,7 @@ scroll position are kept (spec US3).
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T033 [US3] Write `app/src/androidTest/kotlin/io/github/kolod/circuitopedia/NavigationTest.kt` with `createAndroidComposeRule<ComponentActivity>()` and `CircuitopediaApp(sampleModules + manySampleCalculations(40))`. Cases:
+- [X] T033 [US3] Write `app/src/androidTest/kotlin/io/github/kolod/circuitopedia/NavigationTest.kt` with `createAndroidComposeRule<ComponentActivity>()` and `CircuitopediaApp(sampleModules + manySampleCalculations(40))`. Cases:
   1. Clicking "Ohm's law" shows the top bar title "Ohm's law" and the node `content-sample-ohm`.
   2. `Espresso.pressBack()` (or `activity.onBackPressedDispatcher.onBackPressed()`) returns to the catalog with "Calculations" selected.
   3. On the Reference tab, opening "Pinouts" and pressing the "up" button (content description `navigate_up`) returns with "Reference" still selected.
@@ -188,10 +188,10 @@ scroll position are kept (spec US3).
 
 ### Implementation for User Story 3
 
-- [ ] T034 [P] [US3] Add `navigate_up` ("Navigate up") to `app/src/main/res/values/strings.xml`, with translations in `values-de` (Nach oben), `values-fr` (Remonter), `values-es` (Subir), `values-ja` (上へ移動) and `values-uk` (Угору).
-- [ ] T035 [P] [US3] Create `app/src/main/res/drawable/ic_arrow_back.xml`, a 24dp Material Symbols "arrow_back" vector (Apache 2.0) with `android:autoMirrored="true"` and `android:tint="?attr/colorControlNormal"`.
-- [ ] T036 [US3] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/module/ModuleScreen.kt`: `@Composable fun ModuleScreen(module: AppModule, onUp: () -> Unit)`. It is a `Scaffold` with a `TopAppBar(title = stringResource(module.titleRes), navigationIcon = IconButton(onUp) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.navigate_up)) })`, and its content `Box(Modifier.padding(innerPadding).consumeWindowInsets(innerPadding)) { module.content() }`.
-- [ ] T037 [US3] Add navigation to `app/src/main/kotlin/io/github/kolod/circuitopedia/CircuitopediaApp.kt`:
+- [X] T034 [P] [US3] Add `navigate_up` ("Navigate up") to `app/src/main/res/values/strings.xml`, with translations in `values-de` (Nach oben), `values-fr` (Remonter), `values-es` (Subir), `values-ja` (上へ移動) and `values-uk` (Угору).
+- [X] T035 [P] [US3] Create `app/src/main/res/drawable/ic_arrow_back.xml`, a 24dp Material Symbols "arrow_back" vector (Apache 2.0) with `android:autoMirrored="true"` and `android:tint="?attr/colorControlNormal"`.
+- [X] T036 [US3] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/module/ModuleScreen.kt`: `@Composable fun ModuleScreen(module: AppModule, onUp: () -> Unit)`. It is a `Scaffold` with a `TopAppBar(title = stringResource(module.titleRes), navigationIcon = IconButton(onUp) { Icon(painterResource(R.drawable.ic_arrow_back), stringResource(R.string.navigate_up)) })`, and its content `Box(Modifier.padding(innerPadding).consumeWindowInsets(innerPadding)) { module.content() }`.
+- [X] T037 [US3] Add navigation to `app/src/main/kotlin/io/github/kolod/circuitopedia/CircuitopediaApp.kt`:
   - `var openModuleId by rememberSaveable { mutableStateOf<String?>(null) }`.
   - `val open = modules.firstOrNull { it.id.value == openModuleId }`.
   - If `open != null`, show `ModuleScreen(open, onUp = { openModuleId = null })` together with `BackHandler { openModuleId = null }`. Otherwise show `CatalogScreen(modules, onOpen = { openModuleId = it.value })`. An unknown restored id falls through to the catalog.
@@ -213,7 +213,7 @@ line.
 
 ### Tests for User Story 4 ⚠️
 
-- [ ] T038 [P] [US4] Write `app/src/test/kotlin/io/github/kolod/circuitopedia/ModuleRegistryTest.kt` (JVM) first, against `fun duplicateIds(ids: List<ModuleId>): Set<ModuleId>`. Cases:
+- [X] T038 [P] [US4] Write `app/src/test/kotlin/io/github/kolod/circuitopedia/ModuleRegistryTest.kt` (JVM) first, against `fun duplicateIds(ids: List<ModuleId>): Set<ModuleId>`. Cases:
   - `duplicateIds(listOf(a, b, a, c, b))` gives `{a, b}`, and unique input gives an empty set.
   - `registryIdsAreUnique`: `assertTrue("Duplicate module ids: …", duplicateIds(ModuleRegistry.modules.map { it.id }).isEmpty())`, with a message listing the `value`s.
 
@@ -221,9 +221,9 @@ line.
 
 ### Implementation for User Story 4
 
-- [ ] T039 [US4] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/RegistryChecks.kt` with the pure `duplicateIds` (`groupingBy { it }.eachCount().filterValues { it > 1 }.keys`). T038 now passes.
-- [ ] T040 [US4] Add a `lint { }` block to both `app/build.gradle.kts` and `module-api/build.gradle.kts`: `error += setOf("MissingTranslation", "MissingDefaultResource", "ExtraTranslation")` and `abortOnError = true`. In `app`, also `checkDependencies = true`, so lint on `:app` covers the strings of every `:modules:*` project (research R9).
-- [ ] T041 [US4] Run the dry run from `specs/001-app-shell-navigation/quickstart.md` §5 and do not commit it:
+- [X] T039 [US4] Create `app/src/main/kotlin/io/github/kolod/circuitopedia/RegistryChecks.kt` with the pure `duplicateIds` (`groupingBy { it }.eachCount().filterValues { it > 1 }.keys`). T038 now passes.
+- [X] T040 [US4] Add a `lint { }` block to both `app/build.gradle.kts` and `module-api/build.gradle.kts`: `error += setOf("MissingTranslation", "MissingDefaultResource", "ExtraTranslation")` and `abortOnError = true`. In `app`, also `checkDependencies = true`, so lint on `:app` covers the strings of every `:modules:*` project (research R9).
+- [X] T041 [US4] Run the dry run from `specs/001-app-shell-navigation/quickstart.md` §5 and do not commit it:
   1. Create `modules/demo/` from the `modules/README.md` sample, with strings in all six locales, an icon, and `val demoModule`.
   2. Add `demoModule,` to `ModuleRegistry.kt`.
   3. Check that `git status` shows only `modules/demo/**` and `ModuleRegistry.kt`.
@@ -240,16 +240,16 @@ line.
 
 ## Phase 7: Polish & Cross-Cutting Concerns
 
-- [ ] T042 [P] Create the root `README.md` (the constitution's Sync Impact Report flags it as missing). It covers:
+- [X] T042 [P] Create the root `README.md` (the constitution's Sync Impact Report flags it as missing). It covers:
   - What Circuitopedia is, and that it is free, ad-free and offline.
   - Build prerequisites (JDK 25, Android SDK 37).
   - `./gradlew :app:assembleDebug`, `test`, `lint` and `connectedDebugAndroidTest`.
   - A link to `modules/README.md` for adding modules.
   - The GPLv3 license.
-- [ ] T043 [P] Check for hardcoded user-facing strings: search `app/src/main` and `module-api/src/main` for `Text("` and `contentDescription = "`. The expected result is none.
-- [ ] T044 Check the merged release manifest `app/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml` (after `./gradlew :app:processReleaseManifest`). It has no `<uses-permission>` (Principle I). Also check that `./gradlew :app:dependencies --configuration releaseRuntimeClasspath` contains no `com.google.android.gms`, `com.android.billingclient` or `com.google.android.play` artifact (Principle VII).
-- [ ] T045 Confirm the source-citation gate is N/A. This feature adds no formulas or reference values; note this in the PR description.
-- [ ] T046 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. Everything must pass. The release APK is unsigned without `app/keystore.properties`, which is expected.
+- [X] T043 [P] Check for hardcoded user-facing strings: search `app/src/main` and `module-api/src/main` for `Text("` and `contentDescription = "`. The expected result is none.
+- [X] T044 Check the merged release manifest `app/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml` (after `./gradlew :app:processReleaseManifest`). It has no `<uses-permission>` (Principle I). Also check that `./gradlew :app:dependencies --configuration releaseRuntimeClasspath` contains no `com.google.android.gms`, `com.android.billingclient` or `com.google.android.play` artifact (Principle VII).
+- [X] T045 Confirm the source-citation gate is N/A. This feature adds no formulas or reference values; note this in the PR description.
+- [X] T046 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease`. Everything must pass. The release APK is unsigned without `app/keystore.properties`, which is expected.
 - [ ] T047 Run `./gradlew :app:connectedDebugAndroidTest` on an API 26+ emulator or device. All tests must pass.
 - [ ] T048 Do the manual checks from `specs/001-app-shell-navigation/quickstart.md` §4:
   - The launcher name.
