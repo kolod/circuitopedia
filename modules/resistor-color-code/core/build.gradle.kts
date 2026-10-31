@@ -18,5 +18,7 @@ kotlin {
 }
 
 dependencies {
+    api(project(":shared:color-code"))
+
     testImplementation(libs.junit)
 }

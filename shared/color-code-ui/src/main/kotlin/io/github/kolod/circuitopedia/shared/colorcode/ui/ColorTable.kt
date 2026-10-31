@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcolorcode
+package io.github.kolod.circuitopedia.shared.colorcode.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -33,21 +32,31 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandLayout
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.CELL_GRADIENT
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.Selection
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.TextOnColor
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.accepts
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.cellLabel
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.darken
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.lighten
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
+import io.github.kolod.circuitopedia.shared.colorcode.CELL_GRADIENT
+import io.github.kolod.circuitopedia.shared.colorcode.TextOnColor
+import io.github.kolod.circuitopedia.shared.colorcode.darken
+import io.github.kolod.circuitopedia.shared.colorcode.lighten
+
+/** One band column of the table, as plain data from the module that knows what the colors mean. */
+data class TableColumn(
+    /** Short header, e.g. "Band 1" or "Mult.". */
+    val header: String,
+    /** Band name for screen readers, e.g. "Band 1" or "Multiplier". */
+    val bandName: String,
+    /**
+     * Cell text per selectable color; colors missing here are empty and not selectable. A label may
+     * contain one line break where it would not fit a narrow column; screen readers get it without.
+     */
+    val labels: Map<BandColor, String>,
+    val selected: BandColor,
+)
 
 /** Cyan ring as in the reference design; the dark hairline keeps it visible on light band colors. */
 private val SelectionRing = Color(0xFF00E5FF)
 private val SelectionHairline = Color.Black.copy(alpha = 0.6f)
 
-// Column geometry shared by the header, the body and the leader lines of ResistorDrawing.
+// Column geometry shared by the header, the body and the leader lines of BandDrawing.
 internal val CellGap = 2.dp
 internal val TableSidePadding = 4.dp
 internal const val NAME_COLUMN_WEIGHT = 1.3f
@@ -61,45 +70,50 @@ internal fun bandColumnCenters(width: Float, gap: Float, bandCount: Int): List<F
 
 /** The header row: an empty corner over the color names, then one header per band. Stays fixed above the body. */
 @Composable
-fun ColorTableHeader(layout: BandLayout, modifier: Modifier = Modifier) {
+internal fun ColorTableHeader(columns: List<TableColumn>, modifier: Modifier = Modifier) {
     TableRow(modifier) {
         SurfaceCell(Modifier.weight(NAME_COLUMN_WEIGHT), "")
-        for (i in 0 until layout.bandCount) SurfaceCell(Modifier.weight(1f), layout.headerText(i))
+        for (column in columns) SurfaceCell(Modifier.weight(1f), column.header)
     }
 }
 
-/** One row per color, one column per band; tapping a valid cell selects it for that band. */
+/** One row per color, one column per band; tapping a selectable cell selects it for that band. */
 @Composable
-fun ColorTableBody(selection: Selection, onSelect: (index: Int, color: BandColor) -> Unit, modifier: Modifier = Modifier) {
-    val layout = selection.layout
+internal fun ColorTableBody(
+    columns: List<TableColumn>,
+    onSelect: (column: Int, color: BandColor) -> Unit,
+    tagPrefix: String,
+    modifier: Modifier = Modifier,
+) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(CellGap)) {
         for (color in BandColor.entries) {
             TableRow {
-                SurfaceCell(Modifier.weight(NAME_COLUMN_WEIGHT), stringResource(color.nameRes()))
-                for (i in 0 until layout.bandCount) {
-                    if (layout.accepts(i, color)) {
+                val colorName = stringResource(color.nameRes())
+                SurfaceCell(Modifier.weight(NAME_COLUMN_WEIGHT), colorName)
+                columns.forEachIndexed { i, column ->
+                    val tag = "$tagPrefix-cell-$i-${color.name}"
+                    val label = column.labels[color]
+                    if (label != null) {
                         BandCell(
                             color = color,
-                            // "±250ppm/K" does not fit a narrow 6-band column on one line.
-                            label = layout.roles[i].cellLabel(color, LocalConfiguration.current.locales[0])
-                                .replace("ppm/K", "\nppm/K"),
+                            label = label,
                             description = stringResource(
-                                R.string.resistor_color_code_cell_description,
-                                layout.bandName(i),
-                                stringResource(color.nameRes()),
-                                layout.roles[i].cellLabel(color, LocalConfiguration.current.locales[0]),
+                                R.string.color_code_cell_description,
+                                column.bandName,
+                                colorName,
+                                label.replace("\n", ""),
                             ),
-                            selected = selection.colors[i] == color,
+                            selected = column.selected == color,
                             onClick = { onSelect(i, color) },
                             modifier = Modifier.weight(1f),
-                            tag = "rcc-cell-$i-${color.name}",
+                            tag = tag,
                         )
                     } else {
                         // Not a valid choice for this band: empty and invisible to screen readers.
                         Box(
                             Modifier.weight(1f).fillMaxHeight()
                                 .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-                                .clearAndSetSemantics { testTag = "rcc-cell-$i-${color.name}" },
+                                .clearAndSetSemantics { testTag = tag },
                         )
                     }
                 }

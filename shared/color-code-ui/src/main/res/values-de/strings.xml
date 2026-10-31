@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="color_code_bands">
+        <item quantity="one">%d Ring</item>
+        <item quantity="other">%d Ringe</item>
+    </plurals>
+    <string name="color_code_color_black">Schwarz</string>
+    <string name="color_code_color_brown">Braun</string>
+    <string name="color_code_color_red">Rot</string>
+    <string name="color_code_color_orange">Orange</string>
+    <string name="color_code_color_yellow">Gelb</string>
+    <string name="color_code_color_green">Grün</string>
+    <string name="color_code_color_blue">Blau</string>
+    <string name="color_code_color_violet">Violett</string>
+    <string name="color_code_color_gray">Grau</string>
+    <string name="color_code_color_white">Weiß</string>
+    <string name="color_code_color_gold">Gold</string>
+    <string name="color_code_color_silver">Silber</string>
+    <string name="color_code_header_band">Ring %d</string>
+    <string name="color_code_header_multiplier">Mult.</string>
+    <string name="color_code_header_tolerance">Toler.</string>
+    <string name="color_code_cell_description">%1$s, %2$s, %3$s</string>
+    <string name="color_code_band_multiplier">Multiplikator</string>
+    <string name="color_code_band_tolerance">Toleranz</string>
+</resources>

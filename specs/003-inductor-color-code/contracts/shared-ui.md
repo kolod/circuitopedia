@@ -8,12 +8,12 @@ nothing about resistors or inductors: modules pass plain data.
 data class TableColumn(
     val header: String,                     // short, e.g. "Band 1", "Mult."
     val bandName: String,                   // for screen readers, e.g. "Multiplier"
-    val labels: Map<BandColor, String>,     // cell text; colors missing here are not selectable
+    val labels: Map<BandColor, String>,     // cell text (may contain one "\n"); missing = not selectable
     val selected: BandColor,
 )
 
-/** One tab's page content. */
-data class ColorCodePage(
+/** One tab's page content (a plain class: it holds a lambda). */
+class ColorCodePage(
     val value: String,                      // formatted reading, e.g. "47µH ±10%"
     val columns: List<TableColumn>,
     val drawing: @Composable (Modifier) -> Unit,   // usually BandDrawing

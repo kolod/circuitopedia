@@ -6,8 +6,9 @@ In short:
 
 - `settings.gradle.kts` includes every `modules/<name>/` that has a `build.gradle.kts` as
   `:modules:<name>`, and `app` depends on all of them automatically.
-- A module depends only on `:module-api` (plus official AndroidX/Compose artifacts), never on
-  `:app` or another module.
+- A module depends on `:module-api` (plus official AndroidX/Compose artifacts) and, if it needs
+  them, on shared libraries in `shared/<name>` (`:shared:<name>`), never on `:app` or another
+  module. Code moves to `shared/` once a second module needs it.
 - Calculation logic and reference data go in `modules/<name>/core`, a Kotlin/JVM subproject with
   no Android imports, which the module depends on.
 - A module exposes exactly one `val <name>Module: AppModule` and is registered with one line in

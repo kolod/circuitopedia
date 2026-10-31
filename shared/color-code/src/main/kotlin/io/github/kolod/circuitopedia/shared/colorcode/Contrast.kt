@@ -1,4 +1,4 @@
-package io.github.kolod.circuitopedia.modules.resistorcolorcode.core
+package io.github.kolod.circuitopedia.shared.colorcode
 
 import kotlin.math.pow
 

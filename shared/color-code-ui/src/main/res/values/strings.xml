@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="color_code_bands">
+        <item quantity="one">%d band</item>
+        <item quantity="other">%d bands</item>
+    </plurals>
+    <string name="color_code_color_black">Black</string>
+    <string name="color_code_color_brown">Brown</string>
+    <string name="color_code_color_red">Red</string>
+    <string name="color_code_color_orange">Orange</string>
+    <string name="color_code_color_yellow">Yellow</string>
+    <string name="color_code_color_green">Green</string>
+    <string name="color_code_color_blue">Blue</string>
+    <string name="color_code_color_violet">Violet</string>
+    <string name="color_code_color_gray">Gray</string>
+    <string name="color_code_color_white">White</string>
+    <string name="color_code_color_gold">Gold</string>
+    <string name="color_code_color_silver">Silver</string>
+    <string name="color_code_header_band">Band %d</string>
+    <string name="color_code_header_multiplier">Mult.</string>
+    <string name="color_code_header_tolerance">Toler.</string>
+    <string name="color_code_cell_description">%1$s, %2$s, %3$s</string>
+    <string name="color_code_band_multiplier">Multiplier</string>
+    <string name="color_code_band_tolerance">Tolerance</string>
+</resources>

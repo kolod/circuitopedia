@@ -26,6 +26,9 @@ fun formatDecimal(value: BigDecimal, locale: Locale): String
  * Inductor: formatSi(µH, "H", listOf("n", "µ", "m"), 1, locale)         → "100nH", "99mH"
  */
 fun formatSi(value: BigDecimal, unit: String, prefixes: List<String>, baseIndex: Int, locale: Locale): String
+
+/** Render-time CSS for a band drawing: shown bands (1-based, one per column) colored, the rest hidden. */
+fun bandCss(shownBands: List<Int>, colors: List<BandColor>, bandCount: Int): String
 ```
 
 Test fixture (`testFixtures`):

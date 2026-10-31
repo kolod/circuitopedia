@@ -20,20 +20,21 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeLeft
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Black
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Brown
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Gold
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Orange
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Red
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Violet
-import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandColor.Yellow
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Black
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Brown
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Gold
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Orange
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Red
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Violet
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor.Yellow
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.BandLayout
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.Selection
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.core.format
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import io.github.kolod.circuitopedia.shared.colorcode.ui.R as SharedR
 
 @RunWith(AndroidJUnit4::class)
 class ColorCodeScreenTest {
@@ -149,9 +150,9 @@ class ColorCodeScreenTest {
     fun cellsDescribeThemselvesToScreenReaders() {
         launch()
         val description = rule.activity.getString(
-            R.string.resistor_color_code_cell_description,
-            rule.activity.getString(R.string.resistor_color_code_header_band, 1),
-            rule.activity.getString(R.string.resistor_color_code_color_yellow),
+            SharedR.string.color_code_cell_description,
+            rule.activity.getString(SharedR.string.color_code_header_band, 1),
+            rule.activity.getString(SharedR.string.color_code_color_yellow),
             "4",
         )
         cell(0, Yellow).assert(SemanticsMatcher.expectValue(SemanticsProperties.ContentDescription, listOf(description)))

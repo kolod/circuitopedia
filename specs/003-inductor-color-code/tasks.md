@@ -72,22 +72,22 @@ and the inductor's code table is in place.
 
 ### Shared core and resistor core refactor
 
-- [ ] T010 [P] Write `SHARED_TEST/FormatSiTest.kt` (test-first) for `formatSi` and `formatDecimal` (contract core-api):
+- [X] T010 [P] Write `SHARED_TEST/FormatSiTest.kt` (test-first) for `formatSi` and `formatDecimal` (contract core-api):
   - resistor family: 0.1Ω, 4.7kΩ, 1kΩ, 999GΩ;
   - inductor family from µH: 0.1 → "100nH", 0.22 → "220nH", 4.7 → "4.7µH", 1000 → "1mH", 99000 → "99mH";
   - decimal comma in `uk`/`de`, dot in `en`/`ja`.
-- [ ] T011 Move `BandColor` (argb and textOnColor only), `TextOnColor`, `Percent` and `Contrast.kt` from `RCORE` to `SHARED`, with package `io.github.kolod.circuitopedia.shared.colorcode`. Keep the entry order and the palette comment (spec 002 R6).
+- [X] T011 Move `BandColor` (argb and textOnColor only), `TextOnColor`, `Percent` and `Contrast.kt` from `RCORE` to `SHARED`, with package `io.github.kolod.circuitopedia.shared.colorcode`. Keep the entry order and the palette comment (spec 002 R6).
   - Add `SHARED/Format.kt` with `formatDecimal` and `formatSi`, so that T010 passes.
   - Move `PaletteContrastTest` to `SHARED_TEST`.
-- [ ] T012 Create `RCORE/ResistorCode.kt` with the IEC 60062 meanings as `BandColor` extensions (`digit`, `multiplierExponent`, `tolerance`, `tcr`), keeping the citation comment from the old `BandColor.kt`.
+- [X] T012 Create `RCORE/ResistorCode.kt` with the IEC 60062 meanings as `BandColor` extensions (`digit`, `multiplierExponent`, `tolerance`, `tcr`), keeping the citation comment from the old `BandColor.kt`.
   - Point the resistor core's `build.gradle.kts` at `api(project(":shared:color-code"))`.
   - Switch `Units.kt`, `Format.kt` (use `formatSi`/`formatDecimal`), `BandLayout.kt`, `Selection.kt` and the resistor core tests to the shared types.
   - All 39 resistor core tests must pass unchanged in substance.
-- [ ] T013 [P] Create `SHARED_FIX/SvgContract.kt`, `object SvgContract { fun check(svg: File, bandCount: Int): List<String> }`, implementing the four rules of spec 002 R10 with `javax.xml` DOM. Rewrite `modules/resistor-color-code/src/test/…/ResistorSvgTest.kt` to use it for the file checks and keep its layout and CSS tests.
+- [X] T013 [P] Create `SHARED_FIX/SvgContract.kt`, `object SvgContract { fun check(svg: File, bandCount: Int): List<String> }`, implementing the four rules of spec 002 R10 with `javax.xml` DOM. Rewrite `modules/resistor-color-code/src/test/…/ResistorSvgTest.kt` to use it for the file checks and keep its layout and CSS tests.
 
 ### Shared UI and resistor UI refactor
 
-- [ ] T014 Move the common strings from the resistor module to `SUI_RES/values*/strings.xml`, renamed `color_code_*`, in all six locales:
+- [X] T014 Move the common strings from the resistor module to `SUI_RES/values*/strings.xml`, renamed `color_code_*`, in all six locales:
   - the `bands` plurals;
   - the 12 color names;
   - `header_band`, `header_multiplier`, `header_tolerance`;
@@ -95,19 +95,19 @@ and the inductor's code table is in place.
   - `cell_description`.
 
   Remove them from `modules/resistor-color-code/src/main/res`. Only the title, description and TCR strings stay there.
-- [ ] T015 Create `SUI/ColorNames.kt` (`BandColor.nameRes()`). Move the table from `RUI/ColorTable.kt` to `SUI/ColorTable.kt`, made data-driven with `TableColumn` (contract shared-ui):
+- [X] T015 Create `SUI/ColorNames.kt` (`BandColor.nameRes()`). Move the table from `RUI/ColorTable.kt` to `SUI/ColorTable.kt`, made data-driven with `TableColumn` (contract shared-ui):
   - the header is built from `columns.map { it.header }`;
   - a cell is selectable iff its color is in `labels`;
   - the description comes from `color_code_cell_description` with `bandName`, the color name and the label;
   - geometry (`CellGap`, `TableSidePadding`, `bandColumnCenters`) and `CellText` move unchanged.
-- [ ] T016 Move `RUI/ResistorDrawing.kt`'s SVG loading, CSS and leader lines to `SUI/BandDrawing.kt` as `BandDrawing(svg, shownBands, colors, modifier)`, with the band count read from the SVG. `RUI/ResistorDrawing.kt` keeps only `BandLayout.svgBands()` and a call to `BandDrawing`.
-- [ ] T017 Create `SUI/ColorCodeScaffold.kt` from `RUI/ColorCodeScreen.kt`, following the contract: `bandCounts`, `selectedTab`, `onTabSelected`, `tagPrefix`, `page`, `onSelect`, and `ColorCodePage(value, columns, drawing)`. Rewrite `RUI/ColorCodeScreen.kt` to build the `ColorCodePage` from the resistor core and call the scaffold with `tagPrefix = "rcc"`. Update `RUI/Labels.kt` to the shared strings.
-- [ ] T018 Update `modules/resistor-color-code/build.gradle.kts`:
+- [X] T016 Move `RUI/ResistorDrawing.kt`'s SVG loading, CSS and leader lines to `SUI/BandDrawing.kt` as `BandDrawing(svg, shownBands, colors, modifier)`, with the band count read from the SVG. `RUI/ResistorDrawing.kt` keeps only `BandLayout.svgBands()` and a call to `BandDrawing`.
+- [X] T017 Create `SUI/ColorCodeScaffold.kt` from `RUI/ColorCodeScreen.kt`, following the contract: `bandCounts`, `selectedTab`, `onTabSelected`, `tagPrefix`, `page`, `onSelect`, and `ColorCodePage(value, columns, drawing)`. Rewrite `RUI/ColorCodeScreen.kt` to build the `ColorCodePage` from the resistor core and call the scaffold with `tagPrefix = "rcc"`. Update `RUI/Labels.kt` to the shared strings.
+- [X] T018 Update `modules/resistor-color-code/build.gradle.kts`:
   - depend on `:shared:color-code-ui`;
   - drop the direct AndroidSVG dependency;
   - add `testImplementation(testFixtures(project(":shared:color-code")))`.
-- [ ] T019 Amend `specs/001-app-shell-navigation/contracts/module-contract.md` §"What a module MUST provide" item 2: a module MAY depend on `:shared:*` libraries (top-level `shared/`), never on another `:modules:*` project or `:app`. Also amend `modules/README.md`, if it lists allowed dependencies.
-- [ ] T020 Run `./gradlew test lint :app:assembleDebug` and `./gradlew :modules:resistor-color-code:connectedDebugAndroidTest`. All tests pass, including the resistor's 8 UI tests with their `rcc-*` tags. On the emulator the resistor screen looks as before.
+- [X] T019 Amend `specs/001-app-shell-navigation/contracts/module-contract.md` §"What a module MUST provide" item 2: a module MAY depend on `:shared:*` libraries (top-level `shared/`), never on another `:modules:*` project or `:app`. Also amend `modules/README.md`, if it lists allowed dependencies.
+- [X] T020 Run `./gradlew test lint :app:assembleDebug` and `./gradlew :modules:resistor-color-code:connectedDebugAndroidTest`. All tests pass, including the resistor's 8 UI tests with their `rcc-*` tags. On the emulator the resistor screen looks as before.
 
 ### Inductor code table
 

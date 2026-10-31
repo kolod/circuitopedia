@@ -1,7 +1,9 @@
 package io.github.kolod.circuitopedia.modules.resistorcolorcode.core
 
+import io.github.kolod.circuitopedia.shared.colorcode.BandColor
+import io.github.kolod.circuitopedia.shared.colorcode.formatDecimal
+import io.github.kolod.circuitopedia.shared.colorcode.formatSi
 import java.math.BigDecimal
-import java.text.DecimalFormatSymbols
 import java.util.Locale
 
 /** "4.7kΩ ±5%", or "4,7kΩ ±1% ±100ppm/K" in a locale with a decimal comma. */
@@ -19,16 +21,6 @@ fun BandRole.cellLabel(color: BandColor, locale: Locale): String = when (this) {
     BandRole.TemperatureCoefficient -> color.tcr?.let { "±${it.value}ppm/K" }
 } ?: ""
 
-private val PREFIXES = listOf("", "k", "M", "G")
-private val THOUSAND = BigDecimal(1000)
-
 /** With the SI prefix that puts the mantissa in [1, 1000); values below 1 Ω stay in Ω. */
-private fun formatOhms(ohms: Ohms, locale: Locale): String {
-    var k = 0
-    while (k < PREFIXES.lastIndex && ohms.value >= THOUSAND.pow(k + 1)) k++
-    return formatDecimal(ohms.value.movePointLeft(3 * k), locale) + PREFIXES[k] + "Ω"
-}
-
-/** Plain digits without trailing zeros, exponent or grouping, using the locale's decimal separator. */
-private fun formatDecimal(value: BigDecimal, locale: Locale): String =
-    value.stripTrailingZeros().toPlainString().replace('.', DecimalFormatSymbols.getInstance(locale).decimalSeparator)
+private fun formatOhms(ohms: Ohms, locale: Locale): String =
+    formatSi(ohms.value, "Ω", listOf("", "k", "M", "G"), 0, locale)
