@@ -1,9 +1,14 @@
 package io.github.kolod.circuitopedia
 
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
+import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.click
@@ -20,6 +25,8 @@ import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTouchInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.kolod.circuitopedia.module.AppModule
+import io.github.kolod.circuitopedia.module.Category
+import io.github.kolod.circuitopedia.module.ModuleId
 import io.github.kolod.circuitopedia.samples.manySampleCalculations
 import io.github.kolod.circuitopedia.samples.sampleModules
 import org.junit.Assert.assertEquals
@@ -79,6 +86,36 @@ class NavigationTest {
         rule.onNodeWithContentDescription(rule.str(R.string.navigate_up)).performClick()
         assertCatalogShown()
         rule.onNodeWithText(rule.str(R.string.tab_reference)).assertIsSelected()
+    }
+
+    @Test
+    fun upGoesThroughTheModulesOwnBackHandlerLikeSystemBack() {
+        // A module with an inner level (like a part page over its list) handles up first.
+        val nested = AppModule(
+            id = ModuleId("sample-nested"),
+            category = Category.Reference,
+            titleRes = R.string.sample_pinouts_title,
+            descriptionRes = R.string.sample_pinouts_description,
+            iconRes = R.drawable.sample_icon,
+            content = {
+                var inner by remember { mutableStateOf(true) }
+                if (inner) {
+                    BackHandler { inner = false }
+                    Text("inner", Modifier.testTag("nested-inner"))
+                } else {
+                    Text("outer", Modifier.testTag("nested-outer"))
+                }
+            },
+        )
+        launch(listOf(nested))
+        rule.onNodeWithText(rule.str(R.string.tab_reference)).performClick()
+        entry("sample-nested").performClick()
+        rule.onNodeWithTag("nested-inner").assertIsDisplayed()
+        val up = rule.onNodeWithContentDescription(rule.str(R.string.navigate_up))
+        up.performClick()
+        rule.onNodeWithTag("nested-outer").assertIsDisplayed()
+        up.performClick()
+        assertCatalogShown()
     }
 
     @Test

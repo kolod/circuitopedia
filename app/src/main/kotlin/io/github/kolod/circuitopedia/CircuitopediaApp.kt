@@ -1,6 +1,7 @@
 package io.github.kolod.circuitopedia
 
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,9 +24,13 @@ fun CircuitopediaApp(modules: List<AppModule>) {
         // Keeps the catalog's tab and scroll positions while a module screen is shown.
         val stateHolder = rememberSaveableStateHolder()
 
+        // The up arrow sends a back press, so a module's own BackHandler (for example a part page
+        // that returns to its list) handles it first, exactly like the system back button.
+        val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
         if (openModule != null) {
             BackHandler { openModuleId = null }
-            ModuleScreen(openModule, onUp = { openModuleId = null })
+            ModuleScreen(openModule, onUp = { backDispatcher?.onBackPressed() ?: run { openModuleId = null } })
         } else {
             stateHolder.SaveableStateProvider("catalog") {
                 CatalogScreen(modules, onOpen = { openModuleId = it.value })
