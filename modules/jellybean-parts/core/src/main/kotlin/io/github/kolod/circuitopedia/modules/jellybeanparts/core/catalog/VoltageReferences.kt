@@ -20,8 +20,8 @@ import io.github.kolod.circuitopedia.modules.jellybeanparts.core.pins
 
 internal val voltageReferences = listOf(
     // TI SLVS543S: 6.4 Recommended Operating Conditions; 6.5 Electrical Characteristics, TL431C
-    // (TA = 25°C); Table 5-1 Pin Functions, LP (TO-92). TO-92 shunt references are not numbered
-    // alike by all makers, hence the maker warning (to confirm in the audit).
+    // (TA = 25°C); Table 5-1 Pin Functions, LP (TO-92): 1 Cathode, 2 Anode, 3 REF. onsemi TL431/D
+    // Rev. 45 numbers its TO-92 the other way (1 Reference, 2 Anode, 3 Cathode), hence the warning.
     PartEntry(
         id = PartId("tl431"), name = "TL431", category = Category.VoltageReferences,
         parameters = listOf(
