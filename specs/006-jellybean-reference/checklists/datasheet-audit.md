@@ -8,7 +8,7 @@ How the PDFs were read: downloaded from the maker's site and converted with `pdf
 (xpdf 4.06), which keeps table columns aligned. Values are copied as printed.
 
 Some PDFs lose the "µ" glyph in their text layer. These are Vishay, the onsemi Fairchild-format
-sheets, and TI SLVS044 and FN3072. onsemi Symbol-font sheets print µ as "m" instead. Rows whose
+sheets, TI SLVS044, FN3072 and ADI TMP35/TMP36/TMP37. onsemi Symbol-font sheets print µ as "m" instead. Rows whose
 unit had to be read as µ are marked **(µ)**. The visual check must confirm them on the page.
 
 | Done | Entry | Document | Revision | Tables used | Status |
@@ -43,7 +43,7 @@ unit had to be read as µ are marked **(µ)**. The visual check must confirm the
 | [ ] | TL431 | TI SLVS543 | SLVS543S, May 2024 | 6.4 ROC; 6.5 EC TL431C; Table 5-1 (LP) | transcribed. **(µ)** Iref 2/4 µA. Maker-varying TO-92 pinout still to be confirmed against a second maker |
 | [ ] | 74HC family | TI SCLS181 (SN74HC00) | SCLS181H, Aug 2021 | 6.3 ROC; 6.5 EC commercial; 6.7 Switching commercial | transcribed |
 | [ ] | LM35 | TI SNIS159 | SNIS159H, Dec 2017 | 6.3 ROC; 6.7 EC LM35 limits; Pin Functions | transcribed |
-| [ ] | TMP36 | ADI TMP35/TMP36/TMP37 | — | — | **pending**: analog.com timed out on every attempt |
+| [ ] | TMP36 | ADI TMP35/TMP36/TMP37 (PDF supplied by the user; analog.com timed out from here) | Rev. E, Aug 2008 | Table 1 Specifications (F grade); Figure 4 T-3 (TO-92) | transcribed. **(µ)** ISY 50 µA. The text layer also drops ± and °, so the accuracy rows must be checked on the page |
 | [ ] | MC34063 | TI SLLS636 | SLLS636N, Jan 2015 | 7.3 ROC; 7.5–7.8 EC; Pin Functions | transcribed |
 | [ ] | UC3842–UC3845 | TI SLUS223 | SLUS223H, Oct 2024 | 4 Device Comparison; 6.3 ROC; 6.5 EC; Table 5-1 | transcribed |
 | [ ] | ICL7660 | Renesas FN3072 | Rev. 7.00, Oct 5, 2010 | Electrical Specifications ICL7660; Pinouts | transcribed. **(µ)** I+ 170/500 µA |

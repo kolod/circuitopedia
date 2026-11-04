@@ -88,6 +88,14 @@ class SpotValuesTest {
     @Test fun lm35ScaleFactor_SNIS159_6_7() =
         assertEquals(Value(min = "9.8", typ = "10", max = "10.2", unit = "mV/°C"), value("lm35", ScaleFactor))
 
+    @Test fun tmp36OutputAndPinout_TMP35_36_37_Table1() {
+        assertEquals(Value(typ = "750", unit = "mV"), value("tmp36", ParameterKind.OutputAt25C))
+        assertEquals(
+            listOf(PinFunction.PositiveSupply, PinFunction.Output, PinFunction.Ground),
+            entry(PartId("tmp36"))!!.pins.map { it.function },
+        )
+    }
+
     @Test fun mc34063Oscillator_SLLS636_7_5() =
         assertEquals(Value(min = "24", typ = "33", max = "42", unit = "kHz"), value("mc34063", OscillatorFrequency))
 

@@ -100,11 +100,11 @@ datasheets.
   - the 79xx family (7905, 7912, 7915);
   - LM317 and LM337 in TO-220;
   - TL431 in TO-92.
-- [ ] T013 [P] Transcribe the sensors and power controllers into `CAT/TemperatureSensors.kt` and `CAT/PowerControllers.kt`:
+- [X] T013 [P] Transcribe the sensors and power controllers into `CAT/TemperatureSensors.kt` and `CAT/PowerControllers.kt`:
   - LM35 and TMP36 in TO-92;
   - MC34063 and ICL7660 in DIP-8;
   - the UC384x family in DIP-8 (members UC3842–UC3845 with UVLO thresholds and maximum duty cycle).
-- [ ] T014 Write `CORE_TEST/SpotValuesTest.kt`, with about two values per category checked against their transcribed datasheet tables, each test naming its table. Examples: 1N4148 V_RRM, LM317 V_REF typ, TL431 V_REF typ, LM35 scale factor, 2N3904 V_CEO, LM358 supply range. Run `./gradlew :modules:jellybean-parts:core:test` until T006 and T014 pass.
+- [X] T014 Write `CORE_TEST/SpotValuesTest.kt`, with about two values per category checked against their transcribed datasheet tables, each test naming its table. Examples: 1N4148 V_RRM, LM317 V_REF typ, TL431 V_REF typ, LM35 scale factor, 2N3904 V_CEO, LM358 supply range. Run `./gradlew :modules:jellybean-parts:core:test` until T006 and T014 pass.
 
 **Checkpoint**: The catalog is complete, internally consistent, and logged in `AUDIT`.
 
