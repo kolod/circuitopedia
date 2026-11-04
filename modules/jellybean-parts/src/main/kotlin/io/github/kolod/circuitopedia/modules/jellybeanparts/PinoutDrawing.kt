@@ -40,9 +40,9 @@ private fun Pin.symbol(): String = function.symbol + (channel?.let { " $it" } ?:
 /** The drawing height of each package, in dp. The drawing does not scale with the font size. */
 private fun Package.drawingHeight(): Dp = when (this) {
     Package.Dip8, Package.Dip14 -> (pinCount / 2 * 26 + 30).dp
-    Package.To92 -> 140.dp
-    Package.To126 -> 160.dp
-    Package.To220 -> 180.dp
+    Package.To92 -> 160.dp
+    Package.To126 -> 180.dp
+    Package.To220 -> 200.dp
     Package.Sot23 -> 140.dp
     Package.Do35, Package.Do41 -> 90.dp
 }
@@ -139,10 +139,13 @@ private class Drawer(
             style = stroke,
         )
 
-    /** Number and symbol under a lead that ends at [bottom]. */
-    fun leadLabel(pin: Pin, atX: Float, bottom: Float) {
+    /**
+     * Number and symbol under a lead that ends at [bottom]. [lowered] puts the symbol one line lower,
+     * so the symbols of closely spaced leads ("GND" between "IN" and "OUT") do not run together.
+     */
+    fun leadLabel(pin: Pin, atX: Float, bottom: Float, lowered: Boolean = false) {
         text("${pin.number}", Offset(x(atX), y(bottom + 10)), Align.Center, accent)
-        text(pin.symbol(), Offset(x(atX), y(bottom + 26)), Align.Center)
+        text(pin.symbol(), Offset(x(atX), y(bottom + if (lowered) 44 else 26)), Align.Center)
     }
 
     /** Top view: pins 1…n/2 down the left side, then n/2+1…n up the right side. */
@@ -202,7 +205,7 @@ private class Drawer(
         pins.forEachIndexed { i, pin ->
             val lx = (i - (pins.size - 1) / 2f) * spacing
             line(lx, top, lx, top + length)
-            leadLabel(pin, lx, top + length)
+            leadLabel(pin, lx, top + length, lowered = i % 2 == 1)
         }
     }
 

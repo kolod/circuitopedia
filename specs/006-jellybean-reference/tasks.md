@@ -182,7 +182,7 @@ datasheets. Back returns to the same position.
 - [X] T024 [P] [US3] Add spoken words for parameter kinds (minimum, typical, maximum) and units (volt, milliampere, …) to `RES/values*/strings.xml` in six locales.
 - [X] T025 [US3] Give each parameter row a spoken description ("V_CEO, maximum 30 volt, …") and each pin row "Pin 1, collector" via semantics in `UI/ParameterTable.kt` and `UI/PinoutDrawing.kt`.
 - [X] T026 [US3] Extend `UI_TEST/PartsScreenTest.kt` with the spoken texts of a parameter row and a pin row.
-- [ ] T027 [US3] On the emulator, check:
+- [X] T027 [US3] On the emulator, check:
   - Ukrainian: translated texts and decimal commas;
   - dark theme;
   - 200% font: tables wrap and nothing is cut off;
@@ -197,8 +197,8 @@ datasheets. Back returns to the same position.
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 - [ ] T028 Run the manual datasheet audit (SC-003). Re-check every value and pin of every entry against its PDF, fix any mismatch, and mark each `AUDIT` line "audited" with the date.
-- [ ] T029 [P] Check that `modules/jellybean-parts/core` has no `android` imports.
-- [ ] T030 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease` and `./gradlew connectedDebugAndroidTest`. All must be green.
+- [X] T029 [P] Check that `modules/jellybean-parts/core` has no `android` imports.
+- [X] T030 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease` and `./gradlew connectedDebugAndroidTest`. All must be green.
 - [ ] T031 Do the manual checks in `specs/006-jellybean-reference/quickstart.md` §4.
 - [ ] T032 Push branch `006-jellybean-reference` and open a PR to `main`. The description credits the EEVblog thread, lists the datasheets and links the audit. Before merging, wait until CI is no longer pending on the latest commit.
 

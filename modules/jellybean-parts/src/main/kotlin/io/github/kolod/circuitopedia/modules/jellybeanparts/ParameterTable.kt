@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -72,20 +73,40 @@ internal fun spokenParameter(res: Resources, parameter: Parameter, locale: Local
 
 private val NAME_WEIGHT = 2.4f
 
-/** Column headers, then one row per parameter; the cells wrap at large font sizes. */
+/** Above this font scale the columns are too narrow, so each row stacks its values under its name. */
+private const val STACKED_FONT_SCALE = 1.3f
+
+/** "Min 3 · Max 30 V": the printed bounds with their column names, then the unit. */
+@Composable
+private fun boundsLine(v: Value, locale: Locale): String {
+    val bounds = listOfNotNull(
+        v.min?.let { stringResource(R.string.jellybean_parts_col_min) + " " + printed(it, v.plusMinus, locale) },
+        v.typ?.let { stringResource(R.string.jellybean_parts_col_typ) + " " + printed(it, v.plusMinus, locale) },
+        v.max?.let { stringResource(R.string.jellybean_parts_col_max) + " " + printed(it, v.plusMinus, locale) },
+    ).joinToString(" · ")
+    return "$bounds ${v.unit}"
+}
+
+/**
+ * Column headers, then one row per parameter. At large font sizes the table becomes a list: the
+ * name over the condition over the bounds, so no number or word is split across lines.
+ */
 @Composable
 internal fun ParameterTable(parameters: List<Parameter>, locale: Locale) {
     val res = LocalResources.current
+    val stacked = LocalDensity.current.fontScale > STACKED_FONT_SCALE
     Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-        Row(
-            Modifier.fillMaxWidth().padding(vertical = 4.dp).semantics { invisibleToUser() },
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-        ) {
-            HeaderCell(stringResource(R.string.jellybean_parts_col_parameter), NAME_WEIGHT)
-            HeaderCell(stringResource(R.string.jellybean_parts_col_min))
-            HeaderCell(stringResource(R.string.jellybean_parts_col_typ))
-            HeaderCell(stringResource(R.string.jellybean_parts_col_max))
-            HeaderCell(stringResource(R.string.jellybean_parts_col_unit))
+        if (!stacked) {
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 4.dp).semantics { invisibleToUser() },
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                HeaderCell(stringResource(R.string.jellybean_parts_col_parameter), NAME_WEIGHT)
+                HeaderCell(stringResource(R.string.jellybean_parts_col_min))
+                HeaderCell(stringResource(R.string.jellybean_parts_col_typ))
+                HeaderCell(stringResource(R.string.jellybean_parts_col_max))
+                HeaderCell(stringResource(R.string.jellybean_parts_col_unit))
+            }
         }
         HorizontalDivider()
         val seen = mutableMapOf<ParameterKind, Int>()
@@ -93,6 +114,25 @@ internal fun ParameterTable(parameters: List<Parameter>, locale: Locale) {
             val n = seen.merge(parameter.kind, 1, Int::plus)!!
             val tag = if (n == 1) "jb-param-${parameter.kind.name}" else "jb-param-${parameter.kind.name}-$n"
             val spoken = spokenParameter(res, parameter, locale)
+            if (stacked) {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 6.dp)
+                        .clearAndSetSemantics {
+                            contentDescription = spoken
+                            testTag = tag
+                        },
+                ) {
+                    Text(stringResource(parameter.kind.label()), style = MaterialTheme.typography.bodyMedium)
+                    parameter.condition?.let {
+                        Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    Text(boundsLine(parameter.value, locale), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                }
+                HorizontalDivider()
+                return@forEach
+            }
             Row(
                 Modifier
                     .fillMaxWidth()
