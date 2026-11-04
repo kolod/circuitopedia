@@ -117,13 +117,13 @@ datasheets.
 **Independent Test**: The list shows 11 category headers in order and every part with its purpose
 in the device language.
 
-- [ ] T015 [P] [US1] Add to `RES/values*/strings.xml` in six locales:
+- [X] T015 [P] [US1] Add to `RES/values*/strings.xml` in six locales:
   - `category_<name>` (11);
   - `<id>_purpose` (34), one line each, written from the datasheet's own summary, never from the
     forum;
   - `credit` ("Selection based on the EEVblog forum thread \"Jellybean list\" (2014)").
-- [ ] T016 [US1] Create `UI/Texts.kt`: exhaustive `when` maps from `Category`, `ParameterKind`, `PinFunction` and `Package` to string resources, and a `PartId` → purpose/description resource map.
-- [ ] T017 [US1] Implement `UI/PartList.kt`:
+- [X] T016 [US1] Create `UI/Texts.kt`: exhaustive `when` maps from `Category`, `ParameterKind`, `PinFunction` and `Package` to string resources, and a `PartId` → purpose/description resource map.
+- [X] T017 [US1] Implement `UI/PartList.kt`:
   - a `LazyColumn` with a `stickyHeader` per category;
   - each row shows the name and purpose and is one tap target;
   - the credit footer;
@@ -131,7 +131,7 @@ in the device language.
 
   Then `UI/PartsScreen.kt`: the saveable `PartId?` state, the saveable list state, and a
   `BackHandler` while a page is open.
-- [ ] T018 [US1] Write `UI_TEST/PartsScreenTest.kt` part 1: the header order, every row present (scrolling to it), the credit, and that every `PartId` resolves to a purpose string. Run it on an emulator.
+- [X] T018 [US1] Write `UI_TEST/PartsScreenTest.kt` part 1: the header order, every row present (scrolling to it), the credit, and that every `PartId` resolves to a purpose string. Run it on an emulator.
 
 **Checkpoint**: The list works end to end.
 
@@ -144,20 +144,20 @@ in the device language.
 **Independent Test**: Open five parts from different categories and compare them with their
 datasheets. Back returns to the same position.
 
-- [ ] T019 [P] [US2] Add to `RES/values*/strings.xml` in six locales:
+- [X] T019 [P] [US2] Add to `RES/values*/strings.xml` in six locales:
   - `<id>_description` (34);
   - `param_<kind>`;
   - `pin_<function>`;
   - `view_<package>`;
   - `key_parameters`, `pinout`, `members`, `equivalent_of`, `warning_pinout_varies`, `source_label`;
   - the column headers.
-- [ ] T020 [US2] Implement `UI/ParameterTable.kt`:
+- [X] T020 [US2] Implement `UI/ParameterTable.kt`:
   - one row per parameter with min, typ, max and unit columns that wrap;
   - the condition in small text under the name;
   - decimals formatted with `formatDecimal` for the locale;
   - for families, a members table.
-- [ ] T021 [US2] Implement `UI/PinoutDrawing.kt`: one Canvas outline per `Package`, with pins numbered and labeled with short symbols, plus the view note. The drawing gets `clearAndSetSemantics {}`. Under it goes a pin table, "1  Collector", with tag `jb-pin-<n>`.
-- [ ] T022 [US2] Implement `UI/PartPage.kt`, which shows:
+- [X] T021 [US2] Implement `UI/PinoutDrawing.kt`: one Canvas outline per `Package`, with pins numbered and labeled with short symbols, plus the view note. The drawing gets `clearAndSetSemantics {}`. Under it goes a pin table, "1  Collector", with tag `jb-pin-<n>`.
+- [X] T022 [US2] Implement `UI/PartPage.kt`, which shows:
   - the title, category and purpose;
   - the description;
   - the parameter table;
@@ -165,7 +165,7 @@ datasheets. Back returns to the same position.
   - the equivalent note;
   - the source line;
   - tags `jb-page`, `jb-param-<kind>`, `jb-source` and `jb-warning`.
-- [ ] T023 [US2] Extend `UI_TEST/PartsScreenTest.kt`:
+- [X] T023 [US2] Extend `UI_TEST/PartsScreenTest.kt`:
   - open BC548 and check the parameters, the 3 pins, the warning and the source;
   - check 78xx members, 74HC with no pinout, and 1N914 with its equivalent note;
   - back returns to the same list position;
@@ -179,9 +179,9 @@ datasheets. Back returns to the same position.
 
 **Goal**: Spoken parameter rows and pins, locale decimals, 200% font, dark theme.
 
-- [ ] T024 [P] [US3] Add spoken words for parameter kinds (minimum, typical, maximum) and units (volt, milliampere, …) to `RES/values*/strings.xml` in six locales.
-- [ ] T025 [US3] Give each parameter row a spoken description ("V_CEO, maximum 30 volt, …") and each pin row "Pin 1, collector" via semantics in `UI/ParameterTable.kt` and `UI/PinoutDrawing.kt`.
-- [ ] T026 [US3] Extend `UI_TEST/PartsScreenTest.kt` with the spoken texts of a parameter row and a pin row.
+- [X] T024 [P] [US3] Add spoken words for parameter kinds (minimum, typical, maximum) and units (volt, milliampere, …) to `RES/values*/strings.xml` in six locales.
+- [X] T025 [US3] Give each parameter row a spoken description ("V_CEO, maximum 30 volt, …") and each pin row "Pin 1, collector" via semantics in `UI/ParameterTable.kt` and `UI/PinoutDrawing.kt`.
+- [X] T026 [US3] Extend `UI_TEST/PartsScreenTest.kt` with the spoken texts of a parameter row and a pin row.
 - [ ] T027 [US3] On the emulator, check:
   - Ukrainian: translated texts and decimal commas;
   - dark theme;
