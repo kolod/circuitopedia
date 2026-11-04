@@ -44,36 +44,36 @@
 | LM324 | TI | SLOS066, LMx24, LM2902 |
 | TL072 | TI | SLOS080, TL07x |
 | OP07 | TI | SLOS099, OP07x |
-| LM393 | TI | SLOS031, LMx93, LM2903 |
+| LM393 | TI | SLCS005, LMx93, LM2903 (corrected at transcription) |
 | LM339 | TI | SLCS006, LMx39, LM2901 |
 | NE555 | TI | SLFS022, xx555 |
 | 2N3904 | onsemi | 2N3904/D |
 | 2N3906 | onsemi | 2N3906/D |
-| 2N2222 (PN2222A) | onsemi | PN2222A/D (confirm) |
-| PN2907 (PN2907A) | onsemi | PN2907A/D (confirm) |
-| BC548 | onsemi | BC546/D, BC546–BC548 series (confirm) |
-| BD139 | STMicroelectronics | BD135, BD137, BD139 (confirm DS number) |
-| BD140 | STMicroelectronics | BD136, BD138, BD140 (confirm DS number) |
-| 2N7000 | onsemi | 2N7000/D (confirm) |
-| 2N7002 | Nexperia | 2N7002 product data sheet |
+| 2N2222 (PN2222A) | onsemi | PN2222A/D |
+| PN2907 (PN2907A) | onsemi | PN2907A/D |
+| BC548 | onsemi | BC546/D, BC546–BC548 series |
+| BD139 | onsemi | BD135/D, BD135G/BD137G/BD139G (st.com did not respond at transcription) |
+| BD140 | onsemi | BD136/D, BD136/BD138/BD140 |
+| 2N7000 | onsemi | 2N7000/D |
+| 2N7002 | onsemi | 2N7002L/D (Nexperia refused the download at transcription) |
 | 1N4148 | Vishay | 81857, 1N4148 |
-| 1N914 | onsemi | 1N914/D, 1N914–1N4448 (confirm) |
+| 1N914 | onsemi | 1N914/D, 1N91x/1N4x48 |
 | 1N4001–1N4007 | Vishay | 88503, 1N4001 thru 1N4007 |
 | 1N5817 | Vishay | 88525, 1N5817 thru 1N5819 |
 | 1N5819 | Vishay | 88525 (same document) |
-| BAT54 | Nexperia | BAT54 series product data sheet |
-| SD103 | Vishay | SD103A/B/C (confirm document number) |
+| BAT54 | onsemi | BAT54LT1/D (Nexperia refused the download at transcription) |
+| SD103 | Vishay | 85754, SD103A/B/C |
 | 78xx | TI | SLVS056, µA7800 series |
-| 79xx | onsemi | MC7900/D (confirm) |
+| 79xx | onsemi | MC7900/D |
 | LM317 | TI | SLVS044, LM317 |
-| LM337 | TI | LM337 (confirm literature number) |
+| LM337 | TI | SLVS047, LM337 |
 | TL431 | TI | SLVS543, TL431, TL432 |
-| 74HC family | TI | SCLS181, SN74HC00 (family values: supply range, drive, propagation delay at 4.5V) (confirm) |
+| 74HC family | TI | SCLS181, SN74HC00 (family values: supply range, drive, propagation delay at 4.5V) |
 | LM35 | TI | SNIS159, LM35 |
 | TMP36 | Analog Devices | TMP35/TMP36/TMP37 |
-| MC34063 | TI | SLLS636, MC33063A, MC34063A (confirm) |
+| MC34063 | TI | SLLS636, MC33063A, MC34063A |
 | UC384x | TI | SLUS223, UC384x |
-| ICL7660 | Renesas | FN3072, ICL7660 (confirm) |
+| ICL7660 | Renesas | FN3072, ICL7660 |
 
 - **Transcription rules**:
   - values are copied as printed, with their kind (min, typ or max) and condition;
@@ -157,7 +157,7 @@
 ## R6. Testing strategy
 
 - **JVM (core), written first**, as `CatalogTest`:
-  - the 35 entries in FR-002 order and category order;
+  - the 34 entries in FR-002 order and category order;
   - unique ids;
   - every entry has a `Source` with maker, document and revision;
   - every parameter has a unit and at least one bound, and min ≤ typ ≤ max where present;

@@ -6,7 +6,7 @@
 
 ## Summary
 
-This is the first Reference module: 35 jellybean parts in 11 categories, chosen from the EEVblog
+This is the first Reference module: 34 jellybean parts in 11 categories, chosen from the EEVblog
 "Jellybean list" thread (research R1). Each part page shows:
 - its purpose and description;
 - a table of key datasheet parameters (min, typ, max, condition);
@@ -39,7 +39,7 @@ target 17
 **Constraints**: Offline, no permissions, values exactly as the datasheets print them, every value
 cited, six locales
 
-**Scale/Scope**: 2 screens (list and page), 35 entries, 8 package drawings, about 300 parameter rows,
+**Scale/Scope**: 2 screens (list and page), 34 entries, 8 package drawings, about 300 parameter rows,
 about 450 localized strings per locale
 
 ## Constitution Check
@@ -113,4 +113,4 @@ category. It depends only on `:shared:si-format`.
 | Item | Why Needed | Simpler Alternative Rejected Because |
 |------|------------|-------------------------------------|
 | About 450 localized strings per locale | Purposes, descriptions, parameter and pin names in 6 languages (Principle V) | English-only content breaks the constitution. |
-| Manual audit of 35 datasheets | Transcription errors cannot be caught by code (SC-003) | Automated scraping of PDFs is unreliable and would need a network. |
+| Manual audit of 33 datasheets | Transcription errors cannot be caught by code (SC-003) | Automated scraping of PDFs is unreliable and would need a network. |

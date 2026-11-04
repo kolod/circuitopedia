@@ -60,7 +60,7 @@ The module has one module screen with two levels: the list and a part page. The 
 - `param_<kind>` (one per `ParameterKind`)
 - `pin_<function>` (one per `PinFunction`)
 - `view_<package>` (8)
-- `<id>_purpose` and `<id>_description` (35 × 2)
+- `<id>_purpose` and `<id>_description` (34 × 2)
 - spoken words for kinds and units
 
 ## Test tags

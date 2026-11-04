@@ -67,11 +67,11 @@ parts".
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: The catalog model, its integrity checks, and all 35 entries transcribed from their
+**Purpose**: The catalog model, its integrity checks, and all 34 entries transcribed from their
 datasheets.
 
-- [ ] T006 Write `CORE_TEST/CatalogTest.kt` (test-first) with the research R6 integrity checks:
-  - 35 entries in FR-002 order, and categories in `Category` order;
+- [X] T006 Write `CORE_TEST/CatalogTest.kt` (test-first) with the research R6 integrity checks:
+  - 34 entries in FR-002 order, and categories in `Category` order;
   - unique ids;
   - every `Source` has a non-blank maker, document and revision;
   - every parameter has a non-blank unit and at least one bound, and min ≤ typ ≤ max, compared as
@@ -80,22 +80,22 @@ datasheets.
   - the 74HC family has no package and every other entry has one;
   - every family has members;
   - every `equivalent` points to an existing id.
-- [ ] T007 Create `CORE/Model.kt` per contracts/core-api.md and data-model.md: `Category`, `PartId`, `ParameterKind`, `Value`, `Parameter`, `Package`, `PinFunction` (with symbols), `Pin`, `FamilyMember`, `Source` and `PartEntry`. Also create `CAT/Catalog.kt` (`catalog`, `catalogByCategory`, `entry`), assembling the per-category lists of T008–T013. Create `AUDIT` with its header.
-- [ ] T008 [P] Transcribe the op-amps and comparators into `CAT/OpAmps.kt` and `CAT/Comparators.kt`: LM358, LM324, TL072, OP07, LM393, LM339. Use the DIP-8 and DIP-14 pinouts with channels A–D.
-- [ ] T009 [P] Transcribe the timer and the logic family into `CAT/Timers.kt` and `CAT/Logic.kt`:
+- [X] T007 Create `CORE/Model.kt` per contracts/core-api.md and data-model.md: `Category`, `PartId`, `ParameterKind`, `Value`, `Parameter`, `Package`, `PinFunction` (with symbols), `Pin`, `FamilyMember`, `Source` and `PartEntry`. Also create `CAT/Catalog.kt` (`catalog`, `catalogByCategory`, `entry`), assembling the per-category lists of T008–T013. Create `AUDIT` with its header.
+- [X] T008 [P] Transcribe the op-amps and comparators into `CAT/OpAmps.kt` and `CAT/Comparators.kt`: LM358, LM324, TL072, OP07, LM393, LM339. Use the DIP-8 and DIP-14 pinouts with channels A–D.
+- [X] T009 [P] Transcribe the timer and the logic family into `CAT/Timers.kt` and `CAT/Logic.kt`:
   - NE555 with its DIP-8 pinout;
   - the 74HC family: supply range, output drive and propagation delay at 4.5V from the cited SN74HC00 datasheet, no package, and members for the common gates.
-- [ ] T010 [P] Transcribe the bipolar transistors and MOSFETs into `CAT/BipolarTransistors.kt` and `CAT/Mosfets.kt`:
+- [X] T010 [P] Transcribe the bipolar transistors and MOSFETs into `CAT/BipolarTransistors.kt` and `CAT/Mosfets.kt`:
   - 2N3904, 2N3906, 2N2222 (PN2222A), PN2907 (PN2907A) and BC548 in TO-92;
   - BD139 and BD140 in TO-126;
   - 2N7000 in TO-92 and 2N7002 in SOT-23.
 
   Set `makerVariesPinout` where research R3 found a disagreement.
-- [ ] T011 [P] Transcribe the diodes into `CAT/Diodes.kt`:
+- [X] T011 [P] Transcribe the diodes into `CAT/Diodes.kt`:
   - 1N4148, 1N914 (equivalent of 1N4148) and SD103 in DO-35;
   - the 1N4001–1N4007 family (members with V_RRM), 1N5817 and 1N5819 in DO-41;
   - BAT54 in SOT-23, single-diode variant, noting the BAT54A/C/S variants in its description key.
-- [ ] T012 [P] Transcribe the regulators and the reference into `CAT/VoltageRegulators.kt` and `CAT/VoltageReferences.kt`:
+- [X] T012 [P] Transcribe the regulators and the reference into `CAT/VoltageRegulators.kt` and `CAT/VoltageReferences.kt`:
   - the 78xx family (members 7805, 7809, 7812, 7815, 7824 with V_OUT and tolerance);
   - the 79xx family (7905, 7912, 7915);
   - LM317 and LM337 in TO-220;
@@ -119,7 +119,7 @@ in the device language.
 
 - [ ] T015 [P] [US1] Add to `RES/values*/strings.xml` in six locales:
   - `category_<name>` (11);
-  - `<id>_purpose` (35), one line each, written from the datasheet's own summary, never from the
+  - `<id>_purpose` (34), one line each, written from the datasheet's own summary, never from the
     forum;
   - `credit` ("Selection based on the EEVblog forum thread \"Jellybean list\" (2014)").
 - [ ] T016 [US1] Create `UI/Texts.kt`: exhaustive `when` maps from `Category`, `ParameterKind`, `PinFunction` and `Package` to string resources, and a `PartId` → purpose/description resource map.
@@ -145,7 +145,7 @@ in the device language.
 datasheets. Back returns to the same position.
 
 - [ ] T019 [P] [US2] Add to `RES/values*/strings.xml` in six locales:
-  - `<id>_description` (35);
+  - `<id>_description` (34);
   - `param_<kind>`;
   - `pin_<function>`;
   - `view_<package>`;

@@ -95,5 +95,5 @@ and a localized full name.
 
 ## Catalog
 
-`val catalog: List<PartEntry>` holds the 35 entries in FR-002 order. `byCategory()` groups them in
+`val catalog: List<PartEntry>` holds the 34 entries in FR-002 order. `byCategory()` groups them in
 `Category` order.

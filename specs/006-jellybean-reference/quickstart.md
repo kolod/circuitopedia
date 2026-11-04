@@ -11,7 +11,7 @@ Prerequisites are the same as in [spec 001's quickstart](../001-app-shell-naviga
 ```
 
 Expected: the catalog integrity checks pass ([research R6](research.md)):
-- 35 entries in FR-002 order;
+- 34 entries in FR-002 order;
 - every entry has a source with a revision;
 - every parameter has a unit and consistent bounds;
 - every pinout is complete;

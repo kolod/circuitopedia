@@ -30,7 +30,7 @@ data class PartEntry(
     val source: Source,
 )
 
-/** The 35 entries in spec FR-002 order. */
+/** The 34 entries in spec FR-002 order. */
 val catalog: List<PartEntry>
 fun catalogByCategory(): Map<Category, List<PartEntry>>   // in Category order
 fun entry(id: PartId): PartEntry?
