@@ -48,17 +48,17 @@ transcription is verified by a manual audit (SC-003), because code cannot catch 
 
 **Purpose**: The module builds and appears in the Reference tab.
 
-- [ ] T001 [P] Create `modules/jellybean-parts/core/build.gradle.kts`: kotlin-jvm, JVM 17, `api(project(":shared:si-format"))`, `testImplementation(libs.junit)`.
-- [ ] T002 [P] Create `modules/jellybean-parts/build.gradle.kts` like `modules/voltage-divider/build.gradle.kts`, with namespace `io.github.kolod.circuitopedia.modules.jellybeanparts`, `resourcePrefix = "jellybean_parts_"` and a dependency on `:modules:jellybean-parts:core`.
-- [ ] T003 [P] Create `RES/drawable/jellybean_parts_icon.xml`, a 24dp single-color vector of a TO-92 transistor outline with three leads (white, no tint).
-- [ ] T004 [P] Create `RES/values*/strings.xml` with the title and description in six locales:
+- [X] T001 [P] Create `modules/jellybean-parts/core/build.gradle.kts`: kotlin-jvm, JVM 17, `api(project(":shared:si-format"))`, `testImplementation(libs.junit)`.
+- [X] T002 [P] Create `modules/jellybean-parts/build.gradle.kts` like `modules/voltage-divider/build.gradle.kts`, with namespace `io.github.kolod.circuitopedia.modules.jellybeanparts`, `resourcePrefix = "jellybean_parts_"` and a dependency on `:modules:jellybean-parts:core`.
+- [X] T003 [P] Create `RES/drawable/jellybean_parts_icon.xml`, a 24dp single-color vector of a TO-92 transistor outline with three leads (white, no tint).
+- [X] T004 [P] Create `RES/values*/strings.xml` with the title and description in six locales:
   - en: Jellybean parts / Common cheap parts: specs and pinouts;
   - de: Standardbauteile / Gängige Bauteile: Daten und Pinbelegung;
   - fr: Composants courants / Composants bon marché : caractéristiques et brochages;
   - es: Componentes comunes / Componentes baratos: datos y patillajes;
   - ja: 定番部品 / よく使う安価な部品の仕様とピン配置;
   - uk: Поширені компоненти / Дешеві деталі: параметри й цоколівки.
-- [ ] T005 Create `UI/JellybeanPartsModule.kt` (`AppModule(ModuleId("jellybean-parts"), Category.Reference, …) { PartsScreen() }`) and a placeholder `UI/PartsScreen.kt`, then register the module in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
+- [X] T005 Create `UI/JellybeanPartsModule.kt` (`AppModule(ModuleId("jellybean-parts"), Category.Reference, …) { PartsScreen() }`) and a placeholder `UI/PartsScreen.kt`, then register the module in `app/src/main/kotlin/io/github/kolod/circuitopedia/ModuleRegistry.kt`.
 
 **Checkpoint**: `./gradlew test lint :app:assembleDebug` passes. The Reference tab lists "Jellybean
 parts".

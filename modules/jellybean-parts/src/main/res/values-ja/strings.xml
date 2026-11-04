@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="jellybean_parts_title">定番部品</string>
+    <string name="jellybean_parts_description">よく使う安価な部品の仕様とピン配置</string>
+</resources>

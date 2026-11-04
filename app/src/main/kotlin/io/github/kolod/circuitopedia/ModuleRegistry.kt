@@ -2,6 +2,7 @@ package io.github.kolod.circuitopedia
 
 import io.github.kolod.circuitopedia.module.AppModule
 import io.github.kolod.circuitopedia.modules.inductorcolorcode.inductorColorCodeModule
+import io.github.kolod.circuitopedia.modules.jellybeanparts.jellybeanPartsModule
 import io.github.kolod.circuitopedia.modules.resistorcolorcode.resistorColorCodeModule
 import io.github.kolod.circuitopedia.modules.resistorcombinations.resistorCombinationsModule
 import io.github.kolod.circuitopedia.modules.voltagedivider.voltageDividerModule
@@ -13,5 +14,6 @@ object ModuleRegistry {
         inductorColorCodeModule,
         resistorCombinationsModule,
         voltageDividerModule,
+        jellybeanPartsModule,
     )
 }
