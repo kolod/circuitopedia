@@ -173,7 +173,7 @@ the pins of a pinout drawing in order.
 - **FR-005**: Each entry except the 74HC family MUST show a drawing of its common package:
   TO-92, SOT-23, DIP-8, DIP-14, DO-35, DO-41, TO-126, TO-220 or SOD-123, depending on the part. The
   drawing shows every pin with its number and its name, and states the side it is viewed from (for
-  example "TO-92, flat side facing you, leads down"). A part whose pinout differs between makers
+  example "TO-92, top view, flat side down"). A part whose pinout differs between makers
   shows the warning of User Story 2.
 - **FR-006**: Every parameter value and every pinout MUST come from a cited manufacturer
   datasheet. The page names the datasheet's maker, document number or title, and revision or date.

@@ -26,7 +26,7 @@
     <string name="jellybean_parts_col_typ">Typ</string>
     <string name="jellybean_parts_col_max">Max</string>
     <string name="jellybean_parts_col_unit">Unit</string>
-    <string name="jellybean_parts_view_to92">TO-92, flat side facing you, leads down</string>
+    <string name="jellybean_parts_view_to92">TO-92, top view, flat side down</string>
     <string name="jellybean_parts_view_sot23">SOT-23, top view</string>
     <string name="jellybean_parts_view_dip8">DIP-8, top view, notch up</string>
     <string name="jellybean_parts_view_dip14">DIP-14, top view, notch up</string>
@@ -200,7 +200,7 @@
     <string name="jellybean_parts_lm337_purpose">Adjustable negative linear regulator</string>
     <string name="jellybean_parts_lm337_description">The negative counterpart of the LM317, adjusted the same way with two resistors. Its pin order differs from the LM317.</string>
     <string name="jellybean_parts_tl431_purpose">Adjustable shunt voltage reference</string>
-    <string name="jellybean_parts_tl431_description">A programmable shunt reference: two resistors set the cathode voltage anywhere from the reference voltage up to its maximum. Common in power-supply feedback loops with an optocoupler. TI numbers the TO-92 legs in the reverse order (1 = cathode); the legs themselves are the same.</string>
+    <string name="jellybean_parts_tl431_description">A programmable shunt reference: two resistors set the cathode voltage anywhere from the reference voltage up to its maximum. Common in power-supply feedback loops with an optocoupler. onsemi numbers the TO-92 legs in the reverse order (1 = reference); the legs themselves are the same.</string>
     <string name="jellybean_parts_74hc_purpose">High-speed CMOS logic family</string>
     <string name="jellybean_parts_74hc_description">A CMOS logic family; inputs need CMOS levels (for TTL-level inputs there is 74HCT). The members listed are common gates, a flip-flop and a shift register. Values are from the 74HC00.</string>
     <string name="jellybean_parts_lm35_purpose">Analog temperature sensor, output in °C</string>

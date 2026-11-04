@@ -62,7 +62,7 @@ separator.
 
 | Entry | Pins | View note key |
 |-------|------|---------------|
-| `To92` | 3 | flat side facing you, leads down |
+| `To92` | 3 | top view, flat side down (drawn like TI's LP top view) |
 | `Sot23` | 3 | top view |
 | `Dip8` | 8 | top view, notch up |
 | `Dip14` | 14 | top view, notch up |

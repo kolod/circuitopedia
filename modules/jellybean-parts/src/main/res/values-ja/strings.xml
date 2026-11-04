@@ -26,7 +26,7 @@
     <string name="jellybean_parts_col_typ">標準</string>
     <string name="jellybean_parts_col_max">最大</string>
     <string name="jellybean_parts_col_unit">単位</string>
-    <string name="jellybean_parts_view_to92">TO-92、平らな面を手前、リードを下に</string>
+    <string name="jellybean_parts_view_to92">TO-92、上面図、平らな面を下に</string>
     <string name="jellybean_parts_view_sot23">SOT-23、上面図</string>
     <string name="jellybean_parts_view_dip8">DIP-8、上面図、切り欠きを上に</string>
     <string name="jellybean_parts_view_dip14">DIP-14、上面図、切り欠きを上に</string>
@@ -200,7 +200,7 @@
     <string name="jellybean_parts_lm337_purpose">可変負電圧リニアレギュレータ</string>
     <string name="jellybean_parts_lm337_description">LM317 の負電圧版で、同じく 2 本の抵抗で調整します。ピン順は LM317 と異なります。</string>
     <string name="jellybean_parts_tl431_purpose">可変シャント電圧リファレンス</string>
-    <string name="jellybean_parts_tl431_description">プログラマブルなシャントリファレンス。2 本の抵抗でカソード電圧を基準電圧から最大値までの範囲に設定します。フォトカプラと組んだ電源の帰還ループによく使われます。TI は TO-92 のピン番号を逆順 (1 = カソード) に付けていますが、ピンの配置自体は同じです。</string>
+    <string name="jellybean_parts_tl431_description">プログラマブルなシャントリファレンス。2 本の抵抗でカソード電圧を基準電圧から最大値までの範囲に設定します。フォトカプラと組んだ電源の帰還ループによく使われます。onsemi は TO-92 のピン番号を逆順 (1 = リファレンス) に付けていますが、ピンの配置自体は同じです。</string>
     <string name="jellybean_parts_74hc_purpose">高速 CMOS ロジックファミリ</string>
     <string name="jellybean_parts_74hc_description">CMOS ロジックファミリで、入力には CMOS レベルが必要です (TTL レベル入力には 74HCT があります)。品種は代表的なゲート、フリップフロップ、シフトレジスタです。値は 74HC00 のものです。</string>
     <string name="jellybean_parts_lm35_purpose">摂氏出力のアナログ温度センサ</string>

@@ -20,10 +20,9 @@ import io.github.kolod.circuitopedia.modules.jellybeanparts.core.pins
 
 internal val voltageReferences = listOf(
     // TI SLVS543S: 6.4 Recommended Operating Conditions; 6.5 Electrical Characteristics, TL431C
-    // (TA = 25°C). Pinout: the legs are the same at every maker, but the numbering is not. TI
-    // (Table 5-1, LP) numbers them 1 Cathode, 2 Anode, 3 REF; onsemi TL431/D Rev. 45 numbers them
-    // 1 Reference, 2 Anode, 3 Cathode. The pins follow onsemi, because like the other TO-92 entries
-    // its pin 1 is the left leg with the flat side facing the viewer (REF, A, K from the left).
+    // (TA = 25°C); Table 5-1 Pin Functions and the LP top view: 1 Cathode, 2 Anode, 3 REF from the
+    // left with the flat side down. onsemi TL431/D Rev. 45 numbers the same legs the other way
+    // (1 Reference, 2 Anode, 3 Cathode); the legs themselves are the same, so there is no warning.
     PartEntry(
         id = PartId("tl431"), name = "TL431", category = Category.VoltageReferences,
         parameters = listOf(
@@ -34,7 +33,7 @@ internal val voltageReferences = listOf(
             p(InputBiasCurrent, Value(typ = "2", max = "4", unit = "µA"), "reference input current, IKA = 10 mA, R1 = 10 kΩ"),
             p(OutputResistance, Value(typ = "0.2", max = "0.5", unit = "Ω"), "dynamic impedance, VKA = Vref, f ≤ 1 kHz, IKA = 1 mA to 100 mA"),
         ),
-        packageType = Package.To92, pins = pins(Reference, Anode, Cathode),
+        packageType = Package.To92, pins = pins(Cathode, Anode, Reference),
         source = Source("Texas Instruments", "SLVS543 — TL431, TL432 Precision Programmable Reference", "SLVS543S, revised May 2024"),
     ),
 )

@@ -26,7 +26,7 @@
     <string name="jellybean_parts_col_typ">Тип</string>
     <string name="jellybean_parts_col_max">Макс</string>
     <string name="jellybean_parts_col_unit">Од.</string>
-    <string name="jellybean_parts_view_to92">TO-92, плоска сторона до вас, виводи донизу</string>
+    <string name="jellybean_parts_view_to92">TO-92, вигляд зверху, плоскою стороною донизу</string>
     <string name="jellybean_parts_view_sot23">SOT-23, вигляд зверху</string>
     <string name="jellybean_parts_view_dip8">DIP-8, вигляд зверху, виїмкою догори</string>
     <string name="jellybean_parts_view_dip14">DIP-14, вигляд зверху, виїмкою догори</string>
@@ -200,7 +200,7 @@
     <string name="jellybean_parts_lm337_purpose">Регульований лінійний стабілізатор негативної напруги</string>
     <string name="jellybean_parts_lm337_description">Негативний відповідник LM317, регулюється так само двома резисторами. Порядок виводів відрізняється від LM317.</string>
     <string name="jellybean_parts_tl431_purpose">Регульоване паралельне джерело опорної напруги</string>
-    <string name="jellybean_parts_tl431_description">Програмоване паралельне джерело: два резистори задають напругу катода від опорної до максимальної. Поширене в колах зворотного зв\'язку блоків живлення з оптроном. TI нумерує виводи TO-92 у зворотному порядку (1 = катод); самі виводи ті самі.</string>
+    <string name="jellybean_parts_tl431_description">Програмоване паралельне джерело: два резистори задають напругу катода від опорної до максимальної. Поширене в колах зворотного зв\'язку блоків живлення з оптроном. onsemi нумерує виводи TO-92 у зворотному порядку (1 = опорний вхід); самі виводи ті самі.</string>
     <string name="jellybean_parts_74hc_purpose">Швидкодійне сімейство КМОН-логіки</string>
     <string name="jellybean_parts_74hc_description">Сімейство КМОН-логіки; входи потребують КМОН-рівнів (для ТТЛ-рівнів є 74HCT). Перелічені члени — поширені вентилі, тригер і зсувний регістр. Значення взято з 74HC00.</string>
     <string name="jellybean_parts_lm35_purpose">Аналоговий датчик температури, вихід у °C</string>

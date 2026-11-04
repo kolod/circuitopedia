@@ -82,11 +82,11 @@ class SpotValuesTest {
     @Test fun tl431Reference_SLVS543_6_5() =
         assertEquals(Value(min = "2440", typ = "2495", max = "2550", unit = "mV"), value("tl431", ReferenceVoltage))
 
-    /** onsemi TL431/D numbering (pin 1 = left leg, flat side facing): REF, A, K; TI numbers it reversed. */
-    @Test fun tl431PinsInPhysicalOrder_TL431D() {
+    /** TI SLVS543 Table 5-1, LP top view: K, A, REF from the left; the legs are the same at every maker. */
+    @Test fun tl431Pins_SLVS543_Table5_1() {
         val entry = entry(PartId("tl431"))!!
         assertEquals(
-            listOf(PinFunction.Reference, PinFunction.Anode, PinFunction.Cathode),
+            listOf(PinFunction.Cathode, PinFunction.Anode, PinFunction.Reference),
             entry.pins.map { it.function },
         )
         assertEquals(false, entry.makerVariesPinout)

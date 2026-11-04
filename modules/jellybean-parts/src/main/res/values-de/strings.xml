@@ -26,7 +26,7 @@
     <string name="jellybean_parts_col_typ">Typ</string>
     <string name="jellybean_parts_col_max">Max</string>
     <string name="jellybean_parts_col_unit">Einheit</string>
-    <string name="jellybean_parts_view_to92">TO-92, flache Seite zu Ihnen, Anschlüsse unten</string>
+    <string name="jellybean_parts_view_to92">TO-92, Draufsicht, flache Seite unten</string>
     <string name="jellybean_parts_view_sot23">SOT-23, Draufsicht</string>
     <string name="jellybean_parts_view_dip8">DIP-8, Draufsicht, Kerbe oben</string>
     <string name="jellybean_parts_view_dip14">DIP-14, Draufsicht, Kerbe oben</string>
@@ -200,7 +200,7 @@
     <string name="jellybean_parts_lm337_purpose">Einstellbarer negativer Linearregler</string>
     <string name="jellybean_parts_lm337_description">Das negative Gegenstück zum LM317, ebenso mit zwei Widerständen eingestellt. Seine Pinfolge unterscheidet sich vom LM317.</string>
     <string name="jellybean_parts_tl431_purpose">Einstellbare Shunt-Spannungsreferenz</string>
-    <string name="jellybean_parts_tl431_description">Eine programmierbare Shunt-Referenz: Zwei Widerstände stellen die Kathodenspannung zwischen der Referenzspannung und ihrem Höchstwert ein. Verbreitet in Netzteil-Regelschleifen mit Optokoppler. TI nummeriert die TO-92-Anschlüsse in umgekehrter Reihenfolge (1 = Kathode); die Anschlüsse selbst sind gleich.</string>
+    <string name="jellybean_parts_tl431_description">Eine programmierbare Shunt-Referenz: Zwei Widerstände stellen die Kathodenspannung zwischen der Referenzspannung und ihrem Höchstwert ein. Verbreitet in Netzteil-Regelschleifen mit Optokoppler. onsemi nummeriert die TO-92-Anschlüsse in umgekehrter Reihenfolge (1 = Referenz); die Anschlüsse selbst sind gleich.</string>
     <string name="jellybean_parts_74hc_purpose">Schnelle CMOS-Logikfamilie</string>
     <string name="jellybean_parts_74hc_description">Eine CMOS-Logikfamilie; die Eingänge brauchen CMOS-Pegel (für TTL-Pegel gibt es 74HCT). Die aufgeführten Typen sind gängige Gatter, ein Flipflop und ein Schieberegister. Die Werte stammen vom 74HC00.</string>
     <string name="jellybean_parts_lm35_purpose">Analoger Temperatursensor, Ausgang in °C</string>

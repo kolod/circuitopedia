@@ -40,7 +40,7 @@ private fun Pin.symbol(): String = function.symbol + (channel?.let { " $it" } ?:
 /** The drawing height of each package, in dp. The drawing does not scale with the font size. */
 private fun Package.drawingHeight(): Dp = when (this) {
     Package.Dip8, Package.Dip14 -> (pinCount / 2 * 26 + 30).dp
-    Package.To92 -> 160.dp
+    Package.To92 -> 130.dp
     Package.To126 -> 180.dp
     Package.To220 -> 200.dp
     Package.Sot23 -> 140.dp
@@ -173,17 +173,29 @@ private class Drawer(
         }
     }
 
-    /** Flat face toward the viewer, rounded top, three leads down. */
+    /**
+     * Top view, as in TI's drawings: the round body seen from above with its flat side at the
+     * bottom, the three leads as pads along the flat side, numbered 1, 2, 3 from the left.
+     */
     fun to92(pins: List<Pin>) {
+        val r = 40f
+        val cy = 50f
+        // The flat side is a chord 14 dp below the center: the arc runs over the top from the
+        // chord's left end (angle 180° - a) to its right end (a), clockwise.
+        val a = Math.toDegrees(kotlin.math.asin(14.0 / r)).toFloat()
         val path = Path().apply {
-            moveTo(x(-30f), y(60f))
-            lineTo(x(-30f), y(30f))
-            arcTo(Rect(Offset(x(-30f), y(6f)), Size(60f * u, 48f * u)), 180f, 180f, false)
-            lineTo(x(30f), y(60f))
+            arcTo(Rect(Offset(x(-r), y(cy - r)), Size(2 * r * u, 2 * r * u)), 180f - a, 180f + 2 * a, true)
             close()
         }
         scope.drawPath(path, ink, style = stroke)
-        leads(pins, spacing = 20f, top = 60f, length = 34f)
+        val spacing = 24f
+        val chord = cy + 14f
+        pins.forEachIndexed { i, pin ->
+            val px = (i - (pins.size - 1) / 2f) * spacing
+            rect(px - 8f, chord - 16f, 16f, 9f, radius = 1f)
+            text("${pin.number}", Offset(x(px), y(chord + 14f)), Align.Center, accent)
+            text(pin.symbol(), Offset(x(px), y(chord + if (i % 2 == 1) 48f else 30f)), Align.Center)
+        }
     }
 
     /** Marked face toward the viewer, mounting hole in the body. */

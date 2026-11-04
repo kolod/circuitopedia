@@ -101,7 +101,7 @@
 
   | Package | View |
   |---------|------|
-  | TO-92 | flat side facing you, leads down |
+  | TO-92 | top view, flat side down (as in TI drawings) |
   | SOT-23 | top view, pin 3 at the top |
   | DIP | top view, notch at the top, pin 1 at the top left |
   | TO-126 and TO-220 | marking facing you, leads down |

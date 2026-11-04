@@ -34,7 +34,7 @@ The module has one module screen with two levels: the list and a part page. The 
 │ V_CEO                        30    V     │
 │ I_C                          100   mA    │
 │ hFE            110           800   —     │  condition under the name
-│ Pinout · TO-92, flat side facing you     │
+│ Pinout · TO-92, top view, flat side down │
 │      [ drawing with 1 C  2 B  3 E ]      │  Canvas, decorative
 │ 1  Collector                             │  pin table (spoken)
 │ 2  Base                                  │
