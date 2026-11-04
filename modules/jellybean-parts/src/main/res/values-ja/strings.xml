@@ -200,7 +200,7 @@
     <string name="jellybean_parts_lm337_purpose">可変負電圧リニアレギュレータ</string>
     <string name="jellybean_parts_lm337_description">LM317 の負電圧版で、同じく 2 本の抵抗で調整します。ピン順は LM317 と異なります。</string>
     <string name="jellybean_parts_tl431_purpose">可変シャント電圧リファレンス</string>
-    <string name="jellybean_parts_tl431_description">プログラマブルなシャントリファレンス。2 本の抵抗でカソード電圧を基準電圧から最大値までの範囲に設定します。フォトカプラと組んだ電源の帰還ループによく使われます。</string>
+    <string name="jellybean_parts_tl431_description">プログラマブルなシャントリファレンス。2 本の抵抗でカソード電圧を基準電圧から最大値までの範囲に設定します。フォトカプラと組んだ電源の帰還ループによく使われます。TI は TO-92 のピン番号を逆順 (1 = カソード) に付けていますが、ピンの配置自体は同じです。</string>
     <string name="jellybean_parts_74hc_purpose">高速 CMOS ロジックファミリ</string>
     <string name="jellybean_parts_74hc_description">CMOS ロジックファミリで、入力には CMOS レベルが必要です (TTL レベル入力には 74HCT があります)。品種は代表的なゲート、フリップフロップ、シフトレジスタです。値は 74HC00 のものです。</string>
     <string name="jellybean_parts_lm35_purpose">摂氏出力のアナログ温度センサ</string>

@@ -200,7 +200,7 @@
     <string name="jellybean_parts_lm337_purpose">Regulador lineal negativo ajustable</string>
     <string name="jellybean_parts_lm337_description">El equivalente negativo del LM317, ajustado igual con dos resistencias. Su orden de patillas difiere del LM317.</string>
     <string name="jellybean_parts_tl431_purpose">Referencia de tensión shunt ajustable</string>
-    <string name="jellybean_parts_tl431_description">Una referencia shunt programable: dos resistencias fijan la tensión de cátodo entre la tensión de referencia y su máximo. Común en lazos de realimentación de fuentes con optoacoplador.</string>
+    <string name="jellybean_parts_tl431_description">Una referencia shunt programable: dos resistencias fijan la tensión de cátodo entre la tensión de referencia y su máximo. Común en lazos de realimentación de fuentes con optoacoplador. TI numera las patillas TO-92 en orden inverso (1 = cátodo); las patillas en sí son las mismas.</string>
     <string name="jellybean_parts_74hc_purpose">Familia lógica CMOS rápida</string>
     <string name="jellybean_parts_74hc_description">Una familia lógica CMOS; las entradas necesitan niveles CMOS (para niveles TTL existe la 74HCT). Los miembros listados son puertas comunes, un biestable y un registro de desplazamiento. Los valores son del 74HC00.</string>
     <string name="jellybean_parts_lm35_purpose">Sensor de temperatura analógico, salida en °C</string>
