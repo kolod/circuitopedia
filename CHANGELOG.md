@@ -3,6 +3,18 @@
 All notable changes to Circuitopedia are listed here. Versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Reference
+
+- **Board pinouts**: headers of the Arduino Uno R3 and Nano, Raspberry Pi Pico W and Pico 2 W,
+  Raspberry Pi 4 Model B, STM32F103 "Blue Pill" and WeAct STM32F411 "Black Pill", drawn and as a
+  list. Each pin shows its alternate functions and limits: 5 V tolerance, analog, onboard parts
+  (LED, button, crystal, USB), boot role, current limits and errata, all cited from the makers'
+  documents. A planner assigns UART, I2C, SPI, PWM, ADC, CAN, I2S and USB to pins and refuses
+  combinations the chip cannot route, such as a second I2C on pins already in use or a remap that
+  moves a whole group of pins. An optional switch keeps the screen on while a board is open.
+
 ## [0.1.0] - 2026-10-31
 
 The first release. Circuitopedia is a free, ad-free and offline reference app for electronics
