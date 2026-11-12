@@ -200,7 +200,7 @@ datasheets. Back returns to the same position.
 - [X] T029 [P] Check that `modules/jellybean-parts/core` has no `android` imports.
 - [X] T030 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease` and `./gradlew connectedDebugAndroidTest`. All must be green.
 - [ ] T031 Do the manual checks in `specs/006-jellybean-reference/quickstart.md` §4.
-- [ ] T032 Push branch `006-jellybean-reference` and open a PR to `main`. The description credits the EEVblog thread, lists the datasheets and links the audit. Before merging, wait until CI is no longer pending on the latest commit.
+- [X] T032 Push branch `006-jellybean-reference` and open a PR to `main`. The description credits the EEVblog thread, lists the datasheets and links the audit. Before merging, wait until CI is no longer pending on the latest commit.
 
 ---
 
