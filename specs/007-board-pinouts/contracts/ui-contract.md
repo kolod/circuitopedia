@@ -50,6 +50,12 @@ details and the planner (research R7).
   `clearAndSetSemantics { contentDescription = <board> pinout drawing, use the list to read
   pins }`.
 - **Default view**: the drawing, or the list when fontScale > 1.3.
+- **Onboard parts** (FR-017): a pin wired to an onboard part carries its short tag ("LED",
+  "button", "crystal", "USB", "SWD", "ID EEPROM", "flash") on the drawing and in the list.
+- **Keep the screen on** (FR-018, tag `bp-keep-screen-on`): a switch row under the controls. The
+  choice is held by the module screen; `View.keepScreenOn` is set only while a board is shown.
+- **Placement names**: when an instance has several placements, its name carries the pins of its
+  required slots, for example "USART1 (PB6, PB7)" or "I2C3 (GPIO4, GPIO5)".
 - **Marks** (tags `bp-mark-<LimitKind>`): each is a toggle chip, saved. A mark shows on the
   drawing as a symbol and a pattern, not only a color. In the list, it shows as symbols.
 
@@ -90,7 +96,7 @@ Assignments
 
 ## Strings (prefix `board_pinouts_`, six locales)
 
-- `title`, `description`, `drawing`, `list`, `planner`, `marks`, `sources_label`, `view_<key>`,
+- `title`, `description`, `keep_screen_on`, `tag_<BoardUse>`, `drawing`, `list`, `planner`, `marks`, `sources_label`, `view_<key>`,
   `add_function`, `clear_all`, `clear_all_confirm`, `remove`, `edit`, `used`, `moves_as_group`,
   `remap_stays`
 - `function_<kind>` (8), `limit_<kind>` and `limit_<kind>_explain` (11 + 11), `use_<BoardUse>`,

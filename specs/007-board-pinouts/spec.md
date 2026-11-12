@@ -238,6 +238,14 @@ I2C through the planner. At 200% font, do the same with the list.
 - **FR-016**: Limit marks and assignments MUST be distinguishable without color, by symbol or
   pattern.
 
+**Added with the user on 2026-11-12**
+
+- **FR-017**: The drawing and the list MUST always name the onboard part wired to a pin (LED,
+  button, crystal, USB, debug port, ID EEPROM, flash footprint), whatever marks are enabled.
+- **FR-018**: A board page MUST offer a "Keep the screen on" switch. While it is on and a board is
+  shown, the screen does not dim or turn off. Going back to the board list or leaving the module
+  releases the screen; opening a board again restores the user's choice. No permission is needed.
+
 ### Key Entities
 
 - **Board**: a name, its chip, its variants with their differences, its headers, its sources, and

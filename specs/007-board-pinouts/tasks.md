@@ -155,7 +155,7 @@ sheet.
 **Independent Test**: open each board, toggle the 5V mark, and open several pins. Compare with
 the sources.
 
-- [ ] T016 [P] [US1] Add to `RES/values*/strings.xml`, in six locales:
+- [X] T016 [P] [US1] Add to `RES/values*/strings.xml`, in six locales:
   - `board_<id>_description` (7) and `variant_<key>`;
   - `view_<key>`;
   - `limit_<kind>` and `limit_<kind>_explain`;
@@ -163,21 +163,21 @@ the sources.
   - `drawing`, `list`, `marks`, `sources_label`, `function_<kind>`.
 
   The explanations come from the source wording, not from community sites.
-- [ ] T017 [US1] Create `UI/Texts.kt`: exhaustive `when` maps from `LimitKind`, `BoardUse`, `BootEffect`, `ConditionKey`, `GroupKey`, `NoteKey`, `ViewSide`, `FunctionKind` and `PowerRole` to string resources, plus a `BoardId` → description map. Each `LimitKind` also gets a mark symbol and a pattern.
-- [ ] T018 [US1] Implement `UI/BoardList.kt`, a `LazyColumn` with tags `bp-list` and `bp-row-<id>` that shows the name and chip. Implement `UI/PinoutsScreen.kt` with the saveable state of research R7 (board, pin, view, marks) and a `BackHandler` that closes the sheet first, then the page.
-- [ ] T019 [US1] Implement `UI/BoardDrawing.kt`:
+- [X] T017 [US1] Create `UI/Texts.kt`: exhaustive `when` maps from `LimitKind`, `BoardUse`, `BootEffect`, `ConditionKey`, `GroupKey`, `NoteKey`, `ViewSide`, `FunctionKind` and `PowerRole` to string resources, plus a `BoardId` → description map. Each `LimitKind` also gets a mark symbol and a pattern.
+- [X] T018 [US1] Implement `UI/BoardList.kt`, a `LazyColumn` with tags `bp-list` and `bp-row-<id>` that shows the name and chip. Implement `UI/PinoutsScreen.kt` with the saveable state of research R7 (board, pin, view, marks) and a `BackHandler` that closes the sheet first, then the page.
+- [X] T019 [US1] Implement `UI/BoardDrawing.kt`:
   - a Canvas from `BoardLayout`: outline, USB, pads with numbers, labels outside the rows;
   - mark symbols and patterns for the enabled `LimitKind`s;
   - hit-testing that maps taps on a pad or label to a `HeaderPin`, with at least a 48dp target;
   - `clearAndSetSemantics` with `drawing_description`;
   - tag `bp-drawing`.
-- [ ] T020 [US1] Implement `UI/PinList.kt`, with tags `bp-pins` and `bp-pin-<header>-<position>`. Each row shows the number, label, chip pin and limit symbols. Each row is one semantics node.
-- [ ] T021 [US1] Implement `UI/PinSheet.kt`, a modal bottom sheet with tag `bp-pin-sheet`. It shows:
+- [X] T020 [US1] Implement `UI/PinList.kt`, with tags `bp-pins` and `bp-pin-<header>-<position>`. Each row shows the number, label, chip pin and limit symbols. Each row is one semantics node.
+- [X] T021 [US1] Implement `UI/PinSheet.kt`, a modal bottom sheet with tag `bp-pin-sheet`. It shows:
   - the label, the chip pin and the other header positions;
   - limit rows with tag `bp-limit-<kind>`, with values formatted by `formatDecimal` for the locale;
   - the group limits;
   - the functions on this pin, from `functionsOf`.
-- [ ] T022 [US1] Implement `UI/BoardPage.kt`. It shows:
+- [X] T022 [US1] Implement `UI/BoardPage.kt`. It shows:
   - the title and chip;
   - the Drawing | List switch, which defaults to List when fontScale > 1.3;
   - the mark chips, with tags `bp-mark-<kind>`, defaulting to 5V, 3.3V and power;
@@ -185,7 +185,7 @@ the sources.
   - the drawing or the list;
   - the variants and notes;
   - the sources line, with tag `bp-sources`.
-- [ ] T023 [US1] Write `UI_TEST/PinoutsScreenTest.kt` part 1. Run it on an emulator. It checks:
+- [X] T023 [US1] Write `UI_TEST/PinoutsScreenTest.kt` part 1. Run it on an emulator. It checks:
   - the board order;
   - opening each board shows every header pin in the list;
   - on the Blue Pill, the 5V mark state, and that PA12's sheet shows the USB board use and the FT condition;
@@ -217,23 +217,23 @@ conflicting placement and see it blocked, with its reason.
 - [X] T025 [US2] Implement `CORE/Planner.kt` per contracts/core-api.md until T024 passes.
 - [X] T026 [US2] Add a pairwise sweep to `CORE_TEST/PlannerTest.kt` (SC-002). For every real board, assign each placement's default, then check every other placement: it must be `Blocked` exactly when the two share an instance, a used pin or a resource. It must be `Warned` exactly when nothing blocks and it uses a board-use or boot-role pin.
 - [X] T027 [P] [US2] Write `CORE_TEST/StateCodecTest.kt` (test first): round trip, unknown board or placement ids dropped, malformed text gives an empty map. Then implement `CORE/StateCodec.kt`.
-- [ ] T028 [P] [US2] Add the planner strings to `RES/values*/strings.xml` in six locales:
+- [X] T028 [P] [US2] Add the planner strings to `RES/values*/strings.xml` in six locales:
   - `planner`, `add_function`, `clear_all`, `clear_all_confirm`, `remove`, `edit`, `used`;
   - `moves_as_group`, `remap_stays`;
   - `conflict_*`, `resource_<id>`, `warning_*`;
   - `spoken_assigned`, `spoken_blocked`.
-- [ ] T029 [US2] Implement `UI/PlannerSheet.kt` per the ui-contract:
+- [X] T029 [US2] Implement `UI/PlannerSheet.kt` per the ui-contract:
   - the assignments summary;
   - Add function → placements, with tags `bp-placement-<id>`, each with its verdict, the reasons or warnings, and its notes; blocked placements are disabled;
   - Edit, with candidate pins and verdicts per slot and "used" switches;
   - Remove;
   - Clear all, with confirmation.
-- [ ] T030 [US2] Wire the assignments into the UI:
+- [X] T030 [US2] Wire the assignments into the UI:
   - in `UI/PinoutsScreen.kt`, a saveable `Map<BoardId, List<Assignment>>` through a `Saver` that uses `encode`/`decode`;
   - assigned pins filled with their signal in `UI/BoardDrawing.kt`, and shown in `UI/PinList.kt`;
   - in `UI/PinSheet.kt`, the verdicts of the pin's functions, opening the planner at a placement, and Remove;
   - the planner button with its count in `UI/BoardPage.kt`.
-- [ ] T031 [US2] Extend `UI_TEST/PinoutsScreenTest.kt`:
+- [X] T031 [US2] Extend `UI_TEST/PinoutsScreenTest.kt`:
   - Pi 4: add I2C1 and see pins 3 and 5 assigned; the I2C3 placement on GPIO2/3 is blocked with its reason, while the one on GPIO4/5 is available with the overlay note;
   - Blue Pill: I2C1 remap is shown as moving as a group; CAN is blocked once USB is assigned;
   - Pico 2 W: choose per-signal pins;
@@ -248,13 +248,13 @@ conflicting placement and see it blocked, with its reason.
 
 **Goal**: screen-reader texts, locale decimals, 200% font, dark theme, and marks without color.
 
-- [ ] T032 [P] [US3] Add `spoken_pin`, and the spoken words for units and limits ("volt", "milliampere", "kilohm"), to `RES/values*/strings.xml` in six locales.
-- [ ] T033 [US3] Give each list row its spoken text (contracts/ui-contract.md): number, label, assignment and limits. Give blocked placements "disabled + reasons". Do this in `UI/PinList.kt` and `UI/PlannerSheet.kt`. Check that every planner action works from the list alone.
-- [ ] T034 [US3] Extend `UI_TEST/PinoutsScreenTest.kt` with:
+- [X] T032 [P] [US3] Add `spoken_pin`, and the spoken words for units and limits ("volt", "milliampere", "kilohm"), to `RES/values*/strings.xml` in six locales.
+- [X] T033 [US3] Give each list row its spoken text (contracts/ui-contract.md): number, label, assignment and limits. Give blocked placements "disabled + reasons". Do this in `UI/PinList.kt` and `UI/PlannerSheet.kt`. Check that every planner action works from the list alone.
+- [X] T034 [US3] Extend `UI_TEST/PinoutsScreenTest.kt` with:
   - the spoken text of a Pi 4 pin row (GPIO2 with its assignment and pull-up);
   - a blocked placement's spoken reason;
   - the list being the default view at fontScale 2.0.
-- [ ] T035 [US3] On the emulator, check:
+- [X] T035 [US3] On the emulator, check:
   - Ukrainian: texts and decimal commas;
   - dark and light themes: marks readable by symbol and pattern;
   - 200% font: nothing is cut off;
@@ -269,9 +269,9 @@ conflicting placement and see it blocked, with its reason.
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 - [ ] T036 Run the manual source audit (SC-004): re-check every board's pins, functions, placements and limits against its documents, fix any mismatch, and mark each `AUDIT` line "audited" with the date.
-- [ ] T037 [P] Check that `modules/board-pinouts/core` has no `android` imports.
-- [ ] T038 [P] Add the module to the Unreleased section of `CHANGELOG.md` (English).
-- [ ] T039 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease` and `./gradlew connectedDebugAndroidTest`, then reinstall with `:app:installDebug`. All must be green.
+- [X] T037 [P] Check that `modules/board-pinouts/core` has no `android` imports.
+- [X] T038 [P] Add the module to the Unreleased section of `CHANGELOG.md` (English).
+- [X] T039 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease` and `./gradlew connectedDebugAndroidTest`, then reinstall with `:app:installDebug`. All must be green.
 - [ ] T040 Do the manual checks in `specs/007-board-pinouts/quickstart.md` §4.
 - [ ] T041 Push branch `007-board-pinouts` and open a PR to `main`, only after the user says so. The description lists the boards and documents and links the audit. Before merging, wait until CI is no longer pending on the latest commit, and merge only on the user's "merge".
 
