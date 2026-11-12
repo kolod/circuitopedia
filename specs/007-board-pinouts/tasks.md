@@ -273,7 +273,7 @@ conflicting placement and see it blocked, with its reason.
 - [X] T038 [P] Add the module to the Unreleased section of `CHANGELOG.md` (English).
 - [X] T039 Run `./gradlew test lint :app:assembleDebug :app:assembleRelease` and `./gradlew connectedDebugAndroidTest`, then reinstall with `:app:installDebug`. All must be green.
 - [ ] T040 Do the manual checks in `specs/007-board-pinouts/quickstart.md` §4.
-- [ ] T041 Push branch `007-board-pinouts` and open a PR to `main`, only after the user says so. The description lists the boards and documents and links the audit. Before merging, wait until CI is no longer pending on the latest commit, and merge only on the user's "merge".
+- [X] T041 Push branch `007-board-pinouts` and open a PR to `main`, only after the user says so. The description lists the boards and documents and links the audit. Before merging, wait until CI is no longer pending on the latest commit, and merge only on the user's "merge".
 
 ---
 

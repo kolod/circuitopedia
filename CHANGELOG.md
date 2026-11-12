@@ -3,10 +3,18 @@
 All notable changes to Circuitopedia are listed here. Versions follow
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.2.0] - 2026-11-12
+
+The Reference tab gets its first two modules.
 
 ### Reference
 
+- **Jellybean parts**: 34 common, cheap parts in 11 categories, chosen from the EEVblog forum
+  thread "Jellybean list". These include op-amps, comparators, the 555, small transistors and
+  MOSFETs, diodes, regulators, the TL431, 74HC logic, temperature sensors and PWM controllers.
+  Each part shows its purpose, its key parameters copied as printed from one cited manufacturer
+  datasheet, and a drawing of its common package with every pin named. A warning appears where
+  makers number the pins differently.
 - **Board pinouts**: headers of the Arduino Uno R3 and Nano, Raspberry Pi Pico W and Pico 2 W,
   Raspberry Pi 4 Model B, STM32F103 "Blue Pill" and WeAct STM32F411 "Black Pill", drawn and as a
   list. Each pin shows its alternate functions and limits: 5 V tolerance, analog, onboard parts
@@ -14,6 +22,11 @@ All notable changes to Circuitopedia are listed here. Versions follow
   documents. A planner assigns UART, I2C, SPI, PWM, ADC, CAN, I2S and USB to pins and refuses
   combinations the chip cannot route, such as a second I2C on pins already in use or a remap that
   moves a whole group of pins. An optional switch keeps the screen on while a board is open.
+
+### App
+
+- The ← arrow in the top bar now does the same as the system back button: inside a module it
+  first closes the open page, then leaves the module.
 
 ## [0.1.0] - 2026-10-31
 
@@ -43,4 +56,5 @@ in portrait orientation.
   divider from standard resistors, choosing both arms together for the smallest output-voltage
   error, with the total resistance kept within ±10%.
 
+[0.2.0]: https://github.com/kolod/circuitopedia/releases/tag/v0.2.0
 [0.1.0]: https://github.com/kolod/circuitopedia/releases/tag/v0.1.0
