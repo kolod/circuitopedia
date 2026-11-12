@@ -51,7 +51,9 @@ details and the planner (research R7).
   pins }`.
 - **Default view**: the drawing, or the list when fontScale > 1.3.
 - **Onboard parts** (FR-017): a pin wired to an onboard part carries its short tag ("LED",
-  "button", "crystal", "USB", "SWD", "ID EEPROM", "flash") on the drawing and in the list.
+  "button", "crystal", "USB", "SWD", "ID EEPROM", "flash") on the drawing and in the list. Onboard
+  LEDs and buttons are also drawn as schematic symbols in the middle of the board, tagged with their
+  pin and joined to its pad by a dashed right-angle wire.
 - **Keep the screen on** (FR-018, tag `bp-keep-screen-on`): a switch row under the controls. The
   choice is held by the module screen; `View.keepScreenOn` is set only while a board is shown.
 - **Placement names**: when an instance has several placements, its name carries the pins of its

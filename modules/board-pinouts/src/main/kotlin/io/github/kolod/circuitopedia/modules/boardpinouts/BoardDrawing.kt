@@ -14,6 +14,10 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.luminance
@@ -24,6 +28,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.drawText
@@ -32,6 +37,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import io.github.kolod.circuitopedia.modules.boardpinouts.core.Board
+import io.github.kolod.circuitopedia.modules.boardpinouts.core.BoardUse
 import io.github.kolod.circuitopedia.modules.boardpinouts.core.Direction
 import io.github.kolod.circuitopedia.modules.boardpinouts.core.HeaderPin
 import io.github.kolod.circuitopedia.modules.boardpinouts.core.LimitKind
@@ -154,6 +160,9 @@ internal fun BoardDrawing(board: Board, marks: Set<LimitKind>, claims: Claims, o
             drawRoundRect(colors.outline, usbTopLeft, usbDrawn, CornerRadius(pitch * 0.2f))
 
             val fontSize = with(density) { (pitch * 0.62f).toSp() }
+            drawOnboardParts(board, geometry, pitch, LimitKind.BoardUse.color(dark), colors.onSurfaceVariant) { use, pin ->
+                measurer.measure("${res.getString(use.tag())} · ${pin.label}", TextStyle(fontSize = fontSize, color = LimitKind.BoardUse.color(dark)))
+            }
             board.pins.forEach { pin ->
                 val c = geometry.toPx(geometry.unitCenter(pin), pitch)
                 val claim = pin.pin?.let { claims[it] }
@@ -208,4 +217,84 @@ internal fun BoardDrawing(board: Board, marks: Set<LimitKind>, claims: Claims, o
             }
         }
     }
+}
+
+/**
+ * Symbols of the onboard LEDs and buttons wired to header pins, placed in a column in the middle of
+ * the board, each tagged with its pin and joined to that pin's pad by a dashed line (FR-017).
+ */
+private fun DrawScope.drawOnboardParts(
+    board: Board,
+    geometry: Geometry,
+    pitch: Float,
+    color: Color,
+    wire: Color,
+    label: (BoardUse, HeaderPin) -> TextLayoutResult,
+) {
+    val parts = board.pins.flatMap { pin -> board.usesOf(pin).filter { it == BoardUse.Led || it == BoardUse.Button }.map { it to pin } }
+        .distinctBy { (use, pin) -> use to pin.pin }
+    if (parts.isEmpty()) return
+    val layout = board.layout
+    val step = 3.2f
+    val firstY = layout.height / 2 - (parts.size - 1) * step / 2
+    val stroke = pitch * 0.09f
+    parts.forEachIndexed { i, (use, pin) ->
+        val center = geometry.toPx(Offset(layout.width / 2, firstY + i * step), pitch)
+        val pad = geometry.toPx(geometry.unitCenter(pin), pitch)
+        // Wire at right angles: out of the symbol's near side, along a rail just inside the header
+        // row (each part on its own rail), then into the pad, so it never crosses other pads.
+        val toward = if (pad.x < center.x) -1f else 1f
+        val start = Offset(center.x + toward * pitch * 0.9f, center.y)
+        val railX = pad.x - toward * pitch * (0.75f + 0.3f * i)
+        val path = Path().apply {
+            moveTo(start.x, start.y)
+            lineTo(railX, start.y)
+            lineTo(railX, pad.y)
+            lineTo(pad.x - toward * pitch * 0.34f, pad.y)
+        }
+        drawPath(
+            path, wire,
+            style = Stroke(pitch * 0.05f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(pitch * 0.25f, pitch * 0.2f))),
+        )
+        when (use) {
+            BoardUse.Led -> drawLed(center, pitch, color, stroke)
+            else -> drawButton(center, pitch, color, stroke)
+        }
+        val text = label(use, pin)
+        drawText(text, topLeft = Offset(center.x - text.size.width / 2f, center.y + pitch * 0.75f))
+    }
+}
+
+/** A diode triangle with its bar and two light arrows. */
+private fun DrawScope.drawLed(c: Offset, pitch: Float, color: Color, stroke: Float) {
+    val h = pitch * 0.5f
+    val triangle = Path().apply {
+        moveTo(c.x - h, c.y - h)
+        lineTo(c.x - h, c.y + h)
+        lineTo(c.x + h * 0.6f, c.y)
+        close()
+    }
+    drawLine(color, Offset(c.x - pitch * 0.9f, c.y), Offset(c.x + pitch * 0.9f, c.y), strokeWidth = stroke)
+    drawPath(triangle, color)
+    drawLine(color, Offset(c.x + h * 0.6f, c.y - h), Offset(c.x + h * 0.6f, c.y + h), strokeWidth = stroke)
+    listOf(0f, pitch * 0.3f).forEach { dx ->
+        val from = Offset(c.x - h * 0.1f + dx, c.y - h * 1.1f)
+        val to = Offset(from.x + pitch * 0.35f, from.y - pitch * 0.35f)
+        drawLine(color, from, to, strokeWidth = stroke * 0.8f)
+        drawLine(color, to, Offset(to.x - pitch * 0.15f, to.y), strokeWidth = stroke * 0.8f)
+        drawLine(color, to, Offset(to.x, to.y + pitch * 0.15f), strokeWidth = stroke * 0.8f)
+    }
+}
+
+/** A push button: two contacts, the bridging bar above them and its plunger. */
+private fun DrawScope.drawButton(c: Offset, pitch: Float, color: Color, stroke: Float) {
+    val w = pitch * 0.55f
+    drawLine(color, Offset(c.x - pitch * 0.9f, c.y), Offset(c.x - w, c.y), strokeWidth = stroke)
+    drawLine(color, Offset(c.x + w, c.y), Offset(c.x + pitch * 0.9f, c.y), strokeWidth = stroke)
+    drawCircle(color, pitch * 0.09f, Offset(c.x - w, c.y))
+    drawCircle(color, pitch * 0.09f, Offset(c.x + w, c.y))
+    val barY = c.y - pitch * 0.35f
+    drawLine(color, Offset(c.x - w, barY), Offset(c.x + w, barY), strokeWidth = stroke)
+    drawLine(color, Offset(c.x, barY), Offset(c.x, barY - pitch * 0.35f), strokeWidth = stroke)
+    drawLine(color, Offset(c.x - pitch * 0.2f, barY - pitch * 0.35f), Offset(c.x + pitch * 0.2f, barY - pitch * 0.35f), strokeWidth = stroke)
 }
