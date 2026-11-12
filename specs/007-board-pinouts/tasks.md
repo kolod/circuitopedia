@@ -204,7 +204,7 @@ assignments.
 **Independent Test**: on each board, assign a fitting I2C + UART + SPI set. Then add a
 conflicting placement and see it blocked, with its reason.
 
-- [ ] T024 [US2] Write `CORE_TEST/PlannerTest.kt` (test first) on small hand-made boards. It covers every rule of research R3:
+- [X] T024 [US2] Write `CORE_TEST/PlannerTest.kt` (test first) on small hand-made boards. It covers every rule of research R3:
   - same instance;
   - pin taken in a used slot;
   - shared resource;
@@ -214,9 +214,9 @@ conflicting placement and see it blocked, with its reason.
   - `unuse` and `use`, including group placements, where required slots may be unused;
   - `pinAvailability` per candidate;
   - `claims`.
-- [ ] T025 [US2] Implement `CORE/Planner.kt` per contracts/core-api.md until T024 passes.
-- [ ] T026 [US2] Add a pairwise sweep to `CORE_TEST/PlannerTest.kt` (SC-002). For every real board, assign each placement's default, then check every other placement: it must be `Blocked` exactly when the two share an instance, a used pin or a resource. It must be `Warned` exactly when nothing blocks and it uses a board-use or boot-role pin.
-- [ ] T027 [P] [US2] Write `CORE_TEST/StateCodecTest.kt` (test first): round trip, unknown board or placement ids dropped, malformed text gives an empty map. Then implement `CORE/StateCodec.kt`.
+- [X] T025 [US2] Implement `CORE/Planner.kt` per contracts/core-api.md until T024 passes.
+- [X] T026 [US2] Add a pairwise sweep to `CORE_TEST/PlannerTest.kt` (SC-002). For every real board, assign each placement's default, then check every other placement: it must be `Blocked` exactly when the two share an instance, a used pin or a resource. It must be `Warned` exactly when nothing blocks and it uses a board-use or boot-role pin.
+- [X] T027 [P] [US2] Write `CORE_TEST/StateCodecTest.kt` (test first): round trip, unknown board or placement ids dropped, malformed text gives an empty map. Then implement `CORE/StateCodec.kt`.
 - [ ] T028 [P] [US2] Add the planner strings to `RES/values*/strings.xml` in six locales:
   - `planner`, `add_function`, `clear_all`, `clear_all_confirm`, `remove`, `edit`, `used`;
   - `moves_as_group`, `remap_stays`;
