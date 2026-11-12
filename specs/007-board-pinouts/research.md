@@ -16,13 +16,18 @@
 
 | Board | Board documents | Chip documents |
 |-------|-----------------|----------------|
-| Arduino Uno R3 | Arduino, A000066 datasheet; UNO R3 schematic | Microchip DS40002061, ATmega48A/PA/88A/PA/168A/PA/328/P datasheet (confirm) |
-| Arduino Nano | Arduino, A000005 datasheet; Nano schematic | same as Uno |
-| Pico W | Raspberry Pi, "Raspberry Pi Pico W Datasheet" | Raspberry Pi, "RP2040 Datasheet" |
-| Pico 2 W | Raspberry Pi, "Raspberry Pi Pico 2 W Datasheet" | Raspberry Pi, "RP2350 Datasheet" (including its errata appendix) |
-| Raspberry Pi 4 Model B | Raspberry Pi, "Raspberry Pi 4 Model B Datasheet"; Raspberry Pi documentation, "GPIO and the 40-pin header", and the firmware overlay README for I2C3–6, SPI3–6, UART2–5 | Raspberry Pi, "BCM2711 ARM Peripherals" (GPIO alternate function table) |
-| Blue Pill | No official maker. The reference schematic is the one published by stm32-base.org for "STM32F103C8T6 Blue Pill" (confirm). The page states it. | ST DS5319, STM32F103x8/xB datasheet; RM0008 reference manual (AFIO remap tables); ES096 errata (confirm the number) |
-| Black Pill | WeAct Studio, "MiniSTM32F4x1" schematic (GitHub, board V3.0 for STM32F411CEU6) (confirm) | ST DS10314, STM32F411xC/xE datasheet (alternate function table); RM0383 reference manual; ES0287 errata (confirm) |
+| Arduino Uno R3 | Arduino A000066 User Manual; schematic UNO-TH_Rev3e | Microchip DS40002061B (ATmega48A/PA/88A/PA/168A/PA/328/P) |
+| Arduino Nano | Arduino schematic NanoV3.3; A000005 User Manual; TI SNOS412Q (LM1117, for VIN) | same as Uno |
+| Pico W | "Raspberry Pi Pico W Datasheet"; "Raspberry Pi Pico Datasheet" (variant) | "RP2040 Datasheet" |
+| Pico 2 W | "Raspberry Pi Pico 2 W Datasheet"; "Raspberry Pi Pico 2 Datasheet" (variant) | "RP2350 Datasheet" (including its errata appendix) |
+| Raspberry Pi 4 Model B | "Raspberry Pi 4 Model B Datasheet"; Raspberry Pi documentation "GPIO on Raspberry Pi"; firmware boot/overlays/README | Table 5 of the board datasheet (BCM2711 ALT functions) |
+| Blue Pill | Original vcc-gnd schematic, published by stm32-base.org, and the stm32-base.org board page | ST DS5319; RM0008 (AFIO remap tables, §23.2); ES096 errata |
+| Black Pill | WeAct Studio MiniF4x1Cx V3.1 schematic and board shape (GitHub) | ST DS10314 and DS10086, the copies in WeAct's repository |
+
+The revisions actually used are listed in [checklists/source-audit.md](checklists/source-audit.md).
+For the Pi 4, the board datasheet's Table 5 replaces "BCM2711 ARM Peripherals": it gives the same
+ALT functions together with the default pulls. st.com did not respond, so the user supplied DS5319,
+RM0008 and ES096, and approved WeAct's copies of DS10314 and DS10086.
 
 - **Conflicts**: where a board document and a chip document disagree (for example a current
   limit), the stricter value is shown and both are named in the pin note.

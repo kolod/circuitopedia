@@ -17,9 +17,9 @@ All types live in the pure-Kotlin core, `modules/board-pinouts/core`, and hold n
 | `limits` | `Map<ChipPin, List<Limit>>` | the limits of each chip pin |
 | `groupLimits` | `List<GroupLimit>` | port or total current limits |
 | `functions` | `List<BoardFunction>` | in the order shown by the planner |
-| `variants` | `List<VariantNote>` | note keys for the boards that share this header |
-| `notes` | `List<NoteKey>` | for example "reference schematic", "clones may differ" |
+| `notes` | `List<BoardNote>` | variants sharing the header ("Pico variant", "F401 variant"), "reference schematic", "clones may differ", board warnings |
 | `sources` | `List<Source>` | at least one board document and one chip document |
+| `otherFunctions` | `Map<ChipPin, List<String>>` | functions the planner does not cover, as printed ("PCINT5", "PIO0", "TIM1_BKIN") |
 
 The catalog is `boards: List<Board>`, in FR-002 order.
 

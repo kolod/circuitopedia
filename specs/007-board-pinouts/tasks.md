@@ -81,7 +81,7 @@ description: "Task list for 007-board-pinouts"
 **Purpose**: The board model, its integrity checks, and all seven boards transcribed: pins,
 limits and placements.
 
-- [ ] T006 Write `CORE_TEST/BoardDataTest.kt` (test first) with the research R8 integrity checks:
+- [X] T006 Write `CORE_TEST/BoardDataTest.kt` (test first) with the research R8 integrity checks:
   - seven boards in FR-002 order, with unique ids;
   - unique `(header, position)` per board, and every position 1…count present for each layout header;
   - every header pin has a non-blank label;
@@ -95,41 +95,41 @@ limits and placements.
   - every placement has at least one required slot or two optional ones;
   - every `FunctionKind` listed for a board has at least one placement;
   - every board has at least two sources with non-blank maker, document and revision.
-- [ ] T007 Create `CORE/Model.kt` per contracts/core-api.md and data-model.md. Create `BRD/Boards.kt` (`boards`, `board(id)` and the `Board` extension lookups of core-api.md) from the per-board values of T008–T014. Create `AUDIT` with its header.
-- [ ] T008 [P] Transcribe the Arduino Uno R3 into `BRD/UnoR3.kt`:
+- [X] T007 Create `CORE/Model.kt` per contracts/core-api.md and data-model.md. Create `BRD/Boards.kt` (`boards`, `board(id)` and the `Board` extension lookups of core-api.md) from the per-board values of T008–T014. Create `AUDIT` with its header.
+- [X] T008 [P] Transcribe the Arduino Uno R3 into `BRD/UnoR3.kt`:
   - **Headers:** power, analog, both digital headers, including SDA/SCL/AREF/GND, and ICSP. SDA/SCL map to PC4/PC5, and the ICSP pins to PB3/PB4/PB5 and RESET.
   - **Limits:** from the ATmega328P datasheet's electrical characteristics: per-pin current and the port group sums. Board uses: D0/D1 USB-serial, D13 LED.
   - **Placements:** USART0, TWI, SPI, Timer0/1/2 PWM channels and the ADC channels.
   - **Notes:** Timer0 and `millis()`, and SS as an output in SPI master mode.
-- [ ] T009 [P] Transcribe the Arduino Nano into `BRD/Nano.kt`: as the Uno, plus A6/A7, which are `InputOnly` and ADC-only, and its ICSP pads.
-- [ ] T010 [P] Transcribe the Pico W into `BRD/PicoW.kt`, from the Pico W and RP2040 datasheets:
+- [X] T009 [P] Transcribe the Arduino Nano into `BRD/Nano.kt`: as the Uno, plus A6/A7, which are `InputOnly` and ADC-only, and its ICSP pads.
+- [X] T010 [P] Transcribe the Pico W into `BRD/PicoW.kt`, from the Pico W and RP2040 datasheets:
   - **Pins:** the 40 header pins.
   - **Power:** VBUS, VSYS, 3V3_EN, 3V3(OUT), ADC_VREF, AGND and RUN, with their ranges.
   - **Placements:** per-signal routing for UART0/1, I2C0/1, SPI0/1, PWM slices 0–7 (channels A/B as slots, with every candidate GPIO), the ADC on GP26–28, and USB if it is on the header (otherwise omit it).
   - **Variant note:** the Pico (GP23/24/25/29).
   - **Limits:** 3.3V only, and drive and current from the RP2040 electrical characteristics.
-- [ ] T011 [P] Transcribe the Pico 2 W into `BRD/Pico2W.kt`, from the Pico 2 W and RP2350 datasheets:
+- [X] T011 [P] Transcribe the Pico 2 W into `BRD/Pico2W.kt`, from the Pico 2 W and RP2350 datasheets:
   - the same structure as T010, with the RP2350 function table (including UART on its extra function select);
   - `FiveVoltTolerant` with its condition on the digital GPIO, and `ThreeVoltOnly` on the ADC pins, as the datasheet states;
   - the GPIO errata as `Erratum` limits, with their numbers;
   - the variant note for the Pico 2.
-- [ ] T012 [P] Transcribe the Raspberry Pi 4 Model B into `BRD/RaspberryPi4B.kt`, from the Pi 4 datasheet, the header documentation, BCM2711 ARM Peripherals and the overlay README:
+- [X] T012 [P] Transcribe the Raspberry Pi 4 Model B into `BRD/RaspberryPi4B.kt`, from the Pi 4 datasheet, the header documentation, BCM2711 ARM Peripherals and the overlay README:
   - **Pins:** the 40 header pins, numbered 1–40.
   - **Limits:** GPIO2/3 `BoardPull` with its value. GPIO0/1 `BoardUse` ID EEPROM and `BootRole`. Default pulls at boot, if the source treats them as boot roles. Per-pin and total GPIO current as documented.
   - **Placements:** one per instance and pin set, for UART0–5, I2C0–6, SPI0–6, PWM0/1 channels, and PCM/I2S.
   - **Notes:** the overlay note on I2C3–6, SPI3–6 and UART2–5, and the Bluetooth/UART0 note.
-- [ ] T013 [P] Transcribe the Blue Pill into `BRD/BluePill.kt`, from the reference schematic (R1), DS5319 and RM0008 AFIO:
+- [X] T013 [P] Transcribe the Blue Pill into `BRD/BluePill.kt`, from the reference schematic (R1), DS5319 and RM0008 AFIO:
   - **Pins:** both rows and the SWD header.
   - **Limits:** the FT/non-FT column, and the PC13–PC15 current limits. Board uses: PC13 LED, PC14/15 LSE crystal, PA11/12 USB with the pull-up. Boot roles: BOOT1 (PB2) and the JTAG pins.
   - **Placements:** one per remap option (`movesAsGroup`) for USART1–3, I2C1/2, SPI1/2, CAN, TIM1–4 and USB, plus the ADC channels. Omit any option whose pins are not on the 48-pin package.
   - **Resources:** shared USB/CAN SRAM, and the errata conflicts, from the errata sheet with their numbers.
   - **Notes:** JTAG release for PA15/PB3/PB4, and that clones may differ.
-- [ ] T014 [P] Transcribe the Black Pill into `BRD/BlackPill.kt`, from the WeAct schematic, DS10314 and RM0383:
+- [X] T014 [P] Transcribe the Black Pill into `BRD/BlackPill.kt`, from the WeAct schematic, DS10314 and RM0383:
   - **Pins:** both rows and the SWD header.
   - **Limits:** FT/TC from the pin table. Board uses: PC13 LED, PA0 KEY, PC14/15 LSE, PA11/12 USB, and the optional SPI flash footprint, if the schematic shows it. Boot roles: BOOT0 and PB2.
   - **Placements:** per-signal routing for USART1/2/6, I2C1–3, SPI1–5/I2S, TIM channels, ADC and USB OTG FS, from the alternate function table.
   - **Variant note:** the STM32F401 differences, from DS10086.
-- [ ] T015 Write `CORE_TEST/SpotDataTest.kt`. Each test names its source table. Facts to check:
+- [X] T015 Write `CORE_TEST/SpotDataTest.kt`. Each test names its source table. Facts to check:
   - Pi 4: I2C1 on GPIO2/3, with the board pull-up value;
   - Pi 4: I2C3 placements on GPIO2/3 and GPIO4/5;
   - Blue Pill: I2C1 remap on PB8/PB9, `movesAsGroup`;
