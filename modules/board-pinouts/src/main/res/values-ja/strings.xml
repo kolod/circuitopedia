@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="board_pinouts_title">ボードのピン配置</string>
+    <string name="board_pinouts_description">開発ボードのヘッダー、ピン機能と制限</string>
+</resources>

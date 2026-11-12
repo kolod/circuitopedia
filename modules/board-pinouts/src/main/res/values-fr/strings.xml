@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="board_pinouts_title">Brochages de cartes</string>
+    <string name="board_pinouts_description">Connecteurs, fonctions et limites des broches des cartes de développement</string>
+</resources>
